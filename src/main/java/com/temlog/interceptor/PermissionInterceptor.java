@@ -44,15 +44,20 @@ public class PermissionInterceptor implements HandlerInterceptor {
 			response.sendRedirect("/user/sign_in_view");
 			return false;
 		}
-		// 비로그인 && /user/user_info_view (마이페이지) => 로그인 페이지로 리다이렉트
-		if (userLoginId == null && uri.equals("/user/user_info_view")) {
+		// 비로그인 && /account_view(내 정보) => 로그인 페이지로 리다이렉트
+		if (userLoginId == null && uri.equals("/user_info_view")) {
+			response.sendRedirect("/user/sign_in_view");
+			return false;
+		}
+		// 비로그인 && /main_view(홈) => 로그인 페이지로 리다이렉트
+		if (userLoginId == null && uri.equals("/main_view")) {
 			response.sendRedirect("/user/sign_in_view");
 			return false;
 		}
 		
 		// 로그인 && /user => 메인(홈) 페이지로 리다이렉트
 		if (userLoginId != null && uri.startsWith("/user")) {
-			response.sendRedirect("/user/main_view");
+			response.sendRedirect("/main_view");
 			return false;
 		}
 		
