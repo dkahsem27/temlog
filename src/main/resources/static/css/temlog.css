@@ -18,12 +18,23 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .c-red {color: firebrick;}
 .c-gray {color: gray;}
 
+/* buttons */
+.btn-cancle {font-size: 18px; color: #666;}
+.btn-cancle:hover {color: #666;}
+.btn-text {font-size: 14px; color: #666;}
+.btn-text:hover {color: #666;}
+
 /* common */
 #wrap {max-width: 480px; margin: 0 auto;}
+#contents {padding: 20px;}
+
 .logo > a {font-size: 50px;}
+.subject-box {padding-bottom: 12px; border-bottom: 1px solid #bbb;}
+.noti-box .noti {font-size: 13px;}
+.required {color: firebrick;}
 
 /* contents */
-#contents {}
+.user-area h1.logo {margin: 120px 0;}
+.user-area .form-title {font-size: 35px;}
+.user-area .form-group label {min-width: 100px;}
 
-.user-sign-area h1.logo {padding: 120px 0;}
-.user-sign-area .form-group label {min-width: 100px;}
