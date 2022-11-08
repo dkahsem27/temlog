@@ -4,6 +4,8 @@
 @import "../css/reset.css";
 a {color: #000;}
 a:hover {color: #000; text-decoration: none;}
+button {border: none; background: transparent; cursor: pointer;}
+button:focus {outline: none;}
 
 /* fonts */
 body {font-family: 'SUIT Variable', sans-serif;}
@@ -16,6 +18,7 @@ body {font-family: 'SUIT Variable', sans-serif;}
 
 /* colors */
 .c-red {color: firebrick;}
+.c-blue {color: steelblue;}
 .c-gray {color: gray;}
 
 /* buttons */
@@ -23,6 +26,19 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .btn-cancle:hover {color: #666;}
 .btn-text {font-size: 14px; color: #666;}
 .btn-text:hover {color: #666;}
+.btn-text.sign-out, .btn-text.withdrawal {font-size: 15px; text-decoration: underline;}
+
+.btn-create {position: relative; width: 120px; height: 90px; border-radius: 5px; text-align: center; background: #eee;}
+.btn-create:hover {background: #ddd; transition: background 300ms;}
+.btn-create .btn-create-text {padding-top: 55px; font-size: 14px; color: #666;}
+.btn-create > span {position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: #aaa;}
+.btn-create.post > span {font-size: 36px;}
+.btn-create.schedule > span {font-size: 36px;}
+.btn-create.schedule > span {font-size: 28px;}
+
+.search-box {position: relative;}
+.search-box > input[type="search"] {padding-right: 36px;}
+.search-box > .btn-search {position: absolute; top: 50%; right: 0; transform: translateY(-50%); color: #666;}
 
 /* common */
 #wrap {max-width: 480px; margin: 0 auto;}
@@ -30,11 +46,17 @@ body {font-family: 'SUIT Variable', sans-serif;}
 
 .logo > a {font-size: 50px;}
 .subject-box {padding-bottom: 12px; border-bottom: 1px solid #bbb;}
-.noti-box .noti {font-size: 13px;}
 .required {color: firebrick;}
+
+.noti-box .noti {font-size: 13px;}
+.noti-box .noti-info {cursor: default;}
+.noti-box .icon-info {font-size: 14px; color: #999;}
+.noti-box .noti.hover-block {display: none; color: #666;}
+.noti-box .icon-info:hover + .noti.hover-block {display: block;}
 
 /* contents */
 .user-area h1.logo {margin: 120px 0;}
 .user-area .form-title {font-size: 35px;}
 .user-area .form-group label {min-width: 100px;}
-
+.user-area .form-group label.label-width-auto {min-width: auto;}
+.user-area .btn-box {padding: 60px 0;}

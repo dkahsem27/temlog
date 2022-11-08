@@ -33,4 +33,10 @@ public class UserController {
 		model.addAttribute("viewName", "user/main");
 		return "template/layout";
 	}
+	
+	@RequestMapping("/account_view")
+	public String accountView(Model model) {
+		model.addAttribute("viewName", "user/account");
+		return "template/layout";
+	}
 }
