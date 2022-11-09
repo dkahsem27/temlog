@@ -22,7 +22,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 	
 	<!-- css -->
-	<link rel="stylesheet" href="/static/css/temlog.css">
+	<link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 	<div id="wrap">

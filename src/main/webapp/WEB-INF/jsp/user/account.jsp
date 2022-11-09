@@ -8,7 +8,7 @@
 	<div class="form-outer">
 		<div class="form-group mb-4">
 			<div class="noti-box d-flex mb-2">
-				<label for="loginId" class="label-width-auto">아이디</label>
+				<label for="loginId" class="label-width-auto">내 아이디</label>
 				<div class="noti-info d-flex align-items-end ml-1">
 					<span class="icon-info material-icons-outlined">info</span>
 					<span class="noti hover-block ml-1">아이디는 수정할 수 없습니다.</span>
