@@ -6,6 +6,7 @@ a {color: #000;}
 a:hover {color: #000; text-decoration: none;}
 button {border: none; background: transparent; cursor: pointer;}
 button:focus {outline: none;}
+input:focus, select:focus, textarea:focus {outline: none !important; border: 1px solid #666 !important; box-shadow: none !important;}
 
 /* fonts */
 body {font-family: 'SUIT Variable', sans-serif;}
@@ -41,30 +42,41 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .btn-create.post .btn-create-icon {font-size: 37px;}
 .btn-create.schedule .btn-create-icon {font-size: 28px;}
 .btn-create .btn-create-text {font-size: 13px; color: #888;}
+.btn-add-photo {color: #888;}
+.btn-location {color: #888;}
+
+.rating-icon {color: #333;}
+.rating-icon.good {color: steelblue;}
+.rating-icon.normal {color: seagreen;}
+.rating-icon.bad {color: indianred;}
 
 /* common */
 #wrap {min-width: 320px; max-width: 480px; margin: 0 auto;}
 #contents {width: 100%; max-width: 480px; padding: 0 20px;}
 .contents-inner {width: 100%; min-height: 100vh; position: relative; padding: 69px 0 64px;}
 
-#header {z-index: 999; width: 100%; max-width: 480px; padding: 0 20px; position: fixed; top: 0; left: 50%; transform: translateX(-50%);}
+#header {z-index: 999; width: 100%; max-width: 480px; position: fixed; top: 0; left: 50%; transform: translateX(-50%);}
 #header .head-box {background: #fff; border-bottom: 1px solid #333;}
 #header .head-box .category-box .category-name {font-size: 28px; font-weight: 600;}
 
-#navigation {z-index: 999; width: 100%; max-width: 480px; padding: 0 20px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);}
+#navigation {z-index: 999; width: 100%; max-width: 480px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);}
 #navigation .nav {background: #efefef; border-top: 1px solid #ddd;}
 #navigation .nav .nav-item:not(:first-child) {border-left: 1px solid #ddd;}
 #navigation .nav .nav-item .nav-link .nav-link-inner {display: grid; row-gap: 2px;}
 #navigation .nav .nav-item .nav-link .nav-icon {color: #555; font-weight: 200;}
 #navigation .nav .nav-item .nav-link .nav-text {font-size: 13px; color: #888;}
-#navigation .nav .nav-item:hover {background: #333; transition: background 300ms;}
-#navigation .nav .nav-item:hover .nav-link .nav-icon {color: #fff;}
-#navigation .nav .nav-item:hover .nav-link .nav-text {color: #fff;}
+#navigation .nav .nav-item:hover, #navigation .nav .nav-item.on {background: #333; transition: background 300ms;}
+#navigation .nav .nav-item:hover .nav-link .nav-icon, #navigation .nav .nav-item.on .nav-link .nav-icon {color: #fff;}
+#navigation .nav .nav-item:hover .nav-link .nav-text, #navigation .nav .nav-item.on .nav-link .nav-text {color: #fff;}
 
 .logo > a {font-size: 50px;}
-.subject-box {padding: 12px 0; border-bottom: 1px solid #bbb;}
+input#datePicker {cursor: default;}
+
+.subject-box {padding: 15px 0; border-bottom: 1px solid #bbb;}
+.subject-box .form-title {font-size: 35px;}
 .required {color: firebrick;}
 
+.noti {font-size: 13px; color: #888;}
 .noti-box .noti {font-size: 13px;}
 .noti-box .noti-info {cursor: default;}
 .noti-box .icon-info {font-size: 14px; color: #999;}
@@ -79,11 +91,29 @@ body {font-family: 'SUIT Variable', sans-serif;}
 
 .dropdown-util-box {border-bottom: 1px solid #ddd;}
 
+.dropdown-menu .dropdown-item {font-size: 15px;}
+.dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:active {background: #f9f9f9 !important; color: #333 !important;}
+
 /* contents */
 .user-area h1.logo {margin: 120px 0;}
-.user-area .form-title {font-size: 35px;}
+
 .user-area .form-group label {min-width: 100px;}
 .user-area .form-group label.label-width-auto {min-width: auto;}
+.form-group label {font-weight: 500;}
 
-.post-content-list {width: 100%; padding: 20px 0; font-size: 150px;}
+.post-content-list {width: 100%; padding: 20px 0;}
+
+.post-list .list-card {position: relative; border: 1px solid #eee;}
+.post-list .list-card:hover {background: #f9f9f9; transition: all 150ms;}
+.post-list .list-card:not(:first-child) {margin-top: 15px;}
+.post-list .list-card.good {border-left: 4px solid lightblue;}
+.post-list .list-card.normal {border-left: 4px solid darkseagreen;}
+.post-list .list-card.bad {border-left: 4px solid rosybrown;}
+
+.post-list .list-card .card-link {display: block;}
+
+.post-list .list-card .card-link .card-inner .category-name {font-size: 13px; color: #888;}
+.post-list .list-card .card-link .card-inner .purchase-count {font-size: 13px; color: #888;}
+.post-list .list-card .card-link .card-inner .subject {font-size: 18px; font-weight: 600; width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+.post-list .list-card .card-link .card-inner .content {font-size: 15px; color: #666; width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 

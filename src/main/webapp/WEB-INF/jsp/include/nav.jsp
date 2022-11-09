@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <nav id="navigation" class="d-flex align-items-center">
 	<ul class="nav nav-fill w-100">
-		<li class="nav-item py-1">
+		<li class="nav-item py-1"> <!-- on 클래스 추가시 focus -->
 			<a href="/main_view" class="nav-link">
 				<div class="nav-link-inner">
 					<div class="nav-icon material-icons">home</div>
