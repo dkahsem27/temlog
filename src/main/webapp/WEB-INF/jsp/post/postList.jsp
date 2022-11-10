@@ -36,7 +36,7 @@
 	<div class="post-content-list">
 		<ul class="post-list">
 			<li class="list-card good">
-				<a href="#" class="card-link p-3">
+				<a href="/post/post_detail_view" class="card-link p-3">
 					<div class="card-inner">
 						<div class="card-row d-flex justify-content-between py-1">
 							<div class="category-name">카테고리명</div>
@@ -53,7 +53,7 @@
 				</a>
 			</li>
 			<li class="list-card normal">
-				<a href="#" class="card-link p-3">
+				<a href="/post/post_detail_view" class="card-link p-3">
 					<div class="card-inner">
 						<div class="card-row d-flex justify-content-between py-1">
 							<div class="category-name">카테고리명</div>
@@ -68,7 +68,7 @@
 				</a>
 			</li>
 			<li class="list-card bad">
-				<a href="#" class="card-link p-3">
+				<a href="/post/post_detail_view" class="card-link p-3">
 					<div class="card-inner">
 						<div class="card-row d-flex justify-content-between py-1">
 							<div class="category-name">카테고리명</div>

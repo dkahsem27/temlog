@@ -2,8 +2,11 @@
     pageEncoding="UTF-8"%>
 <section class="post-area">
 	<div class="subject-box d-flex justify-content-between align-items-end mb-5">
-		<h2 class="form-title">기록하기</h2>
-		<a href="/post/post_list_view" class="btn-cancle">취소</a>
+		<div class="d-flex align-items-end">
+			<h2 class="form-title">기록하기</h2>
+			<span class="tag tag-modify ml-2">수정</span>
+		</div>
+		<a href="/post/post_detail_view" class="btn-cancle">취소</a>
 	</div>
 	<div class="form-outer">
 		<!-- 카테고리 선택 -->
@@ -77,10 +80,10 @@
 		</div>
 		<div id="fileName" class="upload-file-name mt-1"><!-- 업로드된 파일명 노출 --></div>
 		<!-- 첨부 이미지 영역 -->
-		<!-- <div class="image-box d-flex justify-content-between my-3">
+		<div class="image-box d-flex justify-content-between my-3">
 			<img src="https://cdn.pixabay.com/photo/2019/11/23/07/24/christmas-4646421_960_720.jpg" alt="첨부이미지">
 			<img src="https://cdn.pixabay.com/photo/2021/12/12/20/17/drink-6865996_960_720.jpg" alt="첨부이미지">
-		</div> -->
+		</div>
 		<!-- 위치 -->
 		<div class="form-group d-flex justify-content-between align-items-center">
 			<div class="d-flex align-items-center">
@@ -89,7 +92,7 @@
 			</div>
 		</div>
 		<!-- 지도 표시 영역 -->
-		<!-- <div id="map" class="map-box"></div> -->
+		<div id="map" class="map-box"></div>
 	</div>
 	<div class="btn-box mt-5 mb-4">
 		<button type="button" id="createBtn" class="btn btn-block btn-dark">저장</button>

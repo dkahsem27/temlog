@@ -18,4 +18,17 @@ public class PostController {
 		model.addAttribute("viewName", "post/postCreate");
 		return "template/layout";
 	}
+	
+	@RequestMapping("/post/post_update_view")
+	public String postUpdateView(Model model) {
+		model.addAttribute("viewName", "post/postUpdate");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/post/post_detail_view")
+	public String postDetailView(Model model) {
+		model.addAttribute("viewName", "/post/postDetail");
+		return "template/layout";
+	}
+	
 }

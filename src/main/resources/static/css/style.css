@@ -45,7 +45,19 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .btn-add-photo {color: #555;}
 .btn-location {color: #555;}
 
-.rating-icon {color: #333;}
+.tag {cursor: default; background: #eee; border-radius: 4px; color: #888;
+	-webkit-user-select:none;
+  	-moz-user-select:none;
+  	-ms-user-select:none;
+  	user-select:none;}
+.tag-modify {max-height: 25px; padding: 3px 5px; font-size: 18px;}
+.tag-category {max-height: 22px; padding: 3px 4px; font-size: 15px;}
+
+.rating-icon {color: #333;
+	-webkit-user-select:none;
+  	-moz-user-select:none;
+  	-ms-user-select:none;
+  	user-select:none;}
 .rating-icon.good {color: steelblue;}
 .rating-icon.normal {color: seagreen;}
 .rating-icon.bad {color: indianred;}
@@ -86,7 +98,17 @@ input#datePicker {cursor: default;}
 .search-box > input[type="search"] {padding-right: 36px;}
 .search-box > .btn-search {position: absolute; top: 50%; right: 0; transform: translateY(-50%); color: #888;}
 
+.image-box {width: 100%;}
+.image-box > img {width: 100%; height: 180px; max-width: 49%; object-fit: cover;}
+
+.map-box {width: 100%; height: 200px; background: #eee;}
+
 .util-box .list-count {font-size: 14px; color: #888;}
+
+.modal-box .content {line-height: 1.4;}
+.modal-box .content .subject {font-size: 18px; font-weight: 600; color: #333;}
+.modal-box .content .content {font-size: 15px; color: #555;
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
 .dropdown-util-box {border-bottom: 1px solid #ddd;}
 
@@ -115,9 +137,19 @@ input#datePicker {cursor: default;}
 
 .post-list .list-card .card-link .card-inner .category-name {font-size: 13px; color: #888;}
 .post-list .list-card .card-link .card-inner .purchase-count {font-size: 13px; color: #888;}
-.post-list .list-card .card-link .card-inner .subject {font-size: 18px; font-weight: 600; width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-.post-list .list-card .card-link .card-inner .content {font-size: 15px; color: #666; width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+.post-list .list-card .card-link .card-inner .subject {font-size: 18px; font-weight: 600; width: 100%; 
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.post-list .list-card .card-link .card-inner .content {font-size: 15px; color: #666; width: 100%; 
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
-.image-box {width: 100%;}
-.image-box > img {width: 100%; height: 150px; max-width: 49%; object-fit: cover;}
-
+.post-area .detail-top {border-bottom: 1px solid #333;}
+.post-area .detail-top .purchase-count {font-size: 15px;}
+.post-area .detail-content .content-subject .subject {font-size: 25px; font-weight: 500; line-height: 1.3;
+	overflow: hidden; text-overflow: ellipsis; word-break: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인 수 */
+	-webkit-box-orient: vertical}
+.post-area .detail-content .purchase-date {font-size: 14px; color: #888;}
+.post-area .detail-content .content {white-space: pre-line; line-height: 1.5; border-top: 1px solid #eee;}
+.post-area .detail-content .date-box {font-size: 14px; color: #888;}
+	
