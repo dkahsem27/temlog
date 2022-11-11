@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <section class="post-area">
-	<div class="subject-box d-flex justify-content-between align-items-end mb-5">
+	<div class="subject-box d-flex justify-content-between align-items-end mb-3">
 		<div class="d-flex align-items-end">
 			<h2 class="form-title">기록하기</h2>
 			<span class="tag tag-modify ml-2">수정</span>
 		</div>
 		<a href="/post/post_detail_view" class="btn-cancle">취소</a>
 	</div>
-	<div class="form-outer">
+	<div class="form-outer py-3">
 		<!-- 카테고리 선택 -->
 		<div class="form-box">
 			<div class="form-group">
@@ -60,13 +60,13 @@
 		<!-- 구매일 -->
 		<div class="form-group d-flex justify-content-between align-items-center">
 			<div class="noti-box d-flex">
-				<label for="datePicker">구매일</label>
+				<label for="purchaseDate">구매일</label>
 				<div class="noti-info d-flex align-items-end ml-1">
 					<span class="icon-info material-icons-outlined">info</span>
 					<span class="noti hover-block ml-1">최초 구매일</span>
 				</div>
 			</div>
-			<input type="text" id="datePicker" class="form-control col-5" placeholder="날짜 선택">
+			<input type="text" id="purchaseDate" class="form-control col-5" placeholder="날짜 선택">
 		</div>
 		<!-- 사진 -->
 		<div class="form-group d-flex justify-content-between align-items-center">
@@ -85,16 +85,17 @@
 			<img src="https://cdn.pixabay.com/photo/2021/12/12/20/17/drink-6865996_960_720.jpg" alt="첨부이미지">
 		</div>
 		<!-- 위치 -->
-		<div class="form-group d-flex justify-content-between align-items-center">
-			<div class="d-flex align-items-center">
+		<div class="form-group">
+			<div class="d-flex align-items-center mb-2">
 				<label for="location">위치</label>
 				<button type="button" class="btn-location material-icons-outlined">place</button>
 			</div>
 		</div>
-		<!-- 지도 표시 영역 -->
-		<div id="map" class="map-box"></div>
+		<div id="locationAddress" class="location-address mt-1">주소명이 여기에 노출됩니다. <!-- 지도에 뿌릴 주소명 노출 --></div>
+		<!-- 지도 표시 영역 : 상세에서만 표시 -->
+		<!-- <div id="map" class="map-box"></div> -->
 	</div>
-	<div class="btn-box mt-5 mb-4">
+	<div class="btn-box my-4">
 		<button type="button" id="createBtn" class="btn btn-block btn-dark">저장</button>
 	</div>
 </section>
@@ -128,7 +129,7 @@ $(document).ready(function() {
 	});
 	
 	// datepicker
-	$('#datePicker').datepicker({
+	$('#purchaseDate').datepicker({
 		dateFormat: 'yy-mm-dd'
 		, prevText: '이전 달'
 		, nextText: '다음 달'

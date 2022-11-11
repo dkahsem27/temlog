@@ -24,7 +24,7 @@
 	<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
 	<!-- material icons -->
 	<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-	
+    
 	<!-- css -->
 	<link rel="stylesheet" href="/static/css/style.css">
 </head>

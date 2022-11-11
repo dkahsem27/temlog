@@ -30,6 +30,7 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .btn-text:hover {color: #888;}
 .btn-text.sign-out, .btn-text.withdrawal {font-size: 15px; text-decoration: underline;}
 .btn-close-gray {color: #eee;}
+.btn-clear {font-size: 18px; color: #ccc;}
 
 .btn-create {position: relative; width: 120px; max-height: 80px; border-radius: 5px; text-align: center; background: #eee;}
 .btn-create.post {padding: 15px 0;}
@@ -70,6 +71,13 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .rating-icon.normal {color: seagreen;}
 .rating-icon.bad {color: indianred;}
 
+.btn-schedule-menu {cursor: default;
+	-webkit-user-select:none;
+  	-moz-user-select:none;
+  	-ms-user-select:none;
+  	user-select:none;}
+
+
 /* common */
 #wrap {min-width: 320px; max-width: 480px; margin: 0 auto;}
 #contents {width: 100%; max-width: 480px; padding: 0 20px;}
@@ -77,7 +85,7 @@ body {font-family: 'SUIT Variable', sans-serif;}
 
 #header {z-index: 999; width: 100%; max-width: 480px; position: fixed; top: 0; left: 50%; transform: translateX(-50%);}
 #header .head-box {background: #fff; border-bottom: 1px solid #333;}
-#header .head-box .category-box .category-name {font-size: 28px; font-weight: 600;}
+#header .head-box .util-box .category-name {font-size: 28px; font-weight: 600; cursor: default;}
 
 #navigation {z-index: 999; width: 100%; max-width: 480px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);}
 #navigation .nav {background: #efefef; border-top: 1px solid #ddd;}
@@ -117,16 +125,25 @@ input#datePicker {cursor: default;}
 .util-box .line {font-size: 22px; color: #ddd;}
 
 .modal-box .content {line-height: 1.4;}
+.modal-box .content .date {font-size: 14px; color: #888;}
 .modal-box .content .subject {font-size: 18px; font-weight: 600; color: #333;}
-.modal-box .content .content {font-size: 15px; color: #555;
-	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.modal-box .content .post-content {font-size: 15px; color: #555;
+	overflow: hidden; text-overflow: ellipsis; word-break: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인 수 */
+	-webkit-box-orient: vertical}
+.modal-box .content .schedule-content {font-size: 15px; color: #555;}
+
+.input-cancle-box {position: relative; width: 100%;}
+.input-cancle-box input {padding-right: 35px !important;}
+.input-cancle-box .btn-clear {position: absolute; right: 5px; top: 50%; transform: translateY(-50%);}
 
 .dropdown-util-box {border-bottom: 1px solid #ddd;}
 
 .dropdown-menu .dropdown-item {font-size: 15px;}
 .dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:active {background: #f9f9f9 !important; color: #333 !important;}
 
-.upload-file-name {font-size: 13px; color: #333;}
+.upload-file-name, .location-address {font-size: 13px; color: #333;}
 
 /* contents */
 .user-area h1.logo {margin: 120px 0;}
@@ -170,3 +187,9 @@ input#datePicker {cursor: default;}
 .btn-list-category {font-size: 16px; color: #888;}
 .category-area .category-list .category:hover {background: #e6e6e6; transition: all 150ms;}
 .category-area .category-list .category:hover .btn-list-category {color: #222; transition: all 150ms;}
+
+/* calendar */
+#calendar {height: calc(100vh - 165px); overflow: hidden;}
+#calendar .fc-toolbar-title {font-size: 1.5em;}
+#calendar .fc-highlight {background: rgba(0, 0, 0, .05);}
+

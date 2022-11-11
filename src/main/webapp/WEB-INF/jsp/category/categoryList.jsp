@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <section class="category-area">
 	<div class="category-top mb-5">
 		<div class="subject-box d-flex justify-content-between align-items-end">
@@ -29,7 +30,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modal">
-	<div class="modal-dialog modal-dialog-centered modal-sm">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<!-- 모달 내용 -->
 			<div class="modal-box p-4">
@@ -39,7 +40,10 @@
 				<div class="content mb-4">
 					<div class="subject mb-3">추가할 카테고리명을 입력해주세요.</div>
 					<div class="d-flex">
-						<input type="text" id="categoryName" class="form-control">
+						<div class="input-cancle-box">						
+							<input type="text" id="categoryName" class="form-control">
+							<button type="button" id="inputClearBtn" class="btn-clear material-icons">clear</button>
+						</div>
 						<button type="button" id="addCategory" class="btn btn-add ml-2">+</button>
 					</div>
 					<div class="noti-box mt-2">
@@ -50,3 +54,12 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+	// 모달 인풋 내용 지우기
+	$('#inputClearBtn').on('click', function() {
+		$('#categoryName').val('');
+	});
+});
+</script>

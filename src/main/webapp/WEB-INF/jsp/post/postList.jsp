@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <section class="contents-inner">
 	<!-- head -->
-	<jsp:include page="../include/head.jsp" />
+	<jsp:include page="../include/postHead.jsp" />
 	<!-- content -->
 	<div class="search-box d-flex align-items-center py-3">
 		<input type="search" class="form-control" placeholder="검색어를 입력해주세요">

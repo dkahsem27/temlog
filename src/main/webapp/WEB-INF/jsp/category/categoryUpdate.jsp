@@ -17,7 +17,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modal">
-	<div class="modal-dialog modal-dialog-centered modal-sm">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<!-- 모달 내용 -->
 			<div class="modal-box p-4">
@@ -27,7 +27,10 @@
 				<div class="content mb-4">
 					<div class="subject mb-3">수정할 카테고리명을 입력해주세요.</div>
 					<div class="d-flex">
-						<input type="text" id="categoryName" class="form-control">
+						<div class="input-cancle-box">						
+							<input type="text" id="categoryName" class="form-control">
+							<button type="button" id="inputClearBtn" class="btn-clear material-icons">clear</button>
+						</div>
 						<button type="button" id="updateCategory" class="btn btn-modify material-icons ml-2">edit</button>
 					</div>
 					<div class="noti-box mt-2">
@@ -38,3 +41,12 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+	// 모달 인풋 내용 지우기
+	$('#inputClearBtn').on('click', function() {
+		$('#categoryName').val('');
+	});
+});
+</script>

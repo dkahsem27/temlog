@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <section class="user-area">
-	<div class="subject-box d-flex justify-content-between align-items-end mb-5">
+	<div class="subject-box d-flex justify-content-between align-items-end mb-3">
 		<h2 class="form-title">회원가입</h2>
 		<a href="/user/sign_in_view" class="btn-cancle">취소</a>
 	</div>
-	<div class="form-outer">
+	<div class="form-outer py-3">
 		<div class="form-box">
 			<div class="form-group mb-2">
 				<label for="loginId" class="mb-2">아이디<span class="required">*</span></label>
@@ -28,9 +28,9 @@
 			<label for="checkPassword" class="mb-2">비밀번호 확인<span class="required">*</span></label>
 			<input type="password" id="checkPassword" class="form-control" placeholder="비밀번호를 다시 입력해주세요">
 		</div>
-		<div class="btn-box mt-5">
-			<button type="button" id="signUpBtn" class="btn btn-block btn-dark">가입하기</button>
-		</div>
+	</div>
+	<div class="btn-box my-4">
+		<button type="button" id="signUpBtn" class="btn btn-block btn-dark">가입하기</button>
 	</div>
 </section>
 

@@ -51,7 +51,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modal">
-	<div class="modal-dialog modal-dialog-centered modal-sm">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<!-- 모달 내용 -->
 			<div class="modal-box p-4">
@@ -60,7 +60,7 @@
 				</div>
 				<div class="content mb-5">
 					<div class="subject mb-2">제목입니다 제목은 20자까지 가능합니다. 말줄임 노노</div>
-					<div class="content">내용입니다 내용은 150자 가능하고 1줄 말줄임</div>
+					<div class="post-content">내용입니다 내용은 150자 가능하고 말줄임 몇줄로?? 내용입니다 내용은 150자 가능하고 말줄임 몇줄로?? 내용입니다 내용은 150자 가능하고 말줄임 몇줄로?? 내용입니다 내용은 150자 가능</div>
 				</div>
 				<div class="btn-box d-flex justify-content-center">
 					<a href="/post/post_update_view" id="updatePostBtn" class="btn btn-dark col-6">수정</a>
@@ -103,4 +103,15 @@ geocoder.addressSearch('서울 강남구 테헤란로 107', function(result, sta
         map.setCenter(coords);
     } 
 });    
+</script>
+
+<script>
+$(document).ready(function() {
+	// 삭제버튼
+	$('#deletePostBtn').on('click', function() {
+		if (confirm('삭제하시겠습니까?')) {
+			alert('삭제되었습니다.');
+		}
+	});
+});
 </script>
