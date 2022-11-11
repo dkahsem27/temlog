@@ -191,5 +191,13 @@ input#datePicker {cursor: default;}
 /* calendar */
 #calendar {height: calc(100vh - 165px); overflow: hidden;}
 #calendar .fc-toolbar-title {font-size: 1.5em;}
-#calendar .fc-highlight {background: rgba(0, 0, 0, .05);}
-
+#calendar .fc-day-today {background-color: rgba(0, 0, 0, .05);}
+#calendar .fc-highlight {background-color: rgba(0, 0, 0, .02);}
+#calendar .fc-day-sun a {color: firebrick;}
+#calendar .fc-day-sat a {color: steelblue;}
+#calendar .fc-h-event {background-color: slateblue; border-color: slateblue;}
+#calendar button {outline: none; box-shadow: none;}
+#calendar .fc-button:disabled {opacity: .35; cursor: default;}
+#calendar .fc-today-button {background-color: transparent; border: none; color: #333;}
+#calendar .fc-prev-button, #calendar .fc-next-button {background-color: transparent; border: none; color: #aaa;}
+#calendar .fc-prev-button:hover, #calendar .fc-next-button:hover {color: #333; transition: all 200ms;}

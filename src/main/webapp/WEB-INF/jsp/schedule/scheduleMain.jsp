@@ -5,19 +5,16 @@
 	<jsp:include page="../include/scheduleHead.jsp" />
 	<!-- content -->
 	<div class="schedule-content py-3">
-		<!-- 캘린더 -->
-		<div id="calendar"></div>
-		<!-- 모달버튼 -->
-		<!-- <button type="button" class="btn-more" data-toggle="modal" data-target="#modal">
-			일정상세모달버튼
-		</button> -->
+		<div id="calendar"><!-- 캘린더 --></div>
 	</div>
 	<!-- navi -->
 	<jsp:include page="../include/nav.jsp" />
 </section>
 
+<!-- 모달버튼 -->
+<!-- <button type="button" data-toggle="modal" data-target="#scheduleDetailModal">모달버튼</button> -->
 <!-- Modal -->
-<div class="modal fade" id="modal">
+<div class="modal fade" id="scheduleDetailModal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<!-- 모달 내용 -->
@@ -39,57 +36,52 @@
 	</div>
 </div>
 
-<!-- fullcalendar -->
-<link href='/static/fullcalendar/main.css' rel='stylesheet' />
-<script src='/static/fullcalendar/main.js'></script>
+<!-- fullCalendar -->
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, {
+		// 툴바 관련 문서 https://fullcalendar.io/docs/toolbar
+		// 이벤트 관련 문서 https://fullcalendar.io/docs/event-parsing
 		
 		initialView: 'dayGridMonth',
 		
-		// 툴바 관련 문서
-		// https://fullcalendar.io/docs/toolbar
-        headerToolbar: {
+        headerToolbar: { // 헤더 툴바 영역
             end: 'today prev,next'
         },
-        buttonText: {
+        buttonText: { // 버튼명 변경 옵션
         	today: '오늘'
         },
         
 		selectable: true, // 날짜 선택 가능 여부
         selectMirror: true, // 날짜 드래그 선택 가능 여부
-        
         editable: true,
         
-        // 날짜 클릭 -> 일정등록 페이지
-        /* select: function() {
-        	
-        }, */
-        
-        // 이벤트 클릭 -> 일정상세 모달
-        eventClick: function(info) {
-        	info.jsEvent.preventDefault();
-
-            if (info.event.url) {
-              window.open(info.event.url);
-            }
+        // 날짜가 있는 칸 클릭 => 일정등록 페이지
+        select: function(date, jsEvent, view) {
+            //$('#scheduleDetailModal').modal('show');
+            location.href="/schedule/schedule_create_view";
         },
         
-        // 이벤트 관련 문서
-        // https://fullcalendar.io/docs/event-parsing
-        events: [
-            { // 한개의 이벤트 생성 영역
-              	title: 'The Title', // 제목
+        // 이벤트 클릭 => 일정상세 모달
+        eventClick: function(event) {
+            var modal = $("#scheduleDetailModal");
+            modal.modal();
+        },
+        
+        events: [ // 이벤트(일정)
+            { // 한개의 일정 생성 영역
+              	title: '일정 제목입니다', // 제목
               	start: '2022-11-01', // 시작일
-             	 end: '2022-11-05' // 종료일 ** 지정일 하루 전 종료 **
+             	end: '2022-11-05' // 종료일 ** 지정일 하루 전 종료 **
             },
             {
-              	title: 'The Title',
+              	title: '일정 제목입니다',
               	start: '2022-11-11',
-             	 allDay: true, // 종일 (optionable)
-             	 url: 'http://google.com/',
+             	allDay: true, // 종일 (optionable)
             }
        	]
 	});

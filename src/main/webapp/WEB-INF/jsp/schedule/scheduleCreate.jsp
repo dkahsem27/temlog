@@ -6,10 +6,15 @@
 		<a href="/schedule/schedule_main_view" class="btn-cancle">취소</a>
 	</div>
 	<div class="form-outer py-3">
-		<!-- 날짜선택 -->
+		<!-- 시작날짜 -->
 		<div class="form-group">
-			<label for="scheduleDate" class="mb-2">날짜 선택<span class="required">*</span></label>
-			<input type="text" id="scheduleDate" class="form-control col-5" placeholder="날짜 선택">
+			<label for="startDate" class="mb-2">시작일 선택<span class="required">*</span></label>
+			<input type="text" id="startDate" class="form-control col-5" placeholder="날짜 선택">
+		</div>
+		<!-- 종료날짜 -->
+		<div class="form-group">
+			<label for="endDate" class="mb-2">종료일 선택 <span class="noti">(생략 가능)</span></label>
+			<input type="text" id="endDate" class="form-control col-5" placeholder="날짜 선택">
 		</div>
 		<!-- 제목 -->
 		<div class="form-group">
@@ -30,14 +35,28 @@
 <script>
 $(document).ready(function() {
 	// datepicker
-	$('#scheduleDate').datepicker({
+	$('#startDate').datepicker({
 		dateFormat: 'yy-mm-dd'
 		, prevText: '이전 달'
 		, nextText: '다음 달'
 		, monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-		, monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-		, dayNames: ['일', '월', '화', '수', '목', '금', '토']
-		, dayNamesShort: ['일', '월', '화', '수', '목', '금', '토']
+		//, monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+		//, dayNames: ['일', '월', '화', '수', '목', '금', '토']
+		//, dayNamesShort: ['일', '월', '화', '수', '목', '금', '토']
+		, dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
+		, showMonthAfterYear: true
+		, yearSuffix: '년'
+		, onSelect: function (date) {
+ 			var endDate = $('#endDate');
+			var minDate = $(this).datepicker('getDate');
+			endDate.datepicker('option', 'minDate', minDate);
+		}  
+	});
+	$('#endDate').datepicker({
+		dateFormat: 'yy-mm-dd'
+		, prevText: '이전 달'
+		, nextText: '다음 달'
+		, monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
 		, dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
 		, showMonthAfterYear: true
 		, yearSuffix: '년'
