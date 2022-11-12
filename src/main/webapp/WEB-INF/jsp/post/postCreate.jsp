@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <section class="post-area">
 	<div class="subject-box d-flex justify-content-between align-items-end mb-3">
 		<h2 class="form-title">기록하기</h2>
@@ -38,9 +39,15 @@
 		<div class="form-group d-flex justify-content-between align-items-center">
 			<label for="rating">평가<span class="required">*</span></label>
 			<div class="rating-box d-flex align-items-center">
-				<button type="button" id="goodBtn" class="rating"><span class="rating-icon good material-icons">sentiment_satisfied_alt</span></button> <!-- 좋음 -->
-				<button type="button" id="normalBtn" class="rating"><span class="rating-icon normal material-icons">sentiment_neutral</span></button> <!-- 보통 -->
-				<button type="button" id="badBtn" class="rating"><span class="rating-icon bad material-icons">sentiment_very_dissatisfied</span></button> <!-- 별로 -->
+				<button type="button" title="좋음" id="goodBtn" class="rating">
+					<span class="rating-icon good material-icons">sentiment_satisfied_alt</span>
+				</button> <!-- 좋음 -->
+				<button type="button" title="보통" id="normalBtn" class="rating">
+					<span class="rating-icon normal material-icons">sentiment_neutral</span>
+				</button> <!-- 보통 -->
+				<button type="button" title="별로" id="badBtn" class="rating">
+					<span class="rating-icon bad material-icons">sentiment_very_dissatisfied</span>
+				</button> <!-- 별로 -->
 			</div>
 		</div>
 		<!-- 구매횟수 -->
@@ -71,41 +78,77 @@
 				<label for="file">사진</label>
 				<!-- 파일 첨부 -->
 				<button type="button" id="fileUploadBtn" class="btn-add-photo material-icons-outlined">add_photo_alternate</button>
-				<input type="file" id="file" class="d-none" accept=".gif, .jpg, .jpeg, .png">
+				<input type="file" id="fileInput" class="d-none" accept=".gif, .jpg, .jpeg, .png">
 			</div>
 			<div class="noti">최대 2개 (jpg, jpeg, png, gif)</div>
 		</div>
 		<div id="fileName" class="upload-file-name mt-1"><!-- 업로드된 파일명 노출 --></div>
-		<!-- 첨부 이미지 영역 -->
-		<div class="image-box d-flex justify-content-between my-3">
-			<img src="https://cdn.pixabay.com/photo/2019/11/23/07/24/christmas-4646421_960_720.jpg" alt="첨부이미지">
-			<img src="https://cdn.pixabay.com/photo/2021/12/12/20/17/drink-6865996_960_720.jpg" alt="첨부이미지">
-		</div>
+		<!-- 첨부 이미지 미리보기 -->
+		<div id="preview" class="image-box d-flex justify-content-between my-3"><!-- 첨부된 이미지 노출 영역 --></div>
 		<!-- 위치 -->
 		<div class="form-group">
 			<div class="d-flex align-items-center mb-2">
 				<label for="location">위치</label>
-				<button type="button" class="btn-location material-icons-outlined">place</button>
+				<button type="button" onclick="execDaumPostcode()" class="btn-location material-icons-outlined">place</button>
 			</div>
 		</div>
-		<div id="locationAddress" class="location-address mt-1">주소명이 여기에 노출됩니다. <!-- 지도에 뿌릴 주소명 노출 --></div>
-		<!-- 지도 표시 영역 : 상세에서만 표시 -->
-		<!-- <div id="map" class="map-box"></div> -->
+		<div id="address" class="location-address mt-1"><!-- 지도에 뿌릴 주소명 노출 --></div>
 	</div>
 	<div class="btn-box my-4">
 		<button type="button" id="createBtn" class="btn btn-block btn-dark">저장</button>
 	</div>
 </section>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=39a4fdf39fcdea33b96f40e1d8522d02&libraries=services"></script>
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("address").innerText = addr;
+            }
+        }).open();
+    }
+</script>
+
 <script>
 $(document).ready(function() {
-	// 파일 업로드 버튼
+	
+	// datepicker
+	$('#purchaseDate').datepicker({
+		dateFormat: 'yy-mm-dd'
+		, prevText: '이전 달'
+		, nextText: '다음 달'
+		, monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+		, monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+		, dayNames: ['일', '월', '화', '수', '목', '금', '토']
+		, dayNamesShort: ['일', '월', '화', '수', '목', '금', '토']
+		, dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
+		, showMonthAfterYear: true
+		, yearSuffix: '년'
+	});
+	
+	// 평가 버튼 토글 (이게 아닌것 같은데..)
+	/* $('#goodBtn > .rating-icon').click(function() {
+		$('#goodBtn > .rating-icon').toggleClass('non-selected selected');
+	});
+	$('#normalBtn > .rating-icon').click(function() {
+		$('#normalBtn > .rating-icon').toggleClass('non-selected selected');
+	});
+	$('#badBtn > .rating-icon').click(function() {
+		$('#badBtn > .rating-icon').toggleClass('non-selected selected');
+	}); */
+
+	// 파일 업로드 버튼 대체
 	$('#fileUploadBtn').on('click', function(e) {
 		e.preventDefault();
-		$('#file').click();
+		$('#fileInput').click();
 	});
 	// 파일 업로드 유효성 검사
-	$('#file').on('change', function(e) {
+	$('#fileInput').on('change', function(e) {
 		let fileName = e.target.files[0].name;
 		let ext = fileName.split('.').pop().toLowerCase();
 		
@@ -124,19 +167,29 @@ $(document).ready(function() {
 		// 업로드 된 파일명 노출
 		$('#fileName').text(fileName);
 	});
-	
-	// datepicker
-	$('#purchaseDate').datepicker({
-		dateFormat: 'yy-mm-dd'
-		, prevText: '이전 달'
-		, nextText: '다음 달'
-		, monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-		, monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-		, dayNames: ['일', '월', '화', '수', '목', '금', '토']
-		, dayNamesShort: ['일', '월', '화', '수', '목', '금', '토']
-		, dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-		, showMonthAfterYear: true
-		, yearSuffix: '년'
-	});
+
+	// 파일 이미지 미리보기
+	var sel_files = [];
+	$('#fileInput').on('change', handleImgsFilesSelect);
+	function handleImgsFilesSelect(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f) {
+			sel_files.push(f);
+			// 파일 2개 초과해서 첨부하려 할 때
+			if (sel_files.length > 2) {
+				alert('파일은 2개까지만 첨부할 수 있습니다.');
+				return false;
+			}
+			
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var img_html = "<div class='image'><img src=\'" + e.target.result + "\' /><button type='button' class='btn-delete-image material-icons'>clear</button></div>";
+				$('#preview').append(img_html);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
 });
 </script>

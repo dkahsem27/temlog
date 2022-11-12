@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <section class="post-area">
 	<!-- 글 수정 / 삭제 모달버튼 -->
-	<div class="util-box d-flex justify-content-end py-3">
+	<div class="util-box d-flex justify-content-between py-3">
+		<a href="/post/post_list_view" class="btn-back material-icons px-1">arrow_back</a>
 		<button type="button" class="btn-more" data-toggle="modal" data-target="#modal">
-			<span class="material-icons c-gray">more_horiz</span>
+			<span class="material-icons">more_horiz</span>
 		</button>
 	</div>
 	<!-- 카테고리 / 구매횟수 -->
@@ -42,10 +43,6 @@
 			<div class="created-date">등록 | 2022-11-19</div>
 			<div class="updated-date">마지막 수정 | 2022-11-19</div>
 		</div>
-	</div>
-	<!-- 목록버튼 -->
-	<div class="util-box mt-2 mb-4">
-		<a href="/post/post_list_view" class="btn btn-light btn-block">목록</a>
 	</div>
 </section>
 
