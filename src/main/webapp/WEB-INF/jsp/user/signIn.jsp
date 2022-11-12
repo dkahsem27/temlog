@@ -25,6 +25,14 @@
 
 <script>
 $(document).ready(function() {
+	// 엔터로 로그인
+	let password = document.getElementById('password');
+	password.addEventListener('keyup', function(event) {
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			$('#signInBtn').click();
+		}
+	});
 	// 로그인
 	$('#signInBtn').on('click', function() {
 		let loginId = $('#loginId').val().trim();
