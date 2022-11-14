@@ -9,13 +9,18 @@
 		</div>
 		<div class="subtitle">수정할 카테고리를 선택해주세요.</div>
 	</div>
-	<ul class="category-list py-3">
-		<c:forEach items="${categoryList}" var="category">
-			<li class="category">
-				<button type="button" class="btn-list-category" data-toggle="modal" data-target="#modal" value="${category.categoryName}">${category.categoryName}</button> <!-- 카테고리 수정 모달 팝업으로 이동 -->
-			</li>
-		</c:forEach>
-	</ul>
+	<c:if test="${empty categoryList}">
+		<div class="empty text-center">카테고리가 없습니다.</div>
+	</c:if>
+	<c:if test="${not empty categoryList}">
+		<ul class="category-list py-3">
+			<c:forEach items="${categoryList}" var="category">
+				<li class="category">
+					<button type="button" class="btn-list-category" data-toggle="modal" data-target="#modal" data-category-id="${category.id}" value="${category.categoryName}">${category.categoryName}</button> <!-- 카테고리 수정 모달 팝업으로 이동 -->
+				</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 </section>
 
 <!-- Modal -->
@@ -56,16 +61,21 @@ $(document).ready(function() {
 	
 	// 카테고리 수정 모달 버튼
 	$('.btn-list-category').on('click', function(e) {
+		// 클릭한 카테고리 id 가져오기
 		let categoryId = $(this).data('category-id'); // getting
 		$('#modal').data('category-id', categoryId); // setting
-		alert(categoryId);
+		
+		// 클릭한 카테고리명 가져와서 input에 세팅
 		let categoryName = e.target.value;
 		//let categoryName = $('.btn-list-category').val();
 		$('#modal #categoryName').val(categoryName);
 	});
 	
 	// 카테고리 수정
-	$('#updateCategoryBtn').on('click', function(e) {
+	$('#modal #updateCategoryBtn').on('click', function(e) {
+		let categoryId = $('#modal').data('category-id'); // getting
+		alert(categoryId);
+		
 		let categoryName = $('#modal #categoryName').val().trim();
 		// 유효성 검사
 		if (categoryName == '') {
@@ -87,9 +97,6 @@ $(document).ready(function() {
 			$('#categoryCheckLength').addClass('d-none');
 		}
 		
-		let categoryId = $(this).data('category-id'); // getting
-		
-		alert(categoryId);
 		// ajax
 		// 카테고리 중복 확인 ajax
 		$.ajax({

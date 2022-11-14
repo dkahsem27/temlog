@@ -15,13 +15,18 @@
 		<span class="line">&nbsp;|&nbsp;</span>
 		<a href="/category/category_delete_view" class="btn-category delete d-flex align-items-center"><span class="material-icons md-18">delete</span>삭제</a>
 	</div>
-	<ul class="category-list py-3">
-		<c:forEach items="${categoryList}" var="category">
-			<li class="category">
-				<a href="/post/post_list_view" class="btn-list-category">${category.categoryName}</a> <!-- 카테고리명과 일치하는 목록 리스트 화면으로 이동 -->
-			</li>
-		</c:forEach>
-	</ul>
+	<c:if test="${empty categoryList}">
+		<div class="empty text-center">카테고리가 없습니다.</div>
+	</c:if>
+	<c:if test="${not empty categoryList}">
+		<ul class="category-list py-3">
+			<c:forEach items="${categoryList}" var="category">
+				<li class="category">
+					<a href="/post/post_list_view" class="btn-list-category">${category.categoryName}</a> <!-- 카테고리명과 일치하는 목록 리스트 화면으로 이동 -->
+				</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 </section>
 
 <!-- Modal -->

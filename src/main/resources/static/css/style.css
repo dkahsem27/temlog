@@ -84,6 +84,7 @@ body {font-family: 'SUIT Variable', sans-serif;}
 #wrap {min-width: 320px; max-width: 480px; margin: 0 auto;}
 #contents {width: 100%; max-width: 480px; padding: 0 20px;}
 .contents-inner {width: 100%; min-height: 100vh; position: relative; padding: 69px 0 64px;}
+.empty {padding: 100px 0; color: #888;}
 
 #header {z-index: 999; width: 100%; max-width: 480px; position: fixed; top: 0; left: 50%; transform: translateX(-50%);}
 #header .head-box {background: #fff; border-bottom: 1px solid #333;}

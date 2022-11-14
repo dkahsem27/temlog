@@ -63,7 +63,6 @@ public class CategoryRestController {
 		
 		// update
 		Map<String, Object> result = new HashMap<>();
-		
 		int row = categoryBO.updateCategoryByCategoryId(categoryId, categoryName);
 		if (row > 0) {
 			result.put("code", 100);

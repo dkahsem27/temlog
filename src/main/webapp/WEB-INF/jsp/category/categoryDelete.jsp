@@ -9,13 +9,18 @@
 		</div>
 		<div class="subtitle">삭제할 카테고리를 선택해주세요.</div>
 	</div>
-	<ul class="category-list py-3">
-		<c:forEach items="${categoryList}" var="category">
-			<li class="category">
-				<button type="button" class="btn-delete-category btn-list-category" data-category-id="${category.id}">${category.categoryName}</button> <!-- 삭제 confirm 노출 -->
-			</li>
-		</c:forEach>
-	</ul>
+	<c:if test="${empty categoryList}">
+		<div class="empty text-center">카테고리가 없습니다.</div>
+	</c:if>
+	<c:if test="${not empty categoryList}">
+		<ul class="category-list py-3">
+			<c:forEach items="${categoryList}" var="category">
+				<li class="category">
+					<button type="button" class="btn-delete-category btn-list-category" data-category-id="${category.id}">${category.categoryName}</button> <!-- 삭제 confirm 노출 -->
+				</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 </section>
 
 <script>

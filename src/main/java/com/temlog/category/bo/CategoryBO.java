@@ -33,4 +33,8 @@ public class CategoryBO {
 	public List<Category> getCategoryList() {
 		return categoryDAO.selectCategoryList();
 	}
+	
+	public Category getCategoryByCategoryId(int categoryId) {
+		return categoryDAO.selectCategoryByCategoryId(categoryId);
+	}
 }
