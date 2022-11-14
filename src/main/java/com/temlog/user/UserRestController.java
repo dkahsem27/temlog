@@ -61,7 +61,7 @@ public class UserRestController {
 			result.put("code", 100);
 			result.put("result", true);
 		} else {
-			result.put("code", 400);
+			result.put("code", 100);
 			result.put("result", false);
 		}
 		
