@@ -74,7 +74,7 @@ $(document).ready(function() {
 	// 카테고리 수정
 	$('#modal #updateCategoryBtn').on('click', function(e) {
 		let categoryId = $('#modal').data('category-id'); // getting
-		alert(categoryId);
+		//alert(categoryId);
 		
 		let categoryName = $('#modal #categoryName').val().trim();
 		// 유효성 검사

@@ -61,8 +61,8 @@ public class CategoryRestController {
 			@RequestParam("categoryId") int categoryId,
 			@RequestParam("categoryName") String categoryName) {
 		
-		// update
 		Map<String, Object> result = new HashMap<>();
+		// update
 		int row = categoryBO.updateCategoryByCategoryId(categoryId, categoryName);
 		if (row > 0) {
 			result.put("code", 100);

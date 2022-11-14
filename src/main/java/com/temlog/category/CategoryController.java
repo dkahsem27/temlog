@@ -41,8 +41,6 @@ public class CategoryController {
 
 		List<Category> categoryList = categoryBO.getCategoryList();
 		model.addAttribute("categoryList", categoryList);
-		//Category category = categoryBO.getCategoryByCategoryId(categoryId);
-		//model.addAttribute("categoryId", categoryList.getId());
 		
 		model.addAttribute("viewName", "category/categoryDelete");
 		return "template/layout";
