@@ -28,28 +28,49 @@
 		</div>
 		<!-- 글 제목 -->
 		<div class="form-group">
-			<label for="subject" class="mb-2">제목<span class="required">*</span></label>
-			<input type="text" id="subject" class="form-control" placeholder="기록하고 싶은 항목을 입력해주세요(최대 20자)">
+			<div class="d-flex justify-content-between">
+				<label for="subject" class="mb-2">제목<span class="required">*</span></label>
+				<div class="text-length-box d-flex">
+					<span class="text-count subject">0</span>
+					<span class="text-max subject">/20자</span>
+				</div>
+			</div>
+			<input type="text" id="subject" class="form-control" placeholder="기록하고 싶은 항목을 입력해주세요(최대 20자)" maxlength="20">
+		</div>
+		<div class="noti-box mb-3">
+			<div class="text-count-noti subject noti text-danger d-none">제목은 20자까지 입력할 수 있습니다.</div>
 		</div>
 		<!-- 글 내용 -->
 		<div class="form-group">
-			<label for="content" class="mb-2">내용<span class="required">*</span></label>
-			<textarea id="content" class="form-control" rows="8" placeholder="기록하고 싶은 내용을 입력해주세요(최대 150자)"></textarea>
+			<div class="d-flex justify-content-between">
+				<label for="content" class="mb-2">내용<span class="required">*</span></label>
+				<div class="text-length-box d-flex">
+					<span class="text-count content">0</span>
+					<span class="text-max content">/150자</span>
+				</div>
+			</div>
+			<textarea id="content" class="form-control" rows="8" placeholder="기록하고 싶은 내용을 입력해주세요(최대 150자)" maxlength="150"></textarea>
+		</div>
+		<div class="noti-box mb-3">
+			<div class="text-count-noti content noti text-danger d-none">내용은 150자까지 입력할 수 있습니다.</div>
 		</div>
 		<hr>
 		<!-- 평가 -->
 		<div class="form-group d-flex justify-content-between align-items-center">
-			<label for="rating">평가<span class="required">*</span></label>
+			<label>평가<span class="required">*</span></label>
 			<div class="rating-box d-flex align-items-center">
-				<button type="button" title="좋음" id="goodBtn" class="rating">
-					<span class="rating-icon good material-icons non-selected">sentiment_satisfied_alt</span>
-				</button> <!-- 좋음 -->
-				<button type="button" title="보통" id="normalBtn" class="rating">
-					<span class="rating-icon normal material-icons non-selected">sentiment_neutral</span>
-				</button> <!-- 보통 -->
-				<button type="button" title="별로" id="badBtn" class="rating">
-					<span class="rating-icon bad material-icons non-selected">sentiment_very_dissatisfied</span>
-				</button> <!-- 별로 -->
+				<label for="good" title="좋음" class="d-flex align-items-center">
+					<input type="radio" value="좋음" name="rating" id="good" class="rating">
+					<span class="rating-icon good material-icons ml-1">sentiment_satisfied_alt</span>
+				</label>
+				<label for="normal" title="보통" class="d-flex align-items-center ml-2">
+					<input type="radio" value="보통" name="rating" id="normal" class="rating">
+					<span class="rating-icon normal material-icons ml-1">sentiment_neutral</span>
+				</label>
+				<label for="bad" title="별로" class="d-flex align-items-center ml-2">
+					<input type="radio" value="별로" name="rating" id="bad" class="rating">
+					<span class="rating-icon bad material-icons ml-1">sentiment_very_dissatisfied</span>
+				</label>
 			</div>
 		</div>
 		<!-- 구매횟수 -->
@@ -62,6 +83,9 @@
 				</div>
 			</div>
 			<input type="number" id="purchaseCount" class="form-control col-5">
+		</div>
+		<div class="noti-box mb-3">
+			<div class="number-count-noti noti text-danger d-none">0회부터 999회까지만 입력할 수 있습니다.</div>
 		</div>
 		<!-- 구매일 -->
 		<div class="form-group d-flex justify-content-between align-items-center">
@@ -101,6 +125,7 @@
 	</div>
 </section>
 
+<!-- 다음지도 주소검색 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=39a4fdf39fcdea33b96f40e1d8522d02&libraries=services"></script>
 <script>
@@ -131,6 +156,57 @@ $(document).ready(function() {
 		, dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
 		, showMonthAfterYear: true
 		, yearSuffix: '년'
+	});
+	
+	// 글자수 제한
+	$('#subject').keyup(function(e) {
+		let subject = $('#subject').val();
+		
+		// 글자수 세기
+		if (subject.length == 0 || subject == '') {
+			$('.text-count.subject').text('0');
+		} else {
+			$('.text-count.subject').text(subject.length);
+		}
+		
+		// 글자수 제한
+		if (subject.length > 20) {
+			// 20자부터 타이핑 막기
+			$(this).val($(this).val().substring(0, 21));
+			// 20자 이상 알림
+			$('.text-count-noti.subject').removeClass('d-none');
+		} else {
+			$('.text-count-noti.subject').addClass('d-none');
+		}
+	});
+	$('#content').keyup(function(e) {
+		let content = $(this).val();
+		
+		// 글자수 세기
+		if (content.length == 0 || content == '') {
+			$('.text-count.content').text('0');
+		} else {
+			$('.text-count.content').text(content.length);
+		}
+		
+		// 글자수 제한
+		if (content.length > 150) {
+			// 150자부터 타이핑 막기
+			$(this).val($(this).val().substring(0, 151));
+			// 150자 이상 알림
+			$('.text-count-noti.content').removeClass('d-none');
+		} else {
+			$('.text-count-noti.content').addClass('d-none');
+		}
+	});
+	// 구매횟수 숫자 제한
+	$('#purchaseCount').keyup(function(e) {
+		let purchaseNumber = $(this).val();
+		if (purchaseNumber < 0 || purchaseNumber > 999) {
+			$('.number-count-noti').removeClass('d-none');
+		} else {
+			$('.number-count-noti').addClass('d-none');
+		}
 	});
 	
 	// 파일 업로드 버튼 대체

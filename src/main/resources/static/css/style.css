@@ -150,6 +150,9 @@ input#datePicker {cursor: default;}
 
 .upload-file-name, .location-address {font-size: 13px; color: #333;}
 
+.text-length-box {font-size: 13px; color: #888;}
+.text-length-box .text-max.max {color: firebrick;}
+
 /* contents */
 .user-area h1.logo {margin: 120px 0;}
 
