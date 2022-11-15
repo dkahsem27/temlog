@@ -50,4 +50,22 @@
 			`id` = #{postId}
 			AND `userId` = #{userId}
 	</select>
+	
+	<select id="selectPostList" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		ORDER BY `id` DESC
+	</select>
 </mapper>

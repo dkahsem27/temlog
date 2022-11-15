@@ -31,6 +31,12 @@ public class PostController {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
 		
+		List<Post> postList = postBO.getPostList();
+		model.addAttribute("postList", postList);
+		
+		List<Category> categoryList = categoryBO.getCategoryList();
+		model.addAttribute("categoryList", categoryList);
+		
 		model.addAttribute("viewName", "post/postList");
 		return "template/layout";
 	}

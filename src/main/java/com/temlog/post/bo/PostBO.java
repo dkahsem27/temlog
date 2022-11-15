@@ -1,9 +1,8 @@
 package com.temlog.post.bo;
 
 import java.util.Date;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,5 +38,9 @@ public class PostBO {
 	
 	public Post getPostByPostIdAndUserId(int postId, int userId) {
 		return postDAO.selectPostByPostIdAndUserId(postId, userId);
+	}
+	
+	public List<Post> getPostList() {
+		return postDAO.selectPostList();
 	}
 }

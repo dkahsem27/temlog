@@ -1,6 +1,7 @@
 package com.temlog.post.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -24,4 +25,6 @@ public interface PostDAO {
 	public Post selectPostByPostIdAndUserId(
 			@Param("postId") int postId, 
 			@Param("userId") int userId);
+	
+	public List<Post> selectPostList();
 }

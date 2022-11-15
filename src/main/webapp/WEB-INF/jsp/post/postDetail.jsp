@@ -34,7 +34,9 @@
 			</c:if>
 		</div>
 		<!-- 구매일 -->
-		<div class="purchase-date">구매일: <fmt:formatDate value="${post.purchaseDate}" pattern="yyyy-MM-dd" /></div>
+		<c:if test="${not empty post.purchaseDate}">
+			<div class="purchase-date">구매일: <fmt:formatDate value="${post.purchaseDate}" pattern="yyyy-MM-dd" /></div>
+		</c:if>
 		<!-- 글 내용 -->
 		<div class="content my-2 py-4">${post.content}</div>
 		<!-- 첨부 이미지 영역 -->

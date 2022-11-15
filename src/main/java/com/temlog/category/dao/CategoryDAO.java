@@ -23,4 +23,5 @@ public interface CategoryDAO {
 	public List<Category> selectCategoryList();
 	
 	public Category selectCategoryByCategoryId(int categoryId);
+	
 }

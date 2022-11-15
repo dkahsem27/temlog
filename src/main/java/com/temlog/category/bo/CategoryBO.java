@@ -37,4 +37,5 @@ public class CategoryBO {
 	public Category getCategoryByCategoryId(int categoryId) {
 		return categoryDAO.selectCategoryByCategoryId(categoryId);
 	}
+	
 }
