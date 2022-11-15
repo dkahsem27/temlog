@@ -326,7 +326,7 @@ $(document).ready(function() {
 				if (data.code == 100) {
 					// 성공
 					alert('저장되었습니다.');
-					location.href='/post/post_list_view'; // /post/post_detail_view?postId=1
+					document.location.href='/post/post_list_view';
 				} else {
 					// 에러
 					alert(data.errorMessage);
