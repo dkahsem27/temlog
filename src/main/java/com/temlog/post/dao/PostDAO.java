@@ -4,7 +4,8 @@ import java.util.Date;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
+
+import com.temlog.post.model.Post;
 
 @Repository
 public interface PostDAO {
@@ -19,4 +20,8 @@ public interface PostDAO {
 			@Param("purchaseDate") Date purchaseDate, 
 			@Param("imagePath") String imagePath, 
 			@Param("location") String location);
+	
+	public Post selectPostByPostIdAndUserId(
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
 }

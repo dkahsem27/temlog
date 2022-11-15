@@ -30,4 +30,24 @@
 			, NOW()
 		)
 	</insert>
+	
+	<select id="selectPostByPostIdAndUserId" parameterType="map" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
+	</select>
 </mapper>

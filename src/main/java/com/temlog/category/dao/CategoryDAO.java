@@ -21,4 +21,6 @@ public interface CategoryDAO {
 	public int deleteCategoryByCategoryId(int categoryId);
 	
 	public List<Category> selectCategoryList();
+	
+	public Category selectCategoryByCategoryId(int categoryId);
 }

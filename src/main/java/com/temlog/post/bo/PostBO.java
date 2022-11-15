@@ -10,10 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.temlog.common.FileManagerService;
 import com.temlog.post.dao.PostDAO;
+import com.temlog.post.model.Post;
 
 @Service
 public class PostBO {
-	private Logger log = LoggerFactory.getLogger(this.getClass());
+	//private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private PostDAO postDAO;
@@ -34,5 +35,9 @@ public class PostBO {
 		}
 		
 		return postDAO.insertPost(userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, imagePath, location);
+	}
+	
+	public Post getPostByPostIdAndUserId(int postId, int userId) {
+		return postDAO.selectPostByPostIdAndUserId(postId, userId);
 	}
 }

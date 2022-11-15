@@ -1,9 +1,9 @@
-package com.temlog.category;
+package com.temlog.post.model;
 
 import java.util.Date;
 
 public class Post {
-	
+
 	private int id;
 	private String userId;
 	private int categoryId;
