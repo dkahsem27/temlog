@@ -52,7 +52,15 @@ public class PostController {
 	}
 	
 	@RequestMapping("/post/post_update_view")
-	public String postUpdateView(Model model) {
+	public String postUpdateView(
+			@RequestParam("postId") int postId,
+			Model model) {
+		
+		Post post = postBO.getPostByPostId(postId);
+		model.addAttribute("post", post);
+		List<Category> categoryList = categoryBO.getCategoryList();
+		model.addAttribute("categoryList", categoryList);
+		
 		model.addAttribute("viewName", "post/postUpdate");
 		return "template/layout";
 	}

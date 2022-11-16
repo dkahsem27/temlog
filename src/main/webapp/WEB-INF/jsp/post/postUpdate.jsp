@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <section class="post-area">
 	<div class="subject-box d-flex justify-content-between align-items-end mb-3">
 		<div class="d-flex align-items-end">
@@ -18,10 +20,10 @@
 						<a href="/category/category_list_view" class="material-icons md-18 ml-2">add_circle_outline</a>
 					</div>
 					<select id="category" class="form-control form-select col-6">
-						<option selected>카테고리 선택</option>
-						<option value="1">카테고리명1</option>
-						<option value="2">카테고리명카테고리명</option>
-						<option value="3">카테고리명33</option>
+						<option value="">카테고리 선택</option>
+						<c:forEach items="${categoryList}" var="category">
+							<option value="${category.id}"<c:if test="${post.categoryId == category.id}">selected</c:if>>${category.categoryName}</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
@@ -35,7 +37,7 @@
 					<span class="text-max subject">/20자</span>
 				</div>
 			</div>
-			<input type="text" id="subject" class="form-control" placeholder="기록하고 싶은 항목을 입력해주세요(최대 20자)" maxlength="20">
+			<input type="text" id="subject" class="form-control" placeholder="기록하고 싶은 항목을 입력해주세요(최대 20자)" maxlength="20" value="${post.subject}">
 		</div>
 		<div class="noti-box mb-3">
 			<div class="text-count-noti subject noti text-danger d-none">제목은 20자까지 입력할 수 있습니다.</div>
@@ -49,7 +51,7 @@
 					<span class="text-max content">/150자</span>
 				</div>
 			</div>
-			<textarea id="content" class="form-control" rows="8" placeholder="기록하고 싶은 내용을 입력해주세요(최대 150자)" maxlength="150"></textarea>
+			<textarea id="content" class="form-control" rows="8" placeholder="기록하고 싶은 내용을 입력해주세요(최대 150자)" maxlength="150">${post.content}</textarea>
 		</div>
 		<div class="noti-box mb-3">
 			<div class="text-count-noti content noti text-danger d-none">내용은 150자까지 입력할 수 있습니다.</div>
@@ -60,15 +62,15 @@
 			<label>평가<span class="required">*</span></label>
 			<div class="rating-box d-flex align-items-center">
 				<label for="good" title="좋음" class="d-flex align-items-center">
-					<input type="radio" value="좋음" name="rating" id="good" class="rating">
+					<input type="radio" value="좋음" name="rating" id="good" class="rating" <c:if test="${post.rating eq '좋음'}">checked</c:if>>
 					<span class="rating-icon good material-icons ml-1">sentiment_satisfied_alt</span>
 				</label>
 				<label for="normal" title="보통" class="d-flex align-items-center ml-2">
-					<input type="radio" value="보통" name="rating" id="normal" class="rating">
+					<input type="radio" value="보통" name="rating" id="normal" class="rating" <c:if test="${post.rating eq '보통'}">checked</c:if>>
 					<span class="rating-icon normal material-icons ml-1">sentiment_neutral</span>
 				</label>
 				<label for="bad" title="별로" class="d-flex align-items-center ml-2">
-					<input type="radio" value="별로" name="rating" id="bad" class="rating">
+					<input type="radio" value="별로" name="rating" id="bad" class="rating" <c:if test="${post.rating eq '별로'}">checked</c:if>>
 					<span class="rating-icon bad material-icons ml-1">sentiment_very_dissatisfied</span>
 				</label>
 			</div>
@@ -82,7 +84,7 @@
 					<span class="noti hover-block ml-1">0 ~ 999회</span>
 				</div>
 			</div>
-			<input type="number" id="purchaseCount" class="form-control col-5">
+			<input type="number" id="purchaseCount" class="form-control col-5" value="${post.purchaseNumber}">
 		</div>
 		<div class="noti-box mb-3">
 			<div class="number-count-noti noti text-danger d-none">0회부터 999회까지만 입력할 수 있습니다.</div>
@@ -96,7 +98,8 @@
 					<span class="noti hover-block ml-1">yyyy-mm-dd</span>
 				</div>
 			</div>
-			<input type="text" id="purchaseDate" class="form-control col-5" placeholder="날짜 선택">
+			<input type="text" id="purchaseDate" class="form-control col-5" placeholder="날짜 선택" 
+			value="<fmt:formatDate value="${post.purchaseDate}" pattern="yyyy-MM-dd" />">
 		</div>
 		<!-- 사진 -->
 		<div class="form-group d-flex justify-content-between align-items-center">
@@ -118,7 +121,10 @@
 				<button type="button" onclick="execDaumPostcode()" class="btn-location material-icons-outlined">add_location_alt</button>
 			</div>
 		</div>
-		<div id="address" class="location-address mt-1">주소를 검색해주세요<!-- 지도에 뿌릴 주소명 노출 --></div>
+		<div class="d-flex align-items-center">
+			<div id="address" class="location-address">${post.location}<!-- 지도에 뿌릴 주소명 노출 --></div>
+			<button type="button" id="addressClearBtn" class="btn-clear material-icons ml-2">clear</button>
+		</div>
 	</div>
 	<div class="btn-box my-4">
 		<button type="button" id="updateBtn" class="btn btn-block btn-dark">저장</button>
@@ -207,6 +213,12 @@ $(document).ready(function() {
 		} else {
 			$('.number-count-noti').addClass('d-none');
 		}
+	});
+	
+	// 주소 삭제
+	$('#addressClearBtn').on('click', function() {
+		$('#address').text('');
+		$(this).addClass('d-none');
 	});
 	
 	// 파일 업로드 버튼 대체

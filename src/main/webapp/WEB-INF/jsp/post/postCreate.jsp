@@ -18,7 +18,7 @@
 					<select id="category" class="form-control form-select col-6">
 						<option value="" selected>카테고리 선택</option>
 						<c:forEach items="${categoryList}" var="category">
-						<option value="${category.id}">${category.categoryName}</option>
+							<option value="${category.id}">${category.categoryName}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -116,7 +116,9 @@
 				<button type="button" onclick="execDaumPostcode()" class="btn-location material-icons-outlined">add_location_alt</button>
 			</div>
 		</div>
-		<div id="address" class="location-address mt-1">주소를 검색해주세요<!-- 지도에 뿌릴 주소명 노출 --></div>
+		<div class="d-flex align-items-center">
+			<div id="address" class="location-address">주소를 입력해주세요.<!-- 지도에 뿌릴 주소명 노출 --></div>
+		</div>
 	</div>
 	<div class="btn-box my-4">
 		<button type="button" id="createBtn" class="btn btn-block btn-dark">저장</button>

@@ -87,9 +87,10 @@ public class PostBO {
 		}
 		
 		// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
-		if (image.getImagePath() != null) {
-			fileManagerService.deleteFile(image.getImagePath());
-		}
+		/*
+		 * if (image.getImagePath() != null) {
+		 * fileManagerService.deleteFile(image.getImagePath()); }
+		 */
 		
 		return postDAO.deletePost(postId);
 	}
