@@ -74,8 +74,8 @@
 					<div class="post-content">${post.content}</div>
 				</div>
 				<div class="btn-box d-flex justify-content-center">
-					<a href="/post/post_update_view" id="updatePostBtn" class="btn btn-dark col-6">수정</a>
-					<button type="button" id="deletePostBtn" class="btn btn-secondary col-6 ml-2">삭제</button>
+					<a href="/post/post_update_view?postId=${post.id}" id="updatePostBtn" class="btn btn-dark col-6">수정</a>
+					<button type="button" id="deletePostBtn" class="btn btn-secondary col-6 ml-2" data-post-id="${post.id}">삭제</button>
 				</div>
 			</div>
 		</div>
@@ -121,7 +121,25 @@ $(document).ready(function() {
 	// 삭제버튼
 	$('#deletePostBtn').on('click', function() {
 		if (confirm('삭제하시겠습니까?')) {
-			alert('삭제되었습니다.');
+			let postId = $(this).data('post-id');
+			
+			$.ajax({
+				type: 'delete'
+				, url: '/post/delete'
+				, data: {'postId':postId}
+			
+				, success: function(data) {
+					if (data.code == 100) {
+						alert('삭제되었습니다.');
+						location.href='/post/post_list_view';
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error: function(e) {
+					alert('글 삭제 실패');
+				}
+			});
 		}
 	});
 });

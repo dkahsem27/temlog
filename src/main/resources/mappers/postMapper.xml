@@ -31,6 +31,48 @@
 		)
 	</insert>
 	
+	<update id="updatePost" parameterType="map">
+		UPDATE `post`
+		SET
+			`userId` = #{userId}
+			, `categoryId` = #{categoryId}
+			, `subject` = #{subject}
+			, `content` = #{content}
+			, `rating` = #{rating}
+			, `purchaseNumber` = #{purchaseNumber}
+			, `purchaseDate` = #{purchaseDate}
+			, `location` = #{location}
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{postId}
+	</update>
+	
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+	</delete>
+	
+	<select id="selectPostByPostId" parameterType="int" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+	</select>
+	
 	<select id="selectPostByPostIdAndUserId" parameterType="map" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`

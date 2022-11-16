@@ -6,7 +6,7 @@
 			<h2 class="form-title">기록하기</h2>
 			<span class="tag tag-modify ml-2">수정</span>
 		</div>
-		<a href="/post/post_detail_view" class="btn-cancle">취소</a>
+		<a href="javascript:history.back();" class="btn-cancle">취소</a>
 	</div>
 	<div class="form-outer py-3">
 		<!-- 카테고리 선택 -->
@@ -79,7 +79,7 @@
 				<label for="purchaseCount">구매횟수</label>
 				<div class="noti-info d-flex align-items-end ml-1">
 					<span class="icon-info material-icons-outlined">info</span>
-					<span class="noti hover-block ml-1">0회 ~ 999회</span>
+					<span class="noti hover-block ml-1">0 ~ 999회</span>
 				</div>
 			</div>
 			<input type="number" id="purchaseCount" class="form-control col-5">
@@ -93,7 +93,7 @@
 				<label for="purchaseDate">구매일</label>
 				<div class="noti-info d-flex align-items-end ml-1">
 					<span class="icon-info material-icons-outlined">info</span>
-					<span class="noti hover-block ml-1">최초 구매일</span>
+					<span class="noti hover-block ml-1">yyyy-mm-dd</span>
 				</div>
 			</div>
 			<input type="text" id="purchaseDate" class="form-control col-5" placeholder="날짜 선택">
@@ -115,13 +115,13 @@
 		<div class="form-group">
 			<div class="d-flex align-items-center mb-2">
 				<label for="location">위치</label>
-				<button type="button" onclick="execDaumPostcode()" class="btn-location material-icons-outlined">place</button>
+				<button type="button" onclick="execDaumPostcode()" class="btn-location material-icons-outlined">add_location_alt</button>
 			</div>
 		</div>
-		<div id="address" class="location-address mt-1"><!-- 지도에 뿌릴 주소명 노출 --></div>
+		<div id="address" class="location-address mt-1">주소를 검색해주세요<!-- 지도에 뿌릴 주소명 노출 --></div>
 	</div>
 	<div class="btn-box my-4">
-		<button type="button" id="createBtn" class="btn btn-block btn-dark">저장</button>
+		<button type="button" id="updateBtn" class="btn btn-block btn-dark">저장</button>
 	</div>
 </section>
 
@@ -249,7 +249,7 @@ $(document).ready(function() {
 				alert('파일은 2개까지만 첨부할 수 있습니다.');
 				return false;
 			}
-			
+			// 첨부 이미지 태그 생성
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				var img_html = "<div class='image'><img src=\'" + e.target.result + "\' /><button type='button' class='btn-delete-image material-icons'>clear</button></div>";
@@ -258,5 +258,10 @@ $(document).ready(function() {
 			reader.readAsDataURL(f);
 		});
 	}
+	
+	// 글 수정
+	$('#updateBtn').on('click', function() {
+		alert('ddd');
+	});
 });
 </script>

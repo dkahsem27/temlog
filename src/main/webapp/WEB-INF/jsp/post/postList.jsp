@@ -7,8 +7,8 @@
 	<!-- content -->
 	<!-- 검색창 -->
 	<div class="search-box d-flex align-items-center py-3">
-		<input type="search" class="form-control" placeholder="검색어를 입력해주세요">
-		<button type="button" class="btn-search"><span class="material-icons-outlined">search</span></button>
+		<input type="search" id="searchText" class="form-control" placeholder="검색어를 입력해주세요">
+		<button type="button" id="searchBtn" class="btn-search"><span class="material-icons-outlined">search</span></button>
 	</div>
 	<!-- 분류 -->
 	<div class="util-box dropdown-util-box d-flex justify-content-between align-items-center py-2">
