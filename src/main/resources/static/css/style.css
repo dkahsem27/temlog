@@ -94,11 +94,17 @@ body {font-family: 'SUIT Variable', sans-serif;}
 #navigation .nav {background: #efefef; border-top: 1px solid #ddd;}
 #navigation .nav .nav-item:not(:first-child) {border-left: 1px solid #ddd;}
 #navigation .nav .nav-item .nav-link .nav-link-inner {display: grid; row-gap: 2px;}
-#navigation .nav .nav-item .nav-link .nav-icon {color: #555; font-weight: 200;}
+#navigation .nav .nav-item .nav-link .nav-icon {color: #666; font-weight: 200;}
 #navigation .nav .nav-item .nav-link .nav-text {font-size: 13px; color: #888;}
-#navigation .nav .nav-item:hover, #navigation .nav .nav-item.on {background: #333; transition: background 300ms;}
-#navigation .nav .nav-item:hover .nav-link .nav-icon, #navigation .nav .nav-item.on .nav-link .nav-icon {color: #fff;}
-#navigation .nav .nav-item:hover .nav-link .nav-text, #navigation .nav .nav-item.on .nav-link .nav-text {color: #fff;}
+
+#navigation .nav .nav-item:hover, 
+#navigation .nav .nav-item.on {background: #3d3d3d; transition: background 150ms;}
+#navigation .nav .nav-item:hover .nav-link .nav-icon, 
+#navigation .nav .nav-item:hover .nav-link .nav-text, 
+#navigation .nav .nav-item.on .nav-link .nav-icon, 
+#navigation .nav .nav-item.on .nav-link .nav-text {color: #fff; transition: all 150ms;}
+
+
 
 .logo > a {font-size: 50px;}
 input#datePicker {cursor: default;}

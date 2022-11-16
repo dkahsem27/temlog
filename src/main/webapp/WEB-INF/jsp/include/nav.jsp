@@ -36,3 +36,15 @@
 		</li>
 	</ul>
 </nav>
+
+<script>
+$(document).ready(function() {
+	// 해당 메뉴에 focus
+	let path = window.location.pathname;
+	$('.nav-link').each(function() {
+		if (path === $(this).attr('href')) {
+			$(this).parent().addClass('on');
+		}
+	});
+});
+</script>

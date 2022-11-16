@@ -3,7 +3,7 @@
 <section class="user-area">
 	<div class="subject-box d-flex justify-content-between align-items-end mb-3">
 		<h2 class="form-title">내 정보 수정</h2>
-		<a href="/main_view" class="btn-cancle">취소</a>
+		<a href="javascript:history.back();" class="btn-cancle">취소</a>
 	</div>
 	<div class="form-outer py-3">
 		<div class="form-group mb-4">
