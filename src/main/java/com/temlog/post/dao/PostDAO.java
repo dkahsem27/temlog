@@ -12,6 +12,7 @@ import com.temlog.post.model.Post;
 public interface PostDAO {
 
 	public int insertPost(
+			@Param("post") List<Post> post,
 			@Param("userId") int UserId,
 			@Param("categoryId") int categoryId, 
 			@Param("subject") String subject, 
@@ -19,7 +20,6 @@ public interface PostDAO {
 			@Param("rating") String rating, 
 			@Param("purchaseNumber") Integer purchaseNumber, 
 			@Param("purchaseDate") Date purchaseDate, 
-			@Param("imagePath") String imagePath, 
 			@Param("location") String location);
 	
 	public int updatePost(
@@ -43,4 +43,6 @@ public interface PostDAO {
 			@Param("userId") int userId);
 	
 	public List<Post> selectPostList();
+	
+	public Post selectPost();
 }

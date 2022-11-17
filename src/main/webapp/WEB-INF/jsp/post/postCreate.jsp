@@ -303,9 +303,6 @@ $(document).ready(function() {
 		}
 
 		let formData = new FormData();
-		for (var i = 0; i < sel_files.length; i++) {
-			formData.append("file", sel_files[i]);
-		}
 		formData.append("categoryId", categoryId);
 		formData.append("subject", subject);
 		formData.append("content", content);
@@ -313,21 +310,15 @@ $(document).ready(function() {
 		formData.append("purchaseNumber", purchaseNumber);
 		formData.append("purchaseDate", purchaseDate);
 		formData.append("location", location);
+		for (var i = 0; i < sel_files.length; i++) {
+			formData.append("file", sel_files[i]);
+		}
 		
 		// ajax
 		$.ajax({
 			type: 'post'
 			, url: '/post/create'
 			, data: formData
-			/* , data: {
-				'categoryId':categoryId, 
-				'subject':subject, 
-				'content':content,
-				'rating':rating, 
-				'purchaseNumber':purchaseNumber, 
-				'purchaseDate':purchaseDate,
-				'file':file, 
-				'location':location} */
 			// 파일 업로드를 위한 필수 설정 3가지
 			, enctype: "multipart/form-data"
 			, processData: false

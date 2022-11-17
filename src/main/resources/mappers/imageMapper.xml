@@ -5,7 +5,7 @@
 	<insert id="insertImage" parameterType="map">
 		INSERT INTO `image`
 		(
-			postId`
+			`postId`
 			, `userId`
 			, `imagePath`
 			, `createdAt`
@@ -20,6 +20,18 @@
 			, NOW()
 		)
 	</insert>
+	
+	<select id="selectImage" resultType="com.temlog.image.model.Image">
+		SELECT
+			`id`
+			, `postId`
+			, `userId`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`image`
+	</select>
 
 	<select id="selectImageByPostId" parameterType="int" resultType="com.temlog.image.model.Image">
 		SELECT

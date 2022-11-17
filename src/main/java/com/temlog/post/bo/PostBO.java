@@ -28,19 +28,14 @@ public class PostBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 	
-	public int addPost(int userId, String userLoginId, 
+	public int addPost(List<Post> post,
+			int userId, String userLoginId, 
 			int categoryId, String subject, 
 			String content, String rating, 
 			Integer purchaseNumber, Date purchaseDate, 
-			MultipartFile file, String location) {
+			String location) {
 		
-		String imagePath = null;
-		if (file != null) {
-			// 파일이 있을 때만 업로드
-			imagePath = fileManagerService.saveFile(userLoginId, file);
-		}
-		
-		return postDAO.insertPost(userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, imagePath, location);
+		return postDAO.insertPost(post, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
 	}
 	
 	public int updatePost(int postId,
@@ -80,7 +75,6 @@ public class PostBO {
 		
 		// 기존 글과 이미지 가져오기
 		Post post = getPostByPostId(postId);
-		Image image = imageBO.getImageByPostId(postId);
 		if (post == null) { // 포스트가 없는 경우
 			log.warn("[delete post] 삭제할 글이 존재하지 않습니다. postId:{}", postId);
 			return 0;
@@ -88,9 +82,10 @@ public class PostBO {
 		
 		// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
 		/*
-		 * if (image.getImagePath() != null) {
-		 * fileManagerService.deleteFile(image.getImagePath()); }
+		 * Image image = imageBO.getImageByPostId(postId); if (image.getImagePath() !=
+		 * null) { fileManagerService.deleteFile(image.getImagePath()); }
 		 */
+		 
 		
 		return postDAO.deletePost(postId);
 	}
@@ -104,5 +99,9 @@ public class PostBO {
 	
 	public List<Post> getPostList() {
 		return postDAO.selectPostList();
+	}
+	
+	public Post getPost() {
+		return postDAO.selectPost();
 	}
 }

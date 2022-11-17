@@ -13,5 +13,7 @@ public interface ImageDAO {
 			@Param("userId") int userId, 
 			@Param("imagePath") String imagePath);
 	
+	public Image selectImage();
+	
 	public Image selectImageByPostId(int postId);
 }
