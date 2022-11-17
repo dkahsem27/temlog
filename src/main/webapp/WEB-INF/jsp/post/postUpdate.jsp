@@ -8,7 +8,8 @@
 			<h2 class="form-title">기록하기</h2>
 			<span class="tag tag-modify ml-2">수정</span>
 		</div>
-		<a href="javascript:history.back();" class="btn-cancle">취소</a>
+		<!-- <a href="javascript:history.back();" class="btn-cancle">취소</a> -->
+		<a href="/post/post_detail_view?postId=${post.id}&categoryId=${post.categoryId}" class="btn-cancle">취소</a>
 	</div>
 	<div class="form-outer py-3">
 		<!-- 카테고리 선택 -->
@@ -123,11 +124,11 @@
 		</div>
 		<div class="d-flex align-items-center">
 			<div id="address" class="location-address">${post.location}<!-- 지도에 뿌릴 주소명 노출 --></div>
-			<button type="button" id="addressClearBtn" class="btn-clear material-icons ml-2">clear</button>
+			<button type="button" id="addressClearBtn" class="btn-clear material-icons ml-2 d-none">clear</button>
 		</div>
 	</div>
 	<div class="btn-box my-4">
-		<button type="button" id="updateBtn" class="btn btn-block btn-dark">저장</button>
+		<button type="button" id="updateBtn" class="btn btn-block btn-dark" data-post-id="${post.id}">저장</button>
 	</div>
 </section>
 
@@ -142,6 +143,8 @@
 
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("address").innerText = addr;
+             	// 주소 삭제버튼 노출
+                document.getElementById("addressClearBtn").className+="d-block";
             }
         }).open();
     }
@@ -273,7 +276,77 @@ $(document).ready(function() {
 	
 	// 글 수정
 	$('#updateBtn').on('click', function() {
-		alert('ddd');
+		let postId = $(this).data('post-id');
+		
+		// 필수
+		let categoryId = $('#category').val();
+		let subject = $('#subject').val().trim();
+		let content = $('#content').val();
+		let rating = $('input[name=rating]:checked').val();
+		// 필수아님
+		let purchaseNumber = $('#purchaseCount').val();
+		let purchaseDate = $('#purchaseDate').val();
+		let file = $('#fileInput').val();
+		let location = $('#address').text();
+		
+		// 유효성 검사
+		if (categoryId == '') {
+			alert('카테고리를 선택해주세요.');
+			$('#category').focus();
+			return;
+		}
+		if (subject == '') {
+			alert('제목을 입력해주세요.');
+			$('#subject').focus();
+			return;
+		}
+		if (content == '') {
+			alert('내용을 입력해주세요.');
+			$('#content').focus();
+			return;
+		}
+		if (rating == null) {
+			alert('평가 항목을 선택해주세요.');
+			return;
+		}
+
+		let formData = new FormData();
+		for (var i = 0; i < sel_files.length; i++) {
+			formData.append("file", sel_files[i]);
+		}
+		formData.append("postId", postId);
+		formData.append("categoryId", categoryId);
+		formData.append("subject", subject);
+		formData.append("content", content);
+		formData.append("rating", rating);
+		formData.append("purchaseNumber", purchaseNumber);
+		formData.append("purchaseDate", purchaseDate);
+		formData.append("location", location);
+		
+		// ajax
+		$.ajax({
+			type: 'put'
+			, url: '/post/update'
+			, data: formData
+			// 파일 업로드를 위한 필수 설정 3가지
+			, enctype: "multipart/form-data"
+			, processData: false
+			, contentType: false
+		
+			, success: function(data) {
+				if (data.code == 100) {
+					// 성공
+					alert('저장되었습니다.');
+					document.location.href='/post/post_update_view?postId=' + postId + '&categoryId=' + categoryId;
+				} else {
+					// 에러
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('글 수정 에러');
+			}
+		});
 	});
 });
 </script>

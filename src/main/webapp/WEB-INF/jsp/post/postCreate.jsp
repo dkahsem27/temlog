@@ -118,6 +118,7 @@
 		</div>
 		<div class="d-flex align-items-center">
 			<div id="address" class="location-address">주소를 입력해주세요.<!-- 지도에 뿌릴 주소명 노출 --></div>
+			<button type="button" id="addressClearBtn" class="btn-clear material-icons ml-2 d-none">clear</button>
 		</div>
 	</div>
 	<div class="btn-box my-4">
@@ -136,6 +137,8 @@
 
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("address").innerText = addr;
+                // 주소 삭제버튼 노출
+                document.getElementById("addressClearBtn").className+="d-block";
             }
         }).open();
     }
@@ -207,6 +210,12 @@ $(document).ready(function() {
 		} else {
 			$('.number-count-noti').addClass('d-none');
 		}
+	});
+
+	// 주소 삭제
+	$('#addressClearBtn').on('click', function() {
+		$('#address').text('');
+		$(this).addClass('d-none');
 	});
 	
 	// 파일 업로드 버튼 대체
