@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.temlog.image.dao.ImageDAO">
-	<insert id="insertImage" parameterType="map">
+	<insert id="insertImage" parameterType="com.temlog.image.model.Image">
 		INSERT INTO `image`
 		(
 			`postId`
@@ -12,6 +12,7 @@
 			, `updatedAt`
 		)
 		VALUES
+		<foreach collection="imagePath" index="index" item="pathList" separator=",">
 		(
 			#{postId}
 			, #{userId}
@@ -19,7 +20,20 @@
 			, NOW()
 			, NOW()
 		)
+		</foreach>
 	</insert>
+	
+	<select id="selectImageList" resultType="com.temlog.image.model.Image">
+		SELECT
+			`id`
+			, `postId`
+			, `userId`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`image`
+	</select>
 	
 	<select id="selectImage" resultType="com.temlog.image.model.Image">
 		SELECT

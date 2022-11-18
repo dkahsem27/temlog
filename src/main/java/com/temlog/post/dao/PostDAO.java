@@ -11,16 +11,18 @@ import com.temlog.post.model.Post;
 @Repository
 public interface PostDAO {
 
-	public int insertPost(
-			@Param("post") List<Post> post,
-			@Param("userId") int UserId,
-			@Param("categoryId") int categoryId, 
-			@Param("subject") String subject, 
-			@Param("content") String content, 
-			@Param("rating") String rating, 
-			@Param("purchaseNumber") Integer purchaseNumber, 
-			@Param("purchaseDate") Date purchaseDate, 
-			@Param("location") String location);
+	//public int insertPost(
+	//		@Param("post") List<Post> post,
+	//		@Param("userId") int UserId,
+	//		@Param("categoryId") int categoryId, 
+	//		@Param("subject") String subject, 
+	//		@Param("content") String content, 
+	//		@Param("rating") String rating, 
+	//		@Param("purchaseNumber") Integer purchaseNumber, 
+	//		@Param("purchaseDate") Date purchaseDate, 
+	//		@Param("location") String location);
+	
+	public int insertPost(Post post);
 	
 	public int updatePost(
 			@Param("postId") int postId,

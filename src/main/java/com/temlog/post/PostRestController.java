@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.temlog.image.bo.ImageBO;
+import com.temlog.image.model.Image;
 import com.temlog.post.bo.PostBO;
 import com.temlog.post.model.Post;
 
@@ -45,20 +46,41 @@ public class PostRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
-		List<Post> post = postBO.getPostList();
+		
+		//List<Post> post = postBO.getPostList();
 		// insert post
-		int postrow = postBO.addPost(post, userId, userLoginId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
+		//int postrow = postBO.addPost(post, userId, userLoginId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
 		
 		// useGeneratedKeys 이용해서 생성한 post id 불러오기
-		int postId = 0;
-		for (int i = 0; i < post.size(); i++) {			
-			postId = post.get(i).getId();
-		}
-		// insert image
-		int imagerow = imageBO.addImage(userLoginId, postId, userId, file);
+		//int postId = 0;
+		//for (int i = 0; i < post.size(); i++) {			
+		//	postId = post.get(i).getId();
+		//}
 		
-		int row = postrow + imagerow;
-		if (row > 1) {
+		// insert image
+		//List<Image> imageList = imageBO.getImageList();
+		//int imagerow = imageBO.addImage(userLoginId, postId, userId, file, imageList);
+		
+		//int row = postrow + imagerow;
+		
+		Post post = new Post();
+		post.setUserId(userId);
+		post.setCategoryId(categoryId);
+		post.setSubject(subject);
+		post.setContent(content);
+		post.setRating(rating);
+		post.setPurchaseNumber(purchaseNumber);
+		post.setPurchaseDate(purchaseDate);
+		post.setLocation(location);
+		int row = postBO.addPost(post);
+		
+		int postId = post.getId();
+		Image image = new Image();
+		image.setPostId(post.getId());
+		image.setUserId(userId);
+		int imagerow = imageBO.addImage(userLoginId, file, image);
+		
+		if (row > 0) {
 			result.put("code", 100);
 			result.put("result", "success");
 		} else {

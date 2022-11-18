@@ -28,14 +28,18 @@ public class PostBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 	
-	public int addPost(List<Post> post,
-			int userId, String userLoginId, 
-			int categoryId, String subject, 
-			String content, String rating, 
-			Integer purchaseNumber, Date purchaseDate, 
-			String location) {
-		
-		return postDAO.insertPost(post, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
+	//public int addPost(List<Post> post,
+	//		int userId, String userLoginId, 
+	//		int categoryId, String subject, 
+	//		String content, String rating, 
+	//		Integer purchaseNumber, Date purchaseDate, 
+	//		String location) {
+	//	
+	//	return postDAO.insertPost(post, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
+	//}
+	
+	public int addPost(Post post) {
+		return postDAO.insertPost(post);
 	}
 	
 	public int updatePost(int postId,

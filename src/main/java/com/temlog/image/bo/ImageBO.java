@@ -20,8 +20,7 @@ public class ImageBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 
-	public int addImage(String userLoginId, 
-			int postId, int userId, List<MultipartFile> file) {
+	public int addImage(String userLoginId, List<MultipartFile> file, Image image) {
 		
 		String imagePath = null;
 		if (file != null) {
@@ -31,9 +30,15 @@ public class ImageBO {
 				imagePath = fileManagerService.saveFile(userLoginId, file.get(i));
 				pathUrl.add(imagePath);
 			}
+			
+			image.setImagePath(pathUrl);
 		}
 		
-		return imageDAO.insertImage(postId, userId, imagePath);
+		return imageDAO.insertImage(image);
+	}
+	
+	public List<Image> getImageList() {
+		return imageDAO.selectImageList();
 	}
 	
 	public Image getImage() {

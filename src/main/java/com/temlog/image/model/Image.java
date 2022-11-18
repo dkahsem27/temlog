@@ -1,13 +1,14 @@
 package com.temlog.image.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Image {
 
 	private int id;
 	private int postId;
 	private int userId;
-	private String imagePath;
+	private List<String> imagePath;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -29,10 +30,10 @@ public class Image {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getImagePath() {
+	public List<String> getImagePath() {
 		return imagePath;
 	}
-	public void setImagePath(String imagePath) {
+	public void setImagePath(List<String> imagePath) {
 		this.imagePath = imagePath;
 	}
 	public Date getCreatedAt() {
