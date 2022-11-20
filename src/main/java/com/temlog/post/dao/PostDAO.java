@@ -33,7 +33,6 @@ public interface PostDAO {
 			@Param("rating") String rating, 
 			@Param("purchaseNumber") Integer purchaseNumber, 
 			@Param("purchaseDate") Date purchaseDate, 
-			@Param("imagePath") String imagePath, 
 			@Param("location") String location);
 	
 	public int deletePost(int postId);

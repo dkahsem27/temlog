@@ -117,7 +117,7 @@
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
-			<div id="address" class="location-address">주소를 입력해주세요.<!-- 지도에 뿌릴 주소명 노출 --></div>
+			<div id="address" class="location-address"><!-- 지도에 뿌릴 주소명 노출 --></div>
 			<button type="button" id="addressClearBtn" class="btn-clear material-icons ml-2 d-none">clear</button>
 		</div>
 	</div>

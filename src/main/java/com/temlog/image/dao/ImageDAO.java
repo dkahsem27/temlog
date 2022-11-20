@@ -16,9 +16,13 @@ public interface ImageDAO {
 	
 	public int insertImage(Image image);
 	
+	public int updateImage(Image image);
+	
 	public List<Image> selectImageList();
 	
 	public Image selectImage();
 	
 	public Image selectImageByPostId(int postId);
+	
+	public List<Image> selectImageListByPostId(int postId);
 }

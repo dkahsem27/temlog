@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +19,9 @@ public class FileManagerService {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	// 실제 이미지가 저장될 경로(서버)
-	public static final String FILE_UPLOAD_PATH = "D:\\kwonyeji\\spring_project\\temlog\\workspace\\image/"; // 학원
-	//public static final String FILE_UPLOAD_PATH = ""; // 노트북
-	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\g1\\OneDrive\\_MEGA\\work_home_ee\\spring_project\\temlog\\workspace\\images/"; // 집
+	//public static final String FILE_UPLOAD_PATH = "D:\\kwonyeji\\spring_project\\temlog\\workspace\\image/"; // MEGA
+	public static final String FILE_UPLOAD_PATH = "C:\\Users\\dkahs\\OneDrive\\_MEGA\\work_ee\\spring_project\\temlog\\workspace\\images/"; // LAPTOP
+	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\g1\\OneDrive\\_MEGA\\work_home_ee\\spring_project\\temlog\\workspace\\images/"; // HOME
 	
 	// input: 멀티파트 파일, userLoginId
 	// output: 이미지 패스
@@ -48,27 +50,32 @@ public class FileManagerService {
 		return "/images/" + directoryName + file.getOriginalFilename();
 	}
 	
-	public void deleteFile(String imagePath) {
+	public void deleteFile(List<String> imagePath) {
 		// imagePath: /images/dkahsem27_1620204641/sun.png
 		
 		// /images/ => 이 구문을 제거
-		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
-		if (Files.exists(path)) {
-			try {
-				Files.delete(path); // 이미지를 삭제
-			} catch (IOException e) {
-				log.error("[이미지 삭제] 이미지 삭제 실패  imagePath:{}", imagePath);
-			}
+		
+		for (int i = 0; i > imagePath.size(); i++) {
 			
-			// 디렉토리(=폴더) 삭제
-			path = path.getParent();
+			Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.get(i).replace("/images/", ""));
 			if (Files.exists(path)) {
 				try {
-					Files.delete(path); // 디렉토리를 삭제
+					Files.delete(path); // 이미지를 삭제
 				} catch (IOException e) {
-					log.error("[이미지 삭제] 디렉토리 삭제 실패  imagePath:{}", imagePath);
+					log.error("[이미지 삭제] 이미지 삭제 실패  imagePath:{}", imagePath);
+				}
+				
+				// 디렉토리(=폴더) 삭제
+				path = path.getParent();
+				if (Files.exists(path)) {
+					try {
+						Files.delete(path); // 디렉토리를 삭제
+					} catch (IOException e) {
+						log.error("[이미지 삭제] 디렉토리 삭제 실패  imagePath:{}", imagePath);
+					}
 				}
 			}
+			
 		}
 	}
 }

@@ -179,7 +179,7 @@ input#datePicker {cursor: default;}
 
 .post-list .list-card .card-link .card-inner .category-name {font-size: 13px; color: #888;}
 .post-list .list-card .card-link .card-inner .purchase-count {font-size: 13px; color: #888;}
-.post-list .list-card .card-link .card-inner .subject {font-size: 18px; font-weight: 600; width: 100%; 
+.post-list .list-card .card-link .card-inner .subject {font-size: 18px; font-weight: 600; width: 100%; line-height: 1.5;
 	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .post-list .list-card .card-link .card-inner .content {font-size: 15px; color: #666; width: 100%; 
 	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}

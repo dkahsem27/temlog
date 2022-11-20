@@ -41,12 +41,12 @@
 		<div class="content my-2 py-4">${post.content}</div>
 		<!-- 첨부 이미지 영역 -->
 		<div class="image-box d-flex justify-content-between mb-3">
+			<c:forEach items="${imgpthlist}" var="imageList">
 			<div class="image">
-				<img src="https://cdn.pixabay.com/photo/2019/11/23/07/24/christmas-4646421_960_720.jpg" alt="첨부이미지">
+				${imageList.imagePath}
+				<!-- <img src="" alt="첨부이미지"> -->
 			</div>
-			<div class="image">
-				<img src="https://cdn.pixabay.com/photo/2021/12/12/20/17/drink-6865996_960_720.jpg" alt="첨부이미지">
-			</div>
+			</c:forEach>
 		</div>
 		<!-- 지도 표시 영역 -->
 		<c:if test="${not empty post.location}">

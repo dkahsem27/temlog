@@ -115,6 +115,9 @@
 		<div id="fileName" class="upload-file-name mt-1"><!-- 업로드된 파일명 노출 --></div>
 		<!-- 첨부 이미지 미리보기 -->
 		<div id="preview" class="image-box d-flex justify-content-between my-3"><!-- 첨부된 이미지 노출 영역 --></div>
+		<c:forEach items="${imageList}" var="image">
+			${image.id}
+		</c:forEach>
 		<!-- 위치 -->
 		<div class="form-group">
 			<div class="d-flex align-items-center mb-2">

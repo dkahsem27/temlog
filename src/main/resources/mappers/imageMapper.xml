@@ -16,12 +16,26 @@
 		(
 			#{postId}
 			, #{userId}
-			, #{imagePath}
+			, #{pathList}
 			, NOW()
 			, NOW()
 		)
 		</foreach>
 	</insert>
+	
+	<update id="updateImage" parameterType="com.temlog.image.model.Image">
+		UPDATE `image`
+		SET
+		<foreach collection="imagePath" index="index" item="pathList" separator=",">
+			<!-- imagePath가 있을 때만 수정한다 -->
+			<if test="imagePath != null">
+			`imagePath` = #{pathList}
+			</if>
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{postId}
+		</foreach>
+	</update>
 	
 	<select id="selectImageList" resultType="com.temlog.image.model.Image">
 		SELECT
@@ -48,6 +62,20 @@
 	</select>
 
 	<select id="selectImageByPostId" parameterType="int" resultType="com.temlog.image.model.Image">
+		SELECT
+			`id`
+			, `postId`
+			, `userId`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`image`
+		WHERE
+			`postId` = #{postId}
+	</select>
+	
+	<select id="selectImageListByPostId" parameterType="int" resultType="com.temlog.image.model.Image">
 		SELECT
 			`id`
 			, `postId`

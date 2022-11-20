@@ -63,6 +63,7 @@ public class PostRestController {
 		
 		//int row = postrow + imagerow;
 		
+		// insert post
 		Post post = new Post();
 		post.setUserId(userId);
 		post.setCategoryId(categoryId);
@@ -74,11 +75,11 @@ public class PostRestController {
 		post.setLocation(location);
 		int row = postBO.addPost(post);
 		
+		// 생성된 postId 가져오기
 		int postId = post.getId();
+		// insert image
 		Image image = new Image();
-		image.setPostId(post.getId());
-		image.setUserId(userId);
-		int imagerow = imageBO.addImage(userLoginId, file, image);
+		imageBO.addImage(postId, userId, userLoginId, file, image);
 		
 		if (row > 0) {
 			result.put("code", 100);
@@ -100,7 +101,7 @@ public class PostRestController {
 			@RequestParam("rating") String rating,
 			@RequestParam(value="purchaseNumber", required=false) Integer purchaseNumber,
 			@RequestParam(value="purchaseDate", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date purchaseDate,
-			@RequestParam(value="file", required=false) MultipartFile file,
+			@RequestParam(value="file", required=false) List<MultipartFile> file,
 			@RequestParam(value="location", required=false) String location,
 			HttpSession session) {
 		
@@ -108,8 +109,17 @@ public class PostRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
-		// insert
-		int row = postBO.updatePost(postId, userId, userLoginId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, file, location);
+		// update post
+		int row = postBO.updatePost(postId, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
+		
+		// update image
+		if (file != null) {
+			
+			Image image = imageBO.getImageByPostId(postId);
+			int imageId = image.getId();
+			imageBO.updateImage(imageId, postId, userId, userLoginId, file, image);
+		}
+		
 		if (row > 0) {
 			result.put("code", 100);
 			result.put("result", "success");

@@ -1,5 +1,6 @@
 package com.temlog.post;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.temlog.category.bo.CategoryBO;
 import com.temlog.category.model.Category;
+import com.temlog.image.bo.ImageBO;
+import com.temlog.image.model.Image;
 import com.temlog.post.bo.PostBO;
 import com.temlog.post.model.Post;
 
@@ -23,6 +26,9 @@ public class PostController {
 	
 	@Autowired
 	private CategoryBO categoryBO;
+	
+	@Autowired
+	private ImageBO imageBO;
 
 	@RequestMapping("/post/post_list_view")
 	public String postListView(
@@ -60,6 +66,8 @@ public class PostController {
 		model.addAttribute("post", post);
 		List<Category> categoryList = categoryBO.getCategoryList();
 		model.addAttribute("categoryList", categoryList);
+		List<Image> imageList = imageBO.getImageListByPostId(postId);
+		model.addAttribute("imageList", imageList);
 		
 		model.addAttribute("viewName", "post/postUpdate");
 		return "template/layout";
@@ -79,6 +87,14 @@ public class PostController {
 		
 		Category category = categoryBO.getCategoryByCategoryId(categoryId);
 		model.addAttribute("category", category);
+		
+		List<Image> imageList = imageBO.getImageListByPostId(postId);
+		model.addAttribute("imageList", imageList);
+		
+		for (var i = 0; i < imageList.size(); i++) {
+			List<String> imgpthlist = imageList.get(0).getImagePath();
+			model.addAttribute("imgpthlist", imgpthlist);			
+		}
 		
 		model.addAttribute("viewName", "/post/postDetail");
 		return "template/layout";
