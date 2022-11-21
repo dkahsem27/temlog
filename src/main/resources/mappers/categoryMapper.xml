@@ -64,4 +64,14 @@
 		WHERE
 			`id` = #{categoryId}
 	</select>
+	
+	<select id="selectCategory" resultType="com.temlog.category.model.Category">
+		SELECT
+			`id`
+			, `categoryName`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`category`
+	</select>
 </mapper>

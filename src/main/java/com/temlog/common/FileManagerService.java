@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,8 +19,8 @@ public class FileManagerService {
 
 	// 실제 이미지가 저장될 경로(서버)
 	//public static final String FILE_UPLOAD_PATH = "D:\\kwonyeji\\spring_project\\temlog\\workspace\\image/"; // MEGA
-	public static final String FILE_UPLOAD_PATH = "C:\\Users\\dkahs\\OneDrive\\_MEGA\\work_ee\\spring_project\\temlog\\workspace\\images/"; // LAPTOP
-	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\g1\\OneDrive\\_MEGA\\work_home_ee\\spring_project\\temlog\\workspace\\images/"; // HOME
+	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\dkahs\\OneDrive\\_MEGA\\work_ee\\spring_project\\temlog\\workspace\\images/"; // LAPTOP
+	public static final String FILE_UPLOAD_PATH = "C:\\Users\\g1\\OneDrive\\_MEGA\\work_home_ee\\spring_project\\temlog\\workspace\\images/"; // HOME
 	
 	// input: 멀티파트 파일, userLoginId
 	// output: 이미지 패스

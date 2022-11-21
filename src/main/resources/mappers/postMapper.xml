@@ -128,4 +128,25 @@
 		FROM
 			`post`
 	</select>
+	
+	<select id="selectPostListByKeyword" parameterType="string" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`subject` LIKE '%' || #{keyword} || '%'
+			OR `content` LIKE '%' || #{keyword} || '%'
+		ORDER BY `id` DESC
+	</select>
 </mapper>

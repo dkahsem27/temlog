@@ -1,6 +1,5 @@
 package com.temlog.post;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -34,8 +33,6 @@ public class PostController {
 	public String postListView(
 			HttpSession session,
 			Model model) {
-		
-		Integer userId = (Integer)session.getAttribute("userId");
 		
 		List<Post> postList = postBO.getPostList();
 		model.addAttribute("postList", postList);
@@ -90,6 +87,8 @@ public class PostController {
 		
 		List<Image> imageList = imageBO.getImageListByPostId(postId);
 		model.addAttribute("imageList", imageList);
+		List<String> imagePaths = imageBO.getImageByPostId(postId).getImagePath();
+		model.addAttribute("imagePaths", imagePaths);
 		
 		for (var i = 0; i < imageList.size(); i++) {
 			List<String> imgpthlist = imageList.get(0).getImagePath();

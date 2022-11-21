@@ -116,7 +116,7 @@
 		<!-- 첨부 이미지 미리보기 -->
 		<div id="preview" class="image-box d-flex justify-content-between my-3"><!-- 첨부된 이미지 노출 영역 --></div>
 		<c:forEach items="${imageList}" var="image">
-			${image.id}
+			${image}
 		</c:forEach>
 		<!-- 위치 -->
 		<div class="form-group">

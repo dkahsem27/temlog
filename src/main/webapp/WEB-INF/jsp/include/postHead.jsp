@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header id="header">
 	<div class="head-box d-flex justify-content-between align-items-center px-2 py-3">
 		<div class="util-box d-flex align-items-center">

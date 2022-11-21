@@ -20,7 +20,8 @@ public class ImageBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 
-	public int addImage(int postId, int userId, String userLoginId, List<MultipartFile> file, Image image) {
+	public int addImage(int postId, int userId, String userLoginId, List<MultipartFile> file, 
+			Image image) {
 		
 		String imagePath = null;
 		if (file != null) {

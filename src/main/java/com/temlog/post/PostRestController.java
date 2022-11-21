@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,38 +43,14 @@ public class PostRestController {
 			@RequestParam(value="location", required=false) String location,
 			HttpSession session) {
 		
-		String userLoginId = (String)session.getAttribute("userLoginId");
 		Integer userId = (Integer)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		//List<Post> post = postBO.getPostList();
-		// insert post
-		//int postrow = postBO.addPost(post, userId, userLoginId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
-		
-		// useGeneratedKeys 이용해서 생성한 post id 불러오기
-		//int postId = 0;
-		//for (int i = 0; i < post.size(); i++) {			
-		//	postId = post.get(i).getId();
-		//}
-		
-		// insert image
-		//List<Image> imageList = imageBO.getImageList();
-		//int imagerow = imageBO.addImage(userLoginId, postId, userId, file, imageList);
-		
-		//int row = postrow + imagerow;
-		
 		// insert post
 		Post post = new Post();
-		post.setUserId(userId);
-		post.setCategoryId(categoryId);
-		post.setSubject(subject);
-		post.setContent(content);
-		post.setRating(rating);
-		post.setPurchaseNumber(purchaseNumber);
-		post.setPurchaseDate(purchaseDate);
-		post.setLocation(location);
-		int row = postBO.addPost(post);
+		int row = postBO.addPost(userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location, post);
 		
 		// 생성된 postId 가져오기
 		int postId = post.getId();
@@ -145,6 +122,21 @@ public class PostRestController {
 			result.put("code", 400);
 			result.put("errorMessage", "글 삭제에 실패했습니다. 관리자에게 문의해주세요.");
 		}
+		
+		return result;
+	}
+	
+	@GetMapping("/post/search")
+	public Map<String, Object> search(
+			@RequestParam("keyword") String keyword) {
+		Map<String, Object> result = new HashMap<>();
+		
+		// search
+		postBO.getPostListByKeyword(keyword);
+		
+		result.put("code", 100);
+		result.put("result", "success");
+		result.put("errorMessage", "검색에 실패했습니다. 관리자에게 문의해주세요.");
 		
 		return result;
 	}

@@ -38,4 +38,8 @@ public class CategoryBO {
 		return categoryDAO.selectCategoryByCategoryId(categoryId);
 	}
 	
+	public Category getCategory() {
+		return categoryDAO.selectCategory();
+	}
+	
 }

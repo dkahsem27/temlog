@@ -41,9 +41,9 @@
 		<div class="content my-2 py-4">${post.content}</div>
 		<!-- 첨부 이미지 영역 -->
 		<div class="image-box d-flex justify-content-between mb-3">
-			<c:forEach items="${imgpthlist}" var="imageList">
+			<c:forEach items="${imagePaths}" var="path">
 			<div class="image">
-				${imageList.imagePath}
+				${path.imagePath}
 				<!-- <img src="" alt="첨부이미지"> -->
 			</div>
 			</c:forEach>

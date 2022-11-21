@@ -86,6 +86,33 @@
 
 <script>
 $(document).ready(function() {
-	
+	// 검색
+	$('#searchBtn').on('click', function() {
+		let keyword = $('#searchText').val().trim();
+		// 유효성 검사
+		if (keyword == '') {
+			alert('검색어를 입력해주세요.');
+			$('#searchText').focus();
+			return;
+		}
+		
+		// ajax
+		$.ajax({
+			type: 'get'
+			, url: '/post/search'
+			, data: {'keyword':keyword}
+		
+			, success: function(data) {
+				if (data.code == 100) {
+					location.href='/post/post_list_view?keyword=' + keyword;
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('검색 에러');
+			}
+		});
+	});
 });
 </script>

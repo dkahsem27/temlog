@@ -22,7 +22,7 @@
 		<ul class="category-list py-3">
 			<c:forEach items="${categoryList}" var="category">
 				<li class="category">
-					<a href="/post/post_list_view" class="btn-list-category">${category.categoryName}</a> <!-- 카테고리명과 일치하는 목록 리스트 화면으로 이동 -->
+					<a href="/post/post_list_view?categoryId=${category.id}" class="btn-list-category">${category.categoryName}</a> <!-- 카테고리명과 일치하는 목록 리스트 화면으로 이동 -->
 				</li>
 			</c:forEach>
 		</ul>

@@ -28,7 +28,20 @@ public class PostBO {
 	//	return postDAO.insertPost(post, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
 	//}
 	
-	public int addPost(Post post) {
+	public int addPost(int userId, int categoryId, 
+			String subject, String content, String rating, 
+			Integer purchaseNumber, Date purchaseDate, String location, 
+			Post post) {
+		
+		post.setUserId(userId);
+		post.setCategoryId(categoryId);
+		post.setSubject(subject);
+		post.setContent(content);
+		post.setRating(rating);
+		post.setPurchaseNumber(purchaseNumber);
+		post.setPurchaseDate(purchaseDate);
+		post.setLocation(location);
+		
 		return postDAO.insertPost(post);
 	}
 	
@@ -82,5 +95,9 @@ public class PostBO {
 	
 	public Post getPost() {
 		return postDAO.selectPost();
+	}
+	
+	public Post getPostListByKeyword(String keyword) {
+		return postDAO.selectPostListByKeyword(keyword);
 	}
 }
