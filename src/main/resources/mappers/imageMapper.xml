@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.temlog.image.dao.ImageDAO">
-	<insert id="insertImage" parameterType="com.temlog.image.model.Image">
+	<insert id="insertImage" parameterType="map">
 		INSERT INTO `image`
 		(
 			`postId`
@@ -12,30 +12,33 @@
 			, `updatedAt`
 		)
 		VALUES
-		<foreach collection="imagePath" index="index" item="pathList" separator=",">
 		(
 			#{postId}
 			, #{userId}
-			, #{pathList}
+			, #{imagePath}
 			, NOW()
 			, NOW()
 		)
-		</foreach>
 	</insert>
 	
-	<update id="updateImage" parameterType="com.temlog.image.model.Image">
+	<update id="updateImage" parameterType="map">
 		UPDATE `image`
 		SET
-		<foreach collection="imagePath" index="index" item="pathList" separator=",">
-			<!-- imagePath가 있을 때만 수정한다 -->
-			<if test="imagePath != null">
-			`imagePath` = #{pathList}
-			</if>
+		<!-- imagePath가 있을 때만 수정한다 -->
+		<if test="imagePath != null">
+			`imagePath` = #{imagePath}
+		</if>
 			, `updatedAt` = NOW()
 		WHERE
-			`id` = #{postId}
-		</foreach>
+			`id` = #{imageId}
 	</update>
+	
+	<delete id="deleteImage" parameterType="int">
+		DELETE FROM
+			`image`
+		WHERE
+			`id` = #{postId}
+	</delete>
 	
 	<select id="selectImageList" resultType="com.temlog.image.model.Image">
 		SELECT
@@ -75,14 +78,9 @@
 			`postId` = #{postId}
 	</select>
 	
-	<select id="selectImageListByPostId" parameterType="int" resultType="com.temlog.image.model.Image">
+	<select id="selectImagePathListByPostId" parameterType="int" resultType="string">
 		SELECT
-			`id`
-			, `postId`
-			, `userId`
-			, `imagePath`
-			, `createdAt`
-			, `updatedAt`
+			`imagePath`
 		FROM
 			`image`
 		WHERE

@@ -40,14 +40,15 @@
 		<!-- 글 내용 -->
 		<div class="content my-2 py-4">${post.content}</div>
 		<!-- 첨부 이미지 영역 -->
-		<div class="image-box d-flex justify-content-between mb-3">
-			<c:forEach items="${imagePaths}" var="path">
-			<div class="image">
-				${path.imagePath}
-				<!-- <img src="" alt="첨부이미지"> -->
+		<c:if test="${not empty imagePathList}">
+			<div class="image-box d-flex justify-content-between mb-3">
+				<c:forEach items="${imagePathList}" var="imagePath">
+				<div class="image">
+					<img src="${imagePath}" alt="첨부이미지">
+				</div>
+				</c:forEach>
 			</div>
-			</c:forEach>
-		</div>
+		</c:if>
 		<!-- 지도 표시 영역 -->
 		<c:if test="${not empty post.location}">
 			<div id="map" class="map-box mb-3"></div>

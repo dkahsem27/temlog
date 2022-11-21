@@ -17,19 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.temlog.image.bo.ImageBO;
-import com.temlog.image.model.Image;
 import com.temlog.post.bo.PostBO;
-import com.temlog.post.model.Post;
 
 @RestController
 public class PostRestController {
 
 	@Autowired
 	private PostBO postBO;
-	
-	@Autowired
-	private ImageBO imageBO;
 	
 	@PostMapping("/post/create")
 	public Map<String, Object> create(
@@ -39,7 +33,7 @@ public class PostRestController {
 			@RequestParam("rating") String rating,
 			@RequestParam(value="purchaseNumber", required=false) Integer purchaseNumber,
 			@RequestParam(value="purchaseDate", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date purchaseDate,
-			@RequestParam(value="file", required=false) List<MultipartFile> file,
+			@RequestParam(value="file", required=false) List<MultipartFile> fileList,
 			@RequestParam(value="location", required=false) String location,
 			HttpSession session) {
 		
@@ -49,22 +43,11 @@ public class PostRestController {
 		Map<String, Object> result = new HashMap<>();
 		
 		// insert post
-		Post post = new Post();
-		int row = postBO.addPost(userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location, post);
+		postBO.addPost(userId, userLoginId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location, fileList);
 		
-		// 생성된 postId 가져오기
-		int postId = post.getId();
-		// insert image
-		Image image = new Image();
-		imageBO.addImage(postId, userId, userLoginId, file, image);
-		
-		if (row > 0) {
-			result.put("code", 100);
-			result.put("result", "success");
-		} else {
-			result.put("code", 400);
-			result.put("errorMessage", "글쓰기에 실패했습니다. 관리자에게 문의해주세요.");
-		}
+		result.put("code", 100);
+		result.put("result", "success");
+		result.put("errorMessage", "글쓰기에 실패했습니다. 관리자에게 문의해주세요.");
 		
 		return result;
 	}
@@ -78,7 +61,7 @@ public class PostRestController {
 			@RequestParam("rating") String rating,
 			@RequestParam(value="purchaseNumber", required=false) Integer purchaseNumber,
 			@RequestParam(value="purchaseDate", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date purchaseDate,
-			@RequestParam(value="file", required=false) List<MultipartFile> file,
+			@RequestParam(value="file", required=false) List<MultipartFile> fileList,
 			@RequestParam(value="location", required=false) String location,
 			HttpSession session) {
 		
@@ -87,23 +70,11 @@ public class PostRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		// update post
-		int row = postBO.updatePost(postId, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
+		postBO.updatePost(postId, userId, userLoginId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location, fileList);
 		
-		// update image
-		if (file != null) {
-			
-			Image image = imageBO.getImageByPostId(postId);
-			int imageId = image.getId();
-			imageBO.updateImage(imageId, postId, userId, userLoginId, file, image);
-		}
-		
-		if (row > 0) {
-			result.put("code", 100);
-			result.put("result", "success");
-		} else {
-			result.put("code", 400);
-			result.put("errorMessage", "글 수정에 실패했습니다. 관리자에게 문의해주세요.");
-		}
+		result.put("code", 100);
+		result.put("result", "success");
+		result.put("errorMessage", "글 수정에 실패했습니다. 관리자에게 문의해주세요.");
 		
 		return result;
 	}
@@ -113,15 +84,12 @@ public class PostRestController {
 			@RequestParam("postId") int postId) {
 		
 		Map<String, Object> result = new HashMap<>();
-		// delete
-		int row = postBO.deletePost(postId);
-		if (row > 0) {
-			result.put("code", 100);
-			result.put("result", "success");
-		} else {
-			result.put("code", 400);
-			result.put("errorMessage", "글 삭제에 실패했습니다. 관리자에게 문의해주세요.");
-		}
+		// delete post
+		postBO.deletePost(postId);
+		
+		result.put("code", 100);
+		result.put("result", "success");
+		result.put("errorMessage", "글 삭제에 실패했습니다. 관리자에게 문의해주세요.");
 		
 		return result;
 	}
