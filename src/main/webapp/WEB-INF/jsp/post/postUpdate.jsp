@@ -350,7 +350,7 @@ $(document).ready(function() {
 				if (data.code == 100) {
 					// 성공
 					alert('저장되었습니다.');
-					document.location.href='/post/post_update_view?postId=' + postId + '&categoryId=' + categoryId;
+					document.location.href='/post/post_detail_view?postId=' + postId + '&categoryId=' + categoryId;
 				} else {
 					// 에러
 					alert(data.errorMessage);
