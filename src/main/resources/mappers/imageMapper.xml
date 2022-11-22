@@ -33,11 +33,12 @@
 			`id` = #{imageId}
 	</update>
 	
-	<delete id="deleteImage" parameterType="int">
+	<delete id="deleteImage" parameterType="map">
 		DELETE FROM
 			`image`
 		WHERE
 			`postId` = #{postId}
+			AND `id` = #{imageId}
 	</delete>
 	
 	<select id="selectImageList" resultType="com.temlog.image.model.Image">
@@ -50,6 +51,20 @@
 			, `updatedAt`
 		FROM
 			`image`
+	</select>
+	
+	<select id="selectImageListByPostId" parameterType="int" resultType="com.temlog.image.model.Image">
+		SELECT
+			`id`
+			, `postId`
+			, `userId`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`image`
+		WHERE
+			`postId` = #{postId}
 	</select>
 	
 	<select id="selectImage" resultType="com.temlog.image.model.Image">

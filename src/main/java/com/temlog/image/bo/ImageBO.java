@@ -35,8 +35,6 @@ public class ImageBO {
 	
 	public void updateImage(int imageId, int postId, int userId, String userLoginId, List<MultipartFile> fileList) {
 		
-		Image image = getImageByPostId(postId);
-		
 		// file이 있으면 이미지 수정 => 업로드 (실패시 기존 이미지는 그대로 둔다) => 성공시 기존이미지 제거
 		String imagePath = null;
 		if (ObjectUtils.isEmpty(fileList) == false) {
@@ -48,24 +46,43 @@ public class ImageBO {
 			}
 			
 			// 업로드 성공하면 기존 이미지 제거
-			if (imagePath != null && image.getImagePath() != null) { // 기존 이미지 있는 경우
-				// 업로드가 실패할 수 있으므로 업로드가 된 후 제거
-				fileManagerService.deleteFile(image.getImagePath());
+			/*
+			 * if (imagePath != null && image.getImagePath() != null) { // 기존 이미지 있는 경우 //
+			 * 업로드가 실패할 수 있으므로 업로드가 된 후 제거
+			 * fileManagerService.deleteFile(image.getImagePath()); }
+			 */
+		}
+		
+		List<Image> imageList = getImageListByPostId(postId);
+		for (int i = 0; i < imageList.size(); i++) {
+			List<String> imagePathList = imageList.get(i).getImagePath();
+			// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
+			if (ObjectUtils.isEmpty(imagePathList) == false) {
+				fileManagerService.deleteFile(imagePathList);
+				imageDAO.deleteImage(imageId, postId);
 			}
 		}
 	}
 	
-	public void deleteImage(int postId) {
+	public void deleteImage(int imageId, int postId) {
 
-		Image image = getImageByPostId(postId);
-		// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
-		if (image.getImagePath() != null) { 
-			fileManagerService.deleteFile(image.getImagePath()); 
+		List<Image> imageList = getImageListByPostId(postId);
+		for (int i = 0; i < imageList.size(); i++) {
+			List<String> imagePathList = imageList.get(i).getImagePath();
+			// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
+			if (ObjectUtils.isEmpty(imagePathList) == false) {
+				fileManagerService.deleteFile(imagePathList);
+			}
+			imageDAO.deleteImage(imageId, postId);
 		}
 	}
 	
 	public List<Image> getImageList() {
 		return imageDAO.selectImageList();
+	}
+	
+	public List<Image> getImageListByPostId(int postId) {
+		return imageDAO.selectImageListByPostId(postId);
 	}
 	
 	public Image getImage() {

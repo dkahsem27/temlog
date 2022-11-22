@@ -150,6 +150,7 @@ input#datePicker {cursor: default;}
 .modal-box .image-box img {height: auto;}
 .modal-box .image-box img:not(:first-child) {margin-top: 10px;}
 
+#imageModal .modal-content {background-color: transparent; border: none;}
 
 .input-cancle-box {position: relative; width: 100%;}
 .input-cancle-box input {padding-right: 35px !important;}

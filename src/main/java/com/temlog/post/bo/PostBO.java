@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.temlog.image.bo.ImageBO;
@@ -65,10 +66,18 @@ public class PostBO {
 		postDAO.updatePost(postId, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
 		
 		// update image
-		Image image = imageBO.getImageByPostId(postId);
-		if (image != null) {
-			int imageId = image.getId();
-			imageBO.updateImage(imageId, postId, userId, userLoginId, fileList);
+		List<Image> imageList = imageBO.getImageListByPostId(postId);
+		if (ObjectUtils.isEmpty(imageList)) {
+			// 기존 이미지가 존재하지 않을 경우 -> insert image
+			imageBO.addImage(postId, userId, userLoginId, fileList);
+		} else {
+			// 이미지가 존재할 경우 -> update image
+			for (int i = 0; i < imageList.size(); i++) {
+				int imageId = imageList.get(i).getId();
+				if (ObjectUtils.isEmpty(imageList) == false) {
+					imageBO.updateImage(imageId, postId, userId, userLoginId, fileList);
+				}
+			}
 		}
 	}
 	
@@ -82,9 +91,12 @@ public class PostBO {
 		}
 		
 		// delete image
-		Image image = imageBO.getImageByPostId(postId);
-		if (image != null) {			
-			imageBO.deleteImage(postId);
+		List<Image> imageList = imageBO.getImageListByPostId(postId);
+		for (int i = 0; i < imageList.size(); i++) {
+			int imageId = imageList.get(i).getId();
+			if (ObjectUtils.isEmpty(imageList) == false) {			
+				imageBO.deleteImage(imageId, postId);
+			}
 		}
 		// delete post
 		postDAO.deletePost(postId);

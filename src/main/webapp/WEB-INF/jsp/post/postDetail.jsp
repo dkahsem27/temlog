@@ -87,11 +87,14 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<!-- 모달 내용 -->
-			<div class="modal-box p-4">
+			<div class="modal-box p-0">
 				<div class="image-box">
 					<c:forEach items="${imagePathList}" var="imagePath">
 						<img src="${imagePath}" alt="첨부이미지">
 					</c:forEach>
+				</div>
+				<div class="d-flex justify-content-center mt-2">
+					<button type="button" class="btn-close material-icons text-white" data-dismiss="modal">close</button>
 				</div>
 			</div>
 		</div>

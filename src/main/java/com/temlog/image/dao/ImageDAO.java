@@ -10,7 +10,7 @@ import com.temlog.image.model.Image;
 @Repository
 public interface ImageDAO {
 
-	public int insertImage(
+	public void insertImage(
 			@Param("postId") int postId, 
 			@Param("userId") int userId, 
 			@Param("imagePath") String imagePath);
@@ -21,9 +21,13 @@ public interface ImageDAO {
 			@Param("userId") int userId, 
 			@Param("imagePath") String imagePath);
 	
-	public void deleteImage(int postId);
+	public void deleteImage(
+			@Param("imageId") int imageId, 
+			@Param("postId") int postId);
 	
 	public List<Image> selectImageList();
+	
+	public List<Image> selectImageListByPostId(int postId);
 	
 	public Image selectImage();
 	
