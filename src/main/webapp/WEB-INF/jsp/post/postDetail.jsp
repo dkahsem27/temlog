@@ -43,7 +43,7 @@
 		<c:if test="${not empty imagePathList}">
 			<div class="image-box d-flex justify-content-between mb-3">
 				<c:forEach items="${imagePathList}" var="imagePath">
-				<div class="image">
+				<div class="image detail" data-toggle="modal" data-target="#imageModal">
 					<img src="${imagePath}" alt="첨부이미지">
 				</div>
 				</c:forEach>
@@ -77,6 +77,21 @@
 				<div class="btn-box d-flex justify-content-center">
 					<a href="/post/post_update_view?postId=${post.id}" id="updatePostBtn" class="btn btn-dark col-6">수정</a>
 					<button type="button" id="deletePostBtn" class="btn btn-secondary col-6 ml-2" data-post-id="${post.id}">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<!-- 모달 내용 -->
+			<div class="modal-box p-4">
+				<div class="image-box">
+					<c:forEach items="${imagePathList}" var="imagePath">
+						<img src="${imagePath}" alt="첨부이미지">
+					</c:forEach>
 				</div>
 			</div>
 		</div>

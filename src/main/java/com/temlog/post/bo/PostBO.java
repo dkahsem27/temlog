@@ -30,7 +30,7 @@ public class PostBO {
 			List<MultipartFile> fileList) {
 		
 		Post post = new Post();
-		
+		// insert post
 		post.setUserId(userId);
 		post.setCategoryId(categoryId);
 		post.setSubject(subject);
@@ -64,10 +64,12 @@ public class PostBO {
 		// update post
 		postDAO.updatePost(postId, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
 		
-		Image image = imageBO.getImageByPostId(postId);
-		int imageId = image.getId();
 		// update image
-		imageBO.updateImage(imageId, postId, userId, userLoginId, fileList);
+		Image image = imageBO.getImageByPostId(postId);
+		if (image != null) {
+			int imageId = image.getId();
+			imageBO.updateImage(imageId, postId, userId, userLoginId, fileList);
+		}
 	}
 	
 	public void deletePost(int postId) {
@@ -80,7 +82,10 @@ public class PostBO {
 		}
 		
 		// delete image
-		imageBO.deleteImage(postId);
+		Image image = imageBO.getImageByPostId(postId);
+		if (image != null) {			
+			imageBO.deleteImage(postId);
+		}
 		// delete post
 		postDAO.deletePost(postId);
 	}

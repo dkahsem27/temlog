@@ -25,9 +25,9 @@
 		UPDATE `image`
 		SET
 		<!-- imagePath가 있을 때만 수정한다 -->
-		<if test="imagePath != null">
+		<!-- <if test="imagePath != null"> -->
 			`imagePath` = #{imagePath}
-		</if>
+		<!-- </if> -->
 			, `updatedAt` = NOW()
 		WHERE
 			`id` = #{imageId}
@@ -37,7 +37,7 @@
 		DELETE FROM
 			`image`
 		WHERE
-			`id` = #{postId}
+			`postId` = #{postId}
 	</delete>
 	
 	<select id="selectImageList" resultType="com.temlog.image.model.Image">

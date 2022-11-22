@@ -69,6 +69,7 @@ public class PostRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
+		
 		// update post
 		postBO.updatePost(postId, userId, userLoginId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location, fileList);
 		
@@ -84,6 +85,7 @@ public class PostRestController {
 			@RequestParam("postId") int postId) {
 		
 		Map<String, Object> result = new HashMap<>();
+		
 		// delete post
 		postBO.deletePost(postId);
 		

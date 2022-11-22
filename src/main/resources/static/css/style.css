@@ -129,6 +129,9 @@ input#datePicker {cursor: default;}
 .image-box img {width: 100%; max-width: 100%; height: 180px; object-fit: cover;}
 .image-box .image {position: relative; width: 100%; max-width: 49%}
 .image-box .image .btn-delete-image {position: absolute; top: 0; right: 0;}
+.image-box .image.detail {cursor: pointer; max-width: 100%;}
+.image-box .image.detail:not(:first-child) {margin-left: 2%;}
+.image-box .image.detail > img {height: 250px;}
 
 .map-box {width: 100%; height: 200px; background: #eee;}
 
@@ -144,6 +147,9 @@ input#datePicker {cursor: default;}
 	-webkit-line-clamp: 2; /* 라인 수 */
 	-webkit-box-orient: vertical}
 .modal-box .content .schedule-content {font-size: 15px; color: #555;}
+.modal-box .image-box img {height: auto;}
+.modal-box .image-box img:not(:first-child) {margin-top: 10px;}
+
 
 .input-cancle-box {position: relative; width: 100%;}
 .input-cancle-box input {padding-right: 35px !important;}

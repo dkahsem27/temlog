@@ -114,15 +114,15 @@
 		</div>
 		<div id="fileName" class="upload-file-name mt-1"><!-- 업로드된 파일명 노출 --></div>
 		<!-- 첨부 이미지 미리보기 -->
-		<c:if test="${not empty imagePathList}">
 		<div id="preview" class="image-box d-flex justify-content-between my-3">
 		<c:forEach items="${imagePathList}" var="imagePath">
 			<div class="image">
-				<img src="${imagePath}" alt="첨부이미지"><!-- 첨부된 이미지 노출 영역 -->
+				<!-- 첨부된 이미지 노출 영역 -->
+				<img src="${imagePath}" alt="첨부이미지">
+				<button type='button' class='btn-delete-image material-icons'>clear</button>
 			</div>
 		</c:forEach>
 		</div>
-		</c:if>
 		<!-- 위치 -->
 		<div class="form-group">
 			<div class="d-flex align-items-center mb-2">
@@ -282,6 +282,11 @@ $(document).ready(function() {
 		});
 	}
 	
+	// 이미지 삭제 버튼
+	/* $('.btn-delete-image').on('click', function() {
+		$(this).parent().remove('');
+	}); */
+	
 	// 글 수정
 	$('#updateBtn').on('click', function() {
 		let postId = $(this).data('post-id');
@@ -319,9 +324,6 @@ $(document).ready(function() {
 		}
 
 		let formData = new FormData();
-		for (var i = 0; i < sel_files.length; i++) {
-			formData.append("file", sel_files[i]);
-		}
 		formData.append("postId", postId);
 		formData.append("categoryId", categoryId);
 		formData.append("subject", subject);
@@ -330,6 +332,9 @@ $(document).ready(function() {
 		formData.append("purchaseNumber", purchaseNumber);
 		formData.append("purchaseDate", purchaseDate);
 		formData.append("location", location);
+		for (var i = 0; i < sel_files.length; i++) {
+			formData.append("file", sel_files[i]);
+		}
 		
 		// ajax
 		$.ajax({
