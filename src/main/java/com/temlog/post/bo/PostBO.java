@@ -54,7 +54,7 @@ public class PostBO {
 			String subject, String content, String rating, 
 			Integer purchaseNumber, Date purchaseDate, String location, 
 			List<MultipartFile> fileList) {
-		
+
 		// 기존 글과 이미지를 가지고 온다.(post 존재 유무 확인, 이미지가 교체될 때 기존 이미지를 제거하기 위해)
 		Post post = getPostByPostId(postId);
 		if (post == null) { // 수정할 글이 존재하지 않는 경우
@@ -62,23 +62,55 @@ public class PostBO {
 			//return 0;
 		}
 		
+		// update image -> 이미지 모두 삭제 후 새로 DB에 저장
+		List<Image> imageList = imageBO.getImageListByPostId(postId);
+		for (int i = 0; i < imageList.size(); i++) {
+			int imageId = imageList.get(i).getId();
+			// 이미지가 존재할 때 이미지 삭제
+			if (ObjectUtils.isEmpty(imageList) == false) {
+				
+				// 기존 이미지가 1개일 때 => 삭제x => 추가만
+				// 기존 이미지가 2개일 때 => 첫번째 이미지 삭제
+				// 기존 이미지가 2개 초과일 때 => 전부 삭제??
+				if (imageList.size() == 2) {
+					imageId = imageList.get(0).getId();
+					imageBO.deleteImage(imageId, postId);
+				} else if (imageList.size() > 2) {
+					imageBO.deleteImage(imageId, postId);
+				}
+				
+				// or 프론트단에서 삭제버튼 누르면 전부 삭제된다는 alert 띄우고 삭제 후 새로 추가하는 방법
+				//imageBO.deleteImage(imageId, postId);
+			}
+		}
+		imageBO.addImage(postId, userId, userLoginId, fileList);
+		
+		
 		// update post
 		postDAO.updatePost(postId, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
 		
+		
+		
+		
 		// update image
-		List<Image> imageList = imageBO.getImageListByPostId(postId);
-		if (ObjectUtils.isEmpty(imageList)) {
-			// 기존 이미지가 존재하지 않을 경우 -> insert image
-			imageBO.addImage(postId, userId, userLoginId, fileList);
-		} else {
-			// 이미지가 존재할 경우 -> update image
-			for (int i = 0; i < imageList.size(); i++) {
-				int imageId = imageList.get(i).getId();
-				if (ObjectUtils.isEmpty(imageList) == false) {
-					imageBO.updateImage(imageId, postId, userId, userLoginId, fileList);
-				}
-			}
-		}
+		//Image image = imageBO.getImageByPostId(postId);
+		//int imageId = image.getId();
+		//imageBO.updateImage(imageId, postId, userId, userLoginId, fileList);
+		
+		/*
+		 * List<Image> imageList = imageBO.getImageListByPostId(postId); for (int i = 0;
+		 * i < imageList.size(); i++) { int imageId = imageList.get(i).getId(); if
+		 * (ObjectUtils.isEmpty(imageList) == false) { imageBO.updateImage(imageId,
+		 * postId, userId, userLoginId, fileList); } }
+		 */
+		
+		/*
+		 * if (ObjectUtils.isEmpty(imageList)) { // 기존 이미지가 존재하지 않을 경우 -> insert image
+		 * imageBO.addImage(postId, userId, userLoginId, fileList); } else { // 이미지가 존재할
+		 * 경우 -> update image for (int i = 0; i < imageList.size(); i++) { int imageId =
+		 * imageList.get(i).getId(); if (ObjectUtils.isEmpty(imageList) == false) {
+		 * imageBO.updateImage(imageId, postId, userId, userLoginId, fileList); } } }
+		 */
 	}
 	
 	public void deletePost(int postId) {

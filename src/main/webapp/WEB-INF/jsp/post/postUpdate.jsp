@@ -235,7 +235,13 @@ $(document).ready(function() {
 	// 파일 업로드 버튼 대체
 	$('#fileUploadBtn').on('click', function(e) {
 		e.preventDefault();
-		$('#fileInput').click();
+		// #preview > .image 태그 갯수가 2개 이상이면 업로드 못하게 방지
+		if ($('#preview > .image').length > 1) {
+			alert('파일은 2개까지만 첨부할 수 있습니다. 파일 삭제 후 다시 시도해주세요.');
+			return false;
+		} else {
+			$('#fileInput').click();
+		}
 	});
 	// 파일 업로드 유효성 검사
 	$('#fileInput').on('change', function(e) {
@@ -283,9 +289,9 @@ $(document).ready(function() {
 	}
 	
 	// 이미지 삭제 버튼
-	/* $('.btn-delete-image').on('click', function() {
+	$('.btn-delete-image').on('click', function() {
 		$(this).parent().remove('');
-	}); */
+	});
 	
 	// 글 수정
 	$('#updateBtn').on('click', function() {

@@ -38,12 +38,22 @@ public class ImageBO {
 		// file이 있으면 이미지 수정 => 업로드 (실패시 기존 이미지는 그대로 둔다) => 성공시 기존이미지 제거
 		String imagePath = null;
 		if (ObjectUtils.isEmpty(fileList) == false) {
-			// 파일이 있을 때만 업로드
-			for (int i = 0; i < fileList.size(); i++) {
-				imagePath = fileManagerService.saveFile(userLoginId, fileList.get(i));
-				
-				imageDAO.updateImage(imageId, postId, userId, imagePath);
+			List<Image> imageList = getImageListByPostId(postId);
+			for (int i = 0; i < imageList.size(); i++) {
+				List<String> imagePathList = imageList.get(i).getImagePath();
+				// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
+				if (ObjectUtils.isEmpty(imagePathList) == false) {
+					fileManagerService.deleteFile(imagePathList);
+					imageDAO.deleteImage(imageId, postId);
+				}
 			}
+			
+			// 파일이 있을 때만 업로드
+			imageDAO.insertImage(postId, userId, imagePath);
+			//for (int i = 0; i < fileList.size(); i++) {
+			//	imagePath = fileManagerService.saveFile(userLoginId, fileList.get(i));
+			//	imageDAO.updateImage(imageId, postId, userId, imagePath);
+			//}
 			
 			// 업로드 성공하면 기존 이미지 제거
 			/*
@@ -51,17 +61,9 @@ public class ImageBO {
 			 * 업로드가 실패할 수 있으므로 업로드가 된 후 제거
 			 * fileManagerService.deleteFile(image.getImagePath()); }
 			 */
+			
 		}
 		
-		List<Image> imageList = getImageListByPostId(postId);
-		for (int i = 0; i < imageList.size(); i++) {
-			List<String> imagePathList = imageList.get(i).getImagePath();
-			// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
-			if (ObjectUtils.isEmpty(imagePathList) == false) {
-				fileManagerService.deleteFile(imagePathList);
-				imageDAO.deleteImage(imageId, postId);
-			}
-		}
 	}
 	
 	public void deleteImage(int imageId, int postId) {

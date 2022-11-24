@@ -44,8 +44,8 @@ public class PostController {
 		return "template/layout";
 	}
 	
-	@RequestMapping("/post/post_list_view/{categoryId}")
-	public String postListViewByCategoryId(
+	@RequestMapping("/post/post_list_by_category_view/{categoryId}")
+	public String postListByCategoryView(
 			@PathVariable Integer categoryId, 
 			Model model) {
 
@@ -58,7 +58,7 @@ public class PostController {
 		Category category = categoryBO.getCategoryByCategoryId(categoryId);
 		model.addAttribute("categoryName", category.getCategoryName());
 		
-		model.addAttribute("viewName", "post/postList2");
+		model.addAttribute("viewName", "post/postListByCategory");
 		return "template/layout";
 	}
 	

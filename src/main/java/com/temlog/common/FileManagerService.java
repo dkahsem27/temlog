@@ -18,9 +18,9 @@ public class FileManagerService {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	// 실제 이미지가 저장될 경로(서버)
-	//public static final String FILE_UPLOAD_PATH = "D:\\kwonyeji\\spring_project\\temlog\\workspace\\images/"; // MEGA
+	public static final String FILE_UPLOAD_PATH = "D:\\kwonyeji\\spring_project\\temlog\\workspace\\images/"; // MEGA
 	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\dkahs\\OneDrive\\_MEGA\\work_ee\\spring_project\\temlog\\workspace\\images/"; // LAPTOP
-	public static final String FILE_UPLOAD_PATH = "C:\\Users\\g1\\OneDrive\\_MEGA\\work_home_ee\\spring_project\\temlog\\workspace\\images/"; // HOME
+	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\g1\\OneDrive\\_MEGA\\work_home_ee\\spring_project\\temlog\\workspace\\images/"; // HOME
 	
 	// input: 멀티파트 파일, userLoginId
 	// output: 이미지 패스
