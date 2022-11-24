@@ -204,10 +204,16 @@ input#datePicker {cursor: default;}
 
 .category-area .category-list {display: grid; grid-template-columns: repeat(2, 49%); column-gap: 2%; row-gap: 15px;}
 .category-area .category-list .category {background: #eee; border-radius: 4px; text-align: center;}
+
 .category-area .category-list .category .btn-list-category {display: inline-block; width: 100%; padding: 12px 10px;}
 .btn-list-category {font-size: 16px; color: #888;}
 .category-area .category-list .category:hover {background: #e6e6e6; transition: all 150ms;}
 .category-area .category-list .category:hover .btn-list-category {color: #222; transition: all 150ms;}
+
+.category-area .category-list .category.all {background: lightslategray;}
+.category-area .category-list .category.all .btn-list-category {color: #fff;}
+.category-area .category-list .category.all:hover {background: slategray; transition: all 150ms;}
+.category-area .category-list .category.all:hover .btn-list-category {color: #fff; transition: all 150ms;}
 
 /* calendar */
 #calendar {height: calc(100vh - 165px); overflow: hidden;}

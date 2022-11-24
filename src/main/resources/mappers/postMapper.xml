@@ -129,6 +129,26 @@
 			`post`
 	</select>
 	
+	<select id="selectPostListByCategoryId" parameterType="int" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`categoryId` = #{categoryId}
+		ORDER BY `id` DESC
+	</select>
+	
 	<select id="selectPostListByKeyword" parameterType="string" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`

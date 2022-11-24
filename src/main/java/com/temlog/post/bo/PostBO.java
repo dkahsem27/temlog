@@ -117,7 +117,11 @@ public class PostBO {
 		return postDAO.selectPost();
 	}
 	
-	public Post getPostListByKeyword(String keyword) {
+	public List<Post> getPostListByCategoryId(int categoryId) {
+		return postDAO.selectPostListByCategoryId(categoryId);
+	}
+	
+	public List<Post> getPostListByKeyword(String keyword) {
 		return postDAO.selectPostListByKeyword(keyword);
 	}
 }

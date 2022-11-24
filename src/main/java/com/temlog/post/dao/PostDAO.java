@@ -47,5 +47,7 @@ public interface PostDAO {
 	
 	public Post selectPost();
 	
-	public Post selectPostListByKeyword(String keyword);
+	public List<Post> selectPostListByCategoryId(int categoryId);
+	
+	public List<Post> selectPostListByKeyword(String keyword);
 }
