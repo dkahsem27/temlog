@@ -64,23 +64,21 @@ public class PostBO {
 		
 		// update image -> 이미지 모두 삭제 후 새로 DB에 저장
 		List<Image> imageList = imageBO.getImageListByPostId(postId);
-		for (int i = 0; i < imageList.size(); i++) {
-			int imageId = imageList.get(i).getId();
-			// 이미지가 존재할 때 이미지 삭제
-			if (ObjectUtils.isEmpty(imageList) == false) {
-				
-				// 기존 이미지가 1개일 때 => 삭제x => 추가만
-				// 기존 이미지가 2개일 때 => 첫번째 이미지 삭제
-				// 기존 이미지가 2개 초과일 때 => 전부 삭제??
-				if (imageList.size() == 2) {
-					imageId = imageList.get(0).getId();
-					imageBO.deleteImage(imageId, postId);
-				} else if (imageList.size() > 2) {
-					imageBO.deleteImage(imageId, postId);
-				}
-				
-				// or 프론트단에서 삭제버튼 누르면 전부 삭제된다는 alert 띄우고 삭제 후 새로 추가하는 방법
-				//imageBO.deleteImage(imageId, postId);
+		// 이미지가 존재할 때 이미지 삭제
+		if (ObjectUtils.isEmpty(imageList) == false) {
+			for (int i = 0; i < imageList.size(); i++) {
+				int imageId = imageList.get(i).getId();
+					 
+					// 기존 이미지가 1개일 때
+					// 기존 이미지가 1개이고 기존 이미지를 삭제하고 새로 추가할 때 => 
+					// 기존 이미지가 2개일 때 =>
+					if (imageList.size() > 2) { // 3
+						imageBO.deleteImage(imageId, postId); 
+					}
+					
+					// or 프론트단에서 삭제버튼 누르면 전부 삭제된다는 alert 띄우고 삭제 후 새로 추가하는 방법 (imageId 필요 없음)
+					// 문제 -> 이미지 건드리지 않고 저장해도 이미지가 다 삭제되어버림
+					//imageBO.deleteImageByPostId(postId);
 			}
 		}
 		imageBO.addImage(postId, userId, userLoginId, fileList);

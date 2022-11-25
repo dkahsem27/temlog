@@ -25,6 +25,8 @@ public interface ImageDAO {
 			@Param("imageId") int imageId, 
 			@Param("postId") int postId);
 	
+	public void deleteImageByPostId(int postId);
+	
 	public List<Image> selectImageList();
 	
 	public List<Image> selectImageListByPostId(int postId);

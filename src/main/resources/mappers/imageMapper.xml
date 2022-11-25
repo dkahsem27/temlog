@@ -41,6 +41,13 @@
 			AND `id` = #{imageId}
 	</delete>
 	
+	<delete id="deleteImageByPostId" parameterType="int">
+		DELETE FROM
+			`image`
+		WHERE
+			`postId` = #{postId}
+	</delete>
+	
 	<select id="selectImageList" resultType="com.temlog.image.model.Image">
 		SELECT
 			`id`

@@ -79,6 +79,18 @@ public class ImageBO {
 		}
 	}
 	
+	public void deleteImageByPostId(int postId) {
+		List<Image> imageList = getImageListByPostId(postId);
+		for (int i = 0; i < imageList.size(); i++) {
+			List<String> imagePathList = imageList.get(i).getImagePath();
+			// 업로드 되었던 이미지패스가 존재하면 이미지 삭제
+			if (ObjectUtils.isEmpty(imagePathList) == false) {
+				fileManagerService.deleteFile(imagePathList);
+			}
+			imageDAO.deleteImageByPostId(postId);
+		}
+	}
+	
 	public List<Image> getImageList() {
 		return imageDAO.selectImageList();
 	}
