@@ -108,7 +108,8 @@ body {font-family: 'SUIT Variable', sans-serif;}
 
 
 
-.logo > a {font-size: 50px;}
+.logo > a {display: block; font-size: 50px;}
+.logo > a > img {width: 100%;}
 input#datePicker {cursor: default;}
 
 .subject-box {padding: 15px 0; border-bottom: 1px solid #bbb;}
@@ -169,7 +170,7 @@ input#datePicker {cursor: default;}
 .text-length-box .text-max.max {color: firebrick;}
 
 /* contents */
-.user-area h1.logo {margin: 120px 0;}
+/* .user-area h1.logo {margin: 120px 0;} */
 
 .user-area .form-group label {min-width: 100px;}
 .user-area .form-group label.label-width-auto {min-width: auto;}
