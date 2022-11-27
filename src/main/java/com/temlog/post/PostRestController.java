@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.temlog.post.bo.PostBO;
+import com.temlog.post.model.Post;
 
 @RestController
 public class PostRestController {
@@ -96,18 +98,19 @@ public class PostRestController {
 		return result;
 	}
 	
-	@GetMapping("/post/search")
-	public Map<String, Object> search(
-			@RequestParam("keyword") String keyword) {
-		Map<String, Object> result = new HashMap<>();
-		
-		// search
-		postBO.getPostListByKeyword(keyword);
-		
-		result.put("code", 100);
-		result.put("result", "success");
-		result.put("errorMessage", "검색에 실패했습니다. 관리자에게 문의해주세요.");
-		
-		return result;
-	}
+//	@GetMapping("/post/search")
+//	public Map<String, Object> search(
+//			@RequestParam("keyword") String keyword) {
+//		Map<String, Object> result = new HashMap<>();
+//		
+//		// search
+//		postBO.getPostListByKeyword(keyword);
+//		
+//		result.put("code", 100);
+//		result.put("result", "success");
+//		result.put("errorMessage", "검색에 실패했습니다. 관리자에게 문의해주세요.");
+//		
+//		return result;
+//	}
+	
 }

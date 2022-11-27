@@ -51,7 +51,22 @@ public interface PostDAO {
 	
 	public List<Post> selectPostListByKeyword(String keyword);
 	
+	public List<Post> selectPostListByRating(String rating);
+	
 	public List<Post> selectPostListByCategoryIdAndKeyword(
 			@Param("categoryId") int categoryId, 
 			@Param("keyword") String keyword);
+	
+	public List<Post> selectPostListByCategoryIdAndRating(
+			@Param("categoryId") int categoryId, 
+			@Param("rating") String rating);
+	
+	public List<Post> selectPostListByCreatedAt();
+	public List<Post> selectPostListByPurchaseDate();
+	public List<Post> selectPostListByPurchaseNumber();
+	
+	public List<Post> selectPostListByCategoryIdAndCreatedAt(int categoryId);
+	public List<Post> selectPostListByCategoryIdAndPurchaseDate(int categoryId);
+	public List<Post> selectPostListByCategoryIdAndPurchaseNumber(int categoryId);
+	
 }

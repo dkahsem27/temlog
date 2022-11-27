@@ -79,8 +79,8 @@ body {font-family: 'SUIT Variable', sans-serif;}
   	-ms-user-select:none;
   	user-select:none;}
 
-.btn-empty-back {display: block; text-decoration: underline;}
-.btn-empty-back:hover {text-decoration: underline;}
+.btn-empty-back {display: block; text-decoration: underline; color: #ccc;}
+.btn-empty-back:hover {text-decoration: underline; color: #ccc;}
 
 /* common */
 #wrap {min-width: 320px; max-width: 480px; margin: 0 auto;}

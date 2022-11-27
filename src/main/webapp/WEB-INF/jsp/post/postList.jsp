@@ -18,9 +18,9 @@
 			    	평가
 			  	</button>
 			  	<div class="dropdown-menu py-0">
-			  		<a class="dropdown-item p-2" href="#">좋음 <span class="rating-icon good material-icons md-18">sentiment_satisfied_alt</span></a>
-				    <a class="dropdown-item p-2" href="#">보통 <span class="rating-icon normal material-icons md-18">sentiment_neutral</span></a>
-				    <a class="dropdown-item p-2" href="#">별로 <span class="rating-icon bad material-icons md-18">sentiment_very_dissatisfied</span></a>
+			  		<a class="rating-dropdown dropdown-item p-2" href="#">좋음</a>
+				    <a class="rating-dropdown dropdown-item p-2" href="#">보통</a>
+				    <a class="rating-dropdown dropdown-item p-2" href="#">별로</a>
 			  	</div>
 			</div>
 			<div class="dropdown ml-2">
@@ -28,9 +28,9 @@
 			    	정렬
 			  	</button>
 			  	<div class="dropdown-menu py-0">
-			  		<a class="dropdown-item p-2" href="#">등록일</a>
-				    <a class="dropdown-item p-2" href="#">구매일</a>
-				    <a class="dropdown-item p-2" href="#">구매횟수</a>
+			  		<a class="sort-dropdown dropdown-item p-2" href="#">등록일</a>
+				    <a class="sort-dropdown dropdown-item p-2" href="#">구매일</a>
+				    <a class="sort-dropdown dropdown-item p-2" href="#">구매횟수</a>
 			  	</div>
 			</div>
 		</div>
@@ -117,24 +117,21 @@ $(document).ready(function() {
 		}
 		
 		location.href='/post/post_list_view?keyword=' + keyword;
+	});
+	
+	// 분류(평가)
+	$('.rating-dropdown').on('click', function(e) {
+		e.preventDefault();
+		let rating = $(this).text().trim(); // 좋음, 보통, 나쁨
+		location.href='/post/post_list_view?rating=' + rating;
+	});
+	
+	// 분류(정렬)
+	$('.sort-dropdown').on('click', function(e) {
+		e.preventDefault();
+		let sort = $(this).text().trim(); // 등록일, 구매일, 구매횟수
 		
-		// ajax
-		/* $.ajax({
-			type: 'get'
-			, url: '/post/search'
-			, data: {'keyword':keyword}
-		
-			, success: function(data) {
-				if (data.code == 100) {
-					location.href='/post/post_list_view?keyword=' + keyword;
-				} else {
-					alert(data.errorMessage);
-				}
-			}
-			, error: function(e) {
-				alert('검색 에러');
-			}
-		}); */
+		location.href='/post/post_list_view?sort=' + sort;
 	});
 });
 </script>

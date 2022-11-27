@@ -191,4 +191,159 @@
 			OR `content` LIKE CONCAT('%',#{keyword},'%'))
 		ORDER BY `id` DESC
 	</select>
+	
+	<select id="selectPostListByRating" parameterType="string" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`rating` = #{rating}
+		ORDER BY `id` DESC
+	</select>
+	
+	<select id="selectPostListByCategoryIdAndRating" parameterType="map" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`categoryId` = #{categoryId}
+			AND `rating` = #{rating}
+		ORDER BY `id` DESC
+	</select>
+	
+	<select id="selectPostListByCreatedAt" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		ORDER BY `createdAt` DESC
+	</select>
+	
+	<select id="selectPostListByPurchaseDate" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		ORDER BY `purchaseDate` DESC
+	</select>
+	
+	<select id="selectPostListByPurchaseNumber" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		ORDER BY `purchaseNumber` DESC
+	</select>
+	
+	<select id="selectPostListByCategoryIdAndCreatedAt" parameterType="int" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`categoryId` = #{categoryId}
+		ORDER BY `createdAt` DESC
+	</select>
+	
+	<select id="selectPostListByCategoryIdAndPurchaseDate" parameterType="int" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`categoryId` = #{categoryId}
+		ORDER BY `purchaseDate` DESC
+	</select>
+	
+	<select id="selectPostListByCategoryIdAndPurchaseNumber" parameterType="int" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`categoryId` = #{categoryId}
+		ORDER BY `purchaseNumber` DESC
+	</select>
 </mapper>
