@@ -31,10 +31,11 @@ public class PostController {
 
 	@RequestMapping("/post/post_list_view")
 	public String postListView(
+			@RequestParam(value="keyword", required=false) String keyword,
 			HttpSession session,
 			Model model) {
 		
-		List<Post> postList = postBO.getPostList();
+		List<Post> postList = postBO.getPostList(keyword);
 		model.addAttribute("postList", postList);
 		
 		List<Category> categoryList = categoryBO.getCategoryList();
@@ -47,9 +48,10 @@ public class PostController {
 	@RequestMapping("/post/post_list_by_category_view/{categoryId}")
 	public String postListByCategoryView(
 			@PathVariable Integer categoryId, 
+			@RequestParam(value="keyword", required=false) String keyword,
 			Model model) {
 
-		List<Post> postListByCategoryId = postBO.getPostListByCategoryId(categoryId);
+		List<Post> postListByCategoryId = postBO.getPostListByCategoryId(categoryId, keyword);
 		model.addAttribute("postListByCategory", postListByCategoryId);
 
 		List<Category> categoryList = categoryBO.getCategoryList();
@@ -57,6 +59,8 @@ public class PostController {
 		
 		Category category = categoryBO.getCategoryByCategoryId(categoryId);
 		model.addAttribute("categoryName", category.getCategoryName());
+		
+		model.addAttribute("keyword", keyword);
 		
 		model.addAttribute("viewName", "post/postListByCategory");
 		return "template/layout";

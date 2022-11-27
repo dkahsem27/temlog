@@ -96,8 +96,10 @@ $(document).ready(function() {
 			return;
 		}
 		
+		location.href='/post/post_list_view?keyword=' + keyword;
+		
 		// ajax
-		$.ajax({
+		/* $.ajax({
 			type: 'get'
 			, url: '/post/search'
 			, data: {'keyword':keyword}
@@ -112,7 +114,7 @@ $(document).ready(function() {
 			, error: function(e) {
 				alert('검색 에러');
 			}
-		});
+		}); */
 	});
 });
 </script>

@@ -165,8 +165,28 @@
 		FROM
 			`post`
 		WHERE
-			`subject` LIKE '%' || #{keyword} || '%'
-			OR `content` LIKE '%' || #{keyword} || '%'
+			`subject` LIKE CONCAT('%',#{keyword},'%')
+		ORDER BY `id` DESC
+	</select>
+	
+	<select id="selectPostListByCategoryIdAndKeyword" parameterType="map" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`categoryId` = #{categoryId}
+			AND `subject` LIKE CONCAT('%',#{keyword},'%')
 		ORDER BY `id` DESC
 	</select>
 </mapper>

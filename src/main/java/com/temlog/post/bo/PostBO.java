@@ -72,13 +72,13 @@ public class PostBO {
 					// 기존 이미지가 1개일 때
 					// 기존 이미지가 1개이고 기존 이미지를 삭제하고 새로 추가할 때 => 
 					// 기존 이미지가 2개일 때 =>
-					if (imageList.size() > 2) { // 3
-						imageBO.deleteImage(imageId, postId); 
-					}
+//					if (imageList.size() > 2) { // 3
+//						imageBO.deleteImage(imageId, postId); 
+//					}
 					
 					// or 프론트단에서 삭제버튼 누르면 전부 삭제된다는 alert 띄우고 삭제 후 새로 추가하는 방법 (imageId 필요 없음)
 					// 문제 -> 이미지 건드리지 않고 저장해도 이미지가 다 삭제되어버림
-					//imageBO.deleteImageByPostId(postId);
+					imageBO.deleteImageByPostId(postId);
 			}
 		}
 		imageBO.addImage(postId, userId, userLoginId, fileList);
@@ -143,6 +143,14 @@ public class PostBO {
 		return postDAO.selectPostList();
 	}
 	
+	public List<Post> getPostList(String keyword) {
+		if (keyword != null) {	
+			return getPostListByKeyword(keyword);
+		} else {
+			return postDAO.selectPostList();
+		}
+	}
+	
 	public Post getPost() {
 		return postDAO.selectPost();
 	}
@@ -151,7 +159,19 @@ public class PostBO {
 		return postDAO.selectPostListByCategoryId(categoryId);
 	}
 	
+	public List<Post> getPostListByCategoryId(int categoryId, String keyword) {
+		if (keyword != null) {
+			return getPostListByCategoryIdAndKeyword(categoryId, keyword);
+		} else {
+			return postDAO.selectPostListByCategoryId(categoryId);
+		}
+	}
+	
 	public List<Post> getPostListByKeyword(String keyword) {
 		return postDAO.selectPostListByKeyword(keyword);
+	}
+	
+	public List<Post> getPostListByCategoryIdAndKeyword(int categoryId, String keyword) {
+		return postDAO.selectPostListByCategoryIdAndKeyword(categoryId, keyword);
 	}
 }

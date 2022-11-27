@@ -7,7 +7,7 @@
 	<!-- content -->
 	<!-- 검색창 -->
 	<div class="search-box d-flex align-items-center py-3">
-		<input type="search" id="searchText" class="form-control" placeholder="검색어를 입력해주세요">
+		<input type="search" id="searchText" class="form-control" placeholder="검색어를 입력해주세요" value="${keyword}">
 		<button type="button" id="searchBtn" class="btn-search"><span class="material-icons-outlined">search</span></button>
 	</div>
 	<!-- 분류 -->
@@ -53,6 +53,7 @@
 						<div class="card-inner">
 							<div class="card-row d-flex justify-content-between py-1">
 								<c:forEach items="${categoryList}" var="category">
+									<input type="hidden" value="${post.categoryId}" class="postCategoryId">
 									<c:if test="${post.categoryId == category.id}">
 										<div class="category-name">${category.categoryName}</div>
 									</c:if>
@@ -86,6 +87,10 @@
 
 <script>
 $(document).ready(function() {
+	$('#pageTitle').on('click', function() {
+		let postCategoryId = $('.postCategoryId').val();
+		location.href='/post/post_list_by_category_view/' + postCategoryId;
+	});
 	// 검색
 	$('#searchBtn').on('click', function() {
 		let keyword = $('#searchText').val().trim();
@@ -95,9 +100,11 @@ $(document).ready(function() {
 			$('#searchText').focus();
 			return;
 		}
+		let postCategoryId = $('.postCategoryId').val();
+		location.href='/post/post_list_by_category_view/' + postCategoryId + '?keyword=' + keyword;
 		
 		// ajax
-		$.ajax({
+		/* $.ajax({
 			type: 'get'
 			, url: '/post/search'
 			, data: {'keyword':keyword}
@@ -112,7 +119,7 @@ $(document).ready(function() {
 			, error: function(e) {
 				alert('검색 에러');
 			}
-		});
+		}); */
 	});
 });
 </script>

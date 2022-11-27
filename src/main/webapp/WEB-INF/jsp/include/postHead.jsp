@@ -7,7 +7,7 @@
 			<a href="/category/category_list_view" class="btn-category-menu material-icons md-36">apps</a>
 			<c:choose>
 			<c:when test="${not empty categoryName}">
-				<div class="category-name ml-2">${categoryName}</div>
+				<div id="pageTitle" class="category-name ml-2">${categoryName}</div>
 			</c:when>
 			<c:otherwise>
 				<div class="category-name ml-2">전체</div>

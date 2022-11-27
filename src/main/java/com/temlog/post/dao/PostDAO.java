@@ -50,4 +50,8 @@ public interface PostDAO {
 	public List<Post> selectPostListByCategoryId(int categoryId);
 	
 	public List<Post> selectPostListByKeyword(String keyword);
+	
+	public List<Post> selectPostListByCategoryIdAndKeyword(
+			@Param("categoryId") int categoryId, 
+			@Param("keyword") String keyword);
 }

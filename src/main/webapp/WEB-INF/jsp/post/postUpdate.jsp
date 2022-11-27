@@ -266,6 +266,15 @@ $(document).ready(function() {
 
 	// 파일 이미지 미리보기
 	var sel_files = [];
+	// 기존 이미지 배열에 담기
+	var test = $('#preview').children().length;
+	if (test != 0) {
+		
+		for (var i = 0; i < test; i++) {
+			sel_files.push($('#preview > .image > img:eq(' + i + ')').attr('src'));
+		} 
+		
+	} 
 	$('#fileInput').on('change', handleImgsFilesSelect);
 	function handleImgsFilesSelect(e) {
 		var files = e.target.files;
@@ -274,7 +283,7 @@ $(document).ready(function() {
 		filesArr.forEach(function(f) {
 			sel_files.push(f);
 			// 파일 2개 초과해서 첨부하려 할 때
-			if (sel_files.length > 2) {
+			if (sel_files.length > 5) {
 				alert('파일은 2개까지만 첨부할 수 있습니다.');
 				return false;
 			}
@@ -285,6 +294,7 @@ $(document).ready(function() {
 				$('#preview').append(img_html);
 			}
 			reader.readAsDataURL(f);
+			console.log(sel_files)
 		});
 	}
 	// 이미지 삭제 버튼
@@ -327,7 +337,8 @@ $(document).ready(function() {
 			alert('평가 항목을 선택해주세요.');
 			return;
 		}
-
+		
+		
 		let formData = new FormData();
 		formData.append("postId", postId);
 		formData.append("categoryId", categoryId);
@@ -337,9 +348,11 @@ $(document).ready(function() {
 		formData.append("purchaseNumber", purchaseNumber);
 		formData.append("purchaseDate", purchaseDate);
 		formData.append("location", location);
-		for (var i = 0; i < sel_files.length; i++) {
+		/* for (var i = 0; i < sel_files.length; i++) {
 			formData.append("file", sel_files[i]);
-		}
+			console.log(sel_files[i]);
+		} */
+		
 		
 		// ajax
 		$.ajax({

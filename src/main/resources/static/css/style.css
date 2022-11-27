@@ -89,6 +89,7 @@ body {font-family: 'SUIT Variable', sans-serif;}
 #header {z-index: 999; width: 100%; max-width: 480px; position: fixed; top: 0; left: 50%; transform: translateX(-50%);}
 #header .head-box {background: #fff; border-bottom: 1px solid #333;}
 #header .head-box .util-box .category-name {font-size: 28px; font-weight: 600; cursor: default;}
+#pageTitle {cursor: pointer !important;}
 
 #navigation {z-index: 999; width: 100%; max-width: 480px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);}
 #navigation .nav {background: #efefef; border-top: 1px solid #ddd;}
