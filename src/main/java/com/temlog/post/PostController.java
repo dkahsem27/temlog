@@ -40,6 +40,8 @@ public class PostController {
 		
 		List<Category> categoryList = categoryBO.getCategoryList();
 		model.addAttribute("categoryList", categoryList);
+
+		model.addAttribute("keyword", keyword);
 		
 		model.addAttribute("viewName", "post/postList");
 		return "template/layout";

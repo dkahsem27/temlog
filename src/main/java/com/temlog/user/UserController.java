@@ -1,13 +1,23 @@
 package com.temlog.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.temlog.post.bo.PostBO;
+import com.temlog.post.model.Post;
 
 @Controller
 public class UserController {
+	
+	@Autowired
+	private PostBO postBO;
 
 	@RequestMapping("/user/sign_in_view")
 	public String signInView(Model model) {

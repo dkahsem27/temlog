@@ -80,6 +80,11 @@
 				</li>
 			</c:forEach>
 		</ul>
+		<c:if test="${empty postListByCategory}">
+			<div class="empty text-center">목록이 없습니다.
+				<a href="javascript:history.back();" class="btn-empty-back mt-5">뒤로가기</a>
+			</div>
+		</c:if>
 	</div>
 	<!-- navi -->
 	<jsp:include page="../include/nav.jsp" />
@@ -87,10 +92,21 @@
 
 <script>
 $(document).ready(function() {
+	// 헤드 텍스트-카테고리명 클릭시 페이지 이동
 	$('#pageTitle').on('click', function() {
 		let postCategoryId = $('.postCategoryId').val();
 		location.href='/post/post_list_by_category_view/' + postCategoryId;
 	});
+	
+	// 엔터로 검색
+	let searchText = document.getElementById('searchText');
+	searchText.addEventListener('keyup', function(event) {
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			$('#searchBtn').click();
+		}
+	});
+	
 	// 검색
 	$('#searchBtn').on('click', function() {
 		let keyword = $('#searchText').val().trim();

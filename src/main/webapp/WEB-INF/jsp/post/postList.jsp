@@ -7,7 +7,7 @@
 	<!-- content -->
 	<!-- 검색창 -->
 	<div class="search-box d-flex align-items-center py-3">
-		<input type="search" id="searchText" class="form-control" placeholder="검색어를 입력해주세요">
+		<input type="search" id="searchText" class="form-control" placeholder="검색어를 입력해주세요" value="${keyword}">
 		<button type="button" id="searchBtn" class="btn-search"><span class="material-icons-outlined">search</span></button>
 	</div>
 	<!-- 분류 -->
@@ -79,6 +79,11 @@
 				</li>
 			</c:forEach>
 		</ul>
+		<c:if test="${empty postList}">
+			<div class="empty text-center">목록이 없습니다.
+				<a href="javascript:history.back();" class="btn-empty-back mt-5">뒤로가기</a>
+			</div>
+		</c:if>
 	</div>
 	<!-- navi -->
 	<jsp:include page="../include/nav.jsp" />
@@ -86,6 +91,21 @@
 
 <script>
 $(document).ready(function() {
+	// 헤드 텍스트-전체 클릭시 페이지 이동
+	$('#viewAll').on('click', function() {
+		let postCategoryId = $('.postCategoryId').val();
+		location.href='/post/post_list_view';
+	});
+	
+	// 엔터로 검색
+	let searchText = document.getElementById('searchText');
+	searchText.addEventListener('keyup', function(event) {
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			$('#searchBtn').click();
+		}
+	});
+	
 	// 검색
 	$('#searchBtn').on('click', function() {
 		let keyword = $('#searchText').val().trim();

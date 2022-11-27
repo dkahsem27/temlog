@@ -166,6 +166,7 @@
 			`post`
 		WHERE
 			`subject` LIKE CONCAT('%',#{keyword},'%')
+			OR `content` LIKE CONCAT('%',#{keyword},'%')
 		ORDER BY `id` DESC
 	</select>
 	
@@ -186,7 +187,8 @@
 			`post`
 		WHERE
 			`categoryId` = #{categoryId}
-			AND `subject` LIKE CONCAT('%',#{keyword},'%')
+			AND (`subject` LIKE CONCAT('%',#{keyword},'%')
+			OR `content` LIKE CONCAT('%',#{keyword},'%'))
 		ORDER BY `id` DESC
 	</select>
 </mapper>

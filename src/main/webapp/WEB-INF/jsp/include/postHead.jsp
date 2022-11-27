@@ -10,7 +10,7 @@
 				<div id="pageTitle" class="category-name ml-2">${categoryName}</div>
 			</c:when>
 			<c:otherwise>
-				<div class="category-name ml-2">전체</div>
+				<div id="viewAll" class="category-name ml-2">전체</div>
 			</c:otherwise>
 			</c:choose>
 		</div>
