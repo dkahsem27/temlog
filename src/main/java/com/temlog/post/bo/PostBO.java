@@ -192,20 +192,4 @@ public class PostBO {
 		
 		return postDAO.selectPostListByCategoryId(categoryId);
 	}
-	
-//	public List<Post> getPostListByKeyword(String keyword) {
-//		return postDAO.selectPostListByKeyword(keyword);
-//	}
-//	
-//	public List<Post> getPostListByRating(String rating) {
-//		return postDAO.selectPostListByRating(rating);
-//	}
-//	
-//	public List<Post> getPostListByCategoryIdAndKeyword(int categoryId, String keyword) {
-//		return postDAO.selectPostListByCategoryIdAndKeyword(categoryId, keyword);
-//	}
-//	
-//	public List<Post> getPostListByCategoryIdAndRating(int categoryId, String rating) {
-//		return postDAO.selectPostListByCategoryIdAndRating(categoryId, rating);
-//	}
 }

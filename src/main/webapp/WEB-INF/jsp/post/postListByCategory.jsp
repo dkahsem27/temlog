@@ -34,7 +34,7 @@
 			  	</div>
 			</div>
 		</div>
-		<div class="list-count">총 n건</div>
+		<div class="list-count">총 <span><!-- 목록 갯수 --></span>건</div>
 	</div>
 	<!-- 목록 -->
 	<div class="post-content-list">
@@ -135,5 +135,9 @@ $(document).ready(function() {
 		let sort = $(this).text().trim(); // 등록일, 구매일, 구매횟수
 		location.href='/post/post_list_by_category_view/' + postCategoryId + '?sort=' + sort;
 	});
+
+	// 목록 갯수 출력
+	let listCount = $('.post-list > li').length;
+	$('.list-count > span').text(listCount);
 });
 </script>
