@@ -61,5 +61,46 @@ $(document).ready(function() {
 		, showMonthAfterYear: true
 		, yearSuffix: '년'
 	});
+	
+	// 일정 등록
+	$('#schedulCreateBtn').on('click', function() {
+		let startDate = $('#startDate').val();
+		let endDate = $('#endDate').val(); // 필수X
+		let subject = $('#subject').val();
+		let content = $('#content').val(); // 필수X
+		
+		// 유효성 검사
+		if (startDate == '') {
+			alert('날짜를 선택해주세요');
+			$('#startDate').focus();
+			return;
+		}
+		if (subject == '') {
+			alert('제목을 입력해주세요');
+			$('#subject').focus();
+			return;
+		}
+		
+		// ajax
+		$.ajax({
+			type: 'post'
+			, url: '/schedule/create'
+			, data: {'startDate':startDate, 'endDate':endDate, 'subject':subject, 'content':content}
+		
+			, success: function(data) {
+				if (data.code == 100) {
+					// 성공
+					alert('저장되었습니다.');
+					location.href='/schedule/schedule_main_view';
+				} else {
+					// 에러
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('일정 등록 에러');
+			}
+		});
+	});
 });
 </script>

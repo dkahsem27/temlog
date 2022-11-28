@@ -221,7 +221,7 @@ input#datePicker {cursor: default;}
 /* calendar */
 #calendar {height: calc(100vh - 165px); overflow: hidden;}
 #calendar .fc-toolbar-title {font-size: 1.5em;}
-#calendar .fc-day-today {background-color: rgba(0, 0, 0, .05);}
+#calendar .fc-day-today {background-color: rgba(211, 250, 175, 0.4);}
 #calendar .fc-highlight {background-color: rgba(0, 0, 0, .02);}
 #calendar .fc-day-sun a {color: firebrick;}
 #calendar .fc-day-sat a {color: steelblue;}
