@@ -1,9 +1,12 @@
 package com.temlog.schedule.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.temlog.schedule.model.Schedule;
 
 @Repository
 public interface ScheduleDAO {
@@ -14,4 +17,8 @@ public interface ScheduleDAO {
 			@Param("endDate") Date endDate, 
 			@Param("subject") String subject, 
 			@Param("content") String content);
+	
+	public void deleteSchedule(int scheduleId);
+	
+	public List<Schedule> selectScheduleList();
 }

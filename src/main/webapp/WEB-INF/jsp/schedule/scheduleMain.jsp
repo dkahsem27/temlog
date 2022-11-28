@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <section class="contents-inner">
 	<!-- head -->
 	<jsp:include page="../include/scheduleHead.jsp" />
@@ -29,7 +31,7 @@
 				</div>
 				<div class="btn-box d-flex justify-content-center">
 					<a href="/schedule/schedule_update_view" id="updateScheduleBtn" class="btn btn-dark col-6">수정</a>
-					<button type="button" id="deleteScheduleBtn" class="btn btn-secondary col-6 ml-2">삭제</button>
+					<button type="button" id="deleteScheduleBtn" class="btn btn-secondary col-6 ml-2" data-schedule-id="">삭제</button>
 				</div>
 			</div>
 		</div>
@@ -71,18 +73,21 @@ document.addEventListener('DOMContentLoaded', function() {
             var modal = $("#scheduleDetailModal");
             modal.modal();
         },
-        
         events: [ // 이벤트(일정)
+        	<c:forEach items="${scheduleList}" var="schedule">
             { // 한개의 일정 생성 영역
-              	title: '일정 제목입니다', // 제목
-              	start: '2022-11-01', // 시작일
-             	end: '2022-11-05' // 종료일 ** 지정일 하루 전 종료 **
+              	title: '${schedule.subject}', // 제목
+              	start: "<fmt:formatDate value='${schedule.startDate}' pattern='yyyy-MM-dd' />", // 시작일
+              	<c:if test="${not empty schedule.endDate}">
+             	end: "<fmt:formatDate value='${schedule.endDate}' pattern='yyyy-MM-dd' />" // 종료일 ** 지정일 하루 전 종료 **
+             	</c:if>
             },
-            {
+            </c:forEach>
+            /* {
               	title: '일정 제목입니다',
               	start: '2022-11-11',
              	allDay: true, // 종일 (optionable)
-            }
+            } */
        	]
 	});
 	calendar.render();
@@ -91,10 +96,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 $(document).ready(function() {
-	// 삭제버튼
+	// 일정 삭제
 	$('#deleteScheduleBtn').on('click', function() {
+		let scheduleId = $(this).data('schedule-id');
+		
 		if (confirm('삭제하시겠습니까?')) {
-			alert('삭제되었습니다.');
+			$.ajax({
+				type: 'delete'
+				, url: '/schedule/delete'
+				, data: {'scheduleId':scheduleId}
+			
+				, success: function(data) {
+					if (data.code == 100) {
+						alert('삭제되었습니다.');
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error: function(e) {
+					alert('일정 삭제 실패');
+				}
+			});
 		}
 	});
 });

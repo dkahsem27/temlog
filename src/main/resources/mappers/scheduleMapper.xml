@@ -24,4 +24,25 @@
 			, NOW()
 		)
 	</insert>
+	
+	<delete id="deleteSchedule" parameterType="int">
+		DELETE FROM
+			`schedule`
+		WHERE
+			`id` = #{scheduleId}
+	</delete>
+	
+	<select id="selectScheduleList" resultType="com.temlog.schedule.model.Schedule">
+		SELECT
+			`id`
+			, `userId`
+			, `startDate`
+			, `endDate`
+			, `subject`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`schedule`
+	</select>
 </mapper>
