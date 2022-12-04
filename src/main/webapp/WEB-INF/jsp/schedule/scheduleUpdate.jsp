@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <section class="schedule-area">
 	<div class="subject-box d-flex justify-content-between align-items-end mb-3">
 		<div class="d-flex align-items-end">
@@ -12,26 +14,28 @@
 		<!-- 시작날짜 -->
 		<div class="form-group">
 			<label for="startDate" class="mb-2">시작일 선택<span class="required">*</span></label>
-			<input type="text" id="startDate" class="form-control col-5" placeholder="날짜 선택">
+			<input type="text" id="startDate" class="form-control col-5" placeholder="날짜 선택"
+			value="<fmt:formatDate value="${schedule.startDate}" pattern="yyyy-MM-dd" />">
 		</div>
 		<!-- 종료날짜 -->
 		<div class="form-group">
 			<label for="endDate" class="mb-2">종료일 선택 <span class="noti">(생략 가능)</span></label>
-			<input type="text" id="endDate" class="form-control col-5" placeholder="날짜 선택">
+			<input type="text" id="endDate" class="form-control col-5" placeholder="날짜 선택"
+			value="<fmt:formatDate value="${schedule.endDate}" pattern="yyyy-MM-dd" />">
 		</div>
 		<!-- 제목 -->
 		<div class="form-group">
 			<label for="subject" class="mb-2">제목<span class="required">*</span></label>
-			<input type="text" id="subject" class="form-control" placeholder="제목을 입력해주세요(최대 20자)">
+			<input type="text" id="subject" class="form-control" placeholder="제목을 입력해주세요(최대 20자)" value="${schedule.subject}">
 		</div>
 		<!-- 내용 -->
 		<div class="form-group">
 			<label for="content" class="mb-2">내용</label>
-			<textarea id="content" class="form-control" rows="3" placeholder="내용을 입력해주세요(최대 50자)"></textarea>
+			<textarea id="content" class="form-control" rows="3" placeholder="내용을 입력해주세요(최대 50자)">${schedule.content}</textarea>
 		</div>
 	</div>
 	<div class="btn-box my-4">
-		<button type="button" id="schedulCreateBtn" class="btn btn-block btn-dark">저장</button>
+		<button type="button" id="schedulCreateBtn" class="btn btn-block btn-dark" data-schedule-id="${schedule.id}">저장</button>
 	</div>
 </section>
 
@@ -63,6 +67,49 @@ $(document).ready(function() {
 		, dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
 		, showMonthAfterYear: true
 		, yearSuffix: '년'
+	});
+	
+	// 일정 수정
+	$('#schedulCreateBtn').on('click', function() {
+		let scheduleId = $(this).data('schedule-id');
+		
+		let startDate = $('#startDate').val();
+		let endDate = $('#endDate').val(); // 필수X
+		let subject = $('#subject').val().trim();
+		let content = $('#content').val(); // 필수X
+		
+		// 유효성 검사
+		if (startDate == '') {
+			alert('날짜를 선택해주세요');
+			$('#startDate').focus();
+			return;
+		}
+		if (subject == '') {
+			alert('제목을 입력해주세요');
+			$('#subject').focus();
+			return;
+		}
+		
+		// ajax
+		$.ajax({
+			type: 'put'
+			, url: '/schedule/update'
+			, data: {'scheduleId':scheduleId, 'startDate':startDate, 'endDate':endDate, 'subject':subject, 'content':content}
+			
+			, success: function(data) {
+				if (data.code == 100) {
+					// 성공
+					alert('저장되었습니다.');
+					location.href='/schedule/schedule_main_view';
+				} else {
+					// 에러
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('일정 수정 에러');
+			}
+		});
 	});
 });
 </script>

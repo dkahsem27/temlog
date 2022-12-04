@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.temlog.schedule.bo.ScheduleBO;
 import com.temlog.schedule.model.Schedule;
@@ -33,7 +34,13 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping("/schedule/schedule_update_view")
-	public String scheduleUpdateView(Model model) {
+	public String scheduleUpdateView(
+			@RequestParam("scheduleId") int scheduleId,
+			Model model) {
+		
+		Schedule schedule = scheduleBO.getScheduleById(scheduleId);
+		model.addAttribute("schedule", schedule);
+		
 		model.addAttribute("viewName", "schedule/scheduleUpdate");
 		return "template/layout";
 	}

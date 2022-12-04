@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,6 +53,26 @@ public class ScheduleRestController {
 		scheduleBO.deleteSchedule(scheduleId);
 		result.put("code", 100);
 		result.put("errorMessage", "일정 삭제에 실패했습니다. 관리자에게 문의해주세요.");
+		
+		return result;
+	}
+	
+	@PutMapping("/schedule/update")
+	public Map<String, Object> update(
+			@RequestParam("scheduleId") int scheduleId,
+			@RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
+			@RequestParam(value="endDate", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate,
+			@RequestParam("subject") String subject,
+			@RequestParam(value="content", required=false) String content) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		// update schedule
+		scheduleBO.updateSchedule(scheduleId, startDate, endDate, subject, content);
+		
+		result.put("code", 100);
+		result.put("result", "success");
+		result.put("errorMessage", "일정 수정에 실패했습니다. 관리자에게 문의해주세요.");
 		
 		return result;
 	}

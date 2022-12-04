@@ -66,7 +66,7 @@ $(document).ready(function() {
 	$('#schedulCreateBtn').on('click', function() {
 		let startDate = $('#startDate').val();
 		let endDate = $('#endDate').val(); // 필수X
-		let subject = $('#subject').val();
+		let subject = $('#subject').val().trim();
 		let content = $('#content').val(); // 필수X
 		
 		// 유효성 검사

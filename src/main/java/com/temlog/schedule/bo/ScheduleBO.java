@@ -23,6 +23,10 @@ public class ScheduleBO {
 		scheduleDAO.deleteSchedule(scheduleId);
 	}
 	
+	public void updateSchedule(int scheduleId, Date startDate, Date endDate, String subject, String content) {
+		scheduleDAO.updateSchedule(scheduleId, startDate, endDate, subject, content);
+	}
+	
 	public List<Schedule> getScheduleList() {
 		return scheduleDAO.selectScheduleList();
 	}

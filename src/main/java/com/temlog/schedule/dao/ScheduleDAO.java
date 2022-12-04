@@ -20,6 +20,13 @@ public interface ScheduleDAO {
 	
 	public void deleteSchedule(int scheduleId);
 	
+	public void updateSchedule(
+			@Param("scheduleId") int scheduleId, 
+			@Param("startDate") Date startDate, 
+			@Param("endDate") Date endDate, 
+			@Param("subject") String subject, 
+			@Param("content") String content);
+	
 	public List<Schedule> selectScheduleList();
 	
 	public Schedule selectScheduleById(int scheduleId);

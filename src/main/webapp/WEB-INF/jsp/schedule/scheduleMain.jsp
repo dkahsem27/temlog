@@ -34,7 +34,7 @@
 					<div id="content" class="schedule-content"></div>
 				</div>
 				<div class="btn-box d-flex justify-content-center">
-					<a href="/schedule/schedule_update_view" id="updateScheduleBtn" class="btn btn-dark col-6">수정</a>
+					<a href="" id="updateScheduleBtn" class="btn btn-dark col-6">수정</a>
 					<button type="button" id="deleteScheduleBtn" class="btn btn-secondary col-6 ml-2">삭제</button>
 				</div>
 			</div>
@@ -89,10 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
         	//alert(info.event.title);
         	//alert(calendar.event.id);
         	
-            $('#scheduleDetailModal').modal('show');
-            $('#scheduleDetailModal #deleteScheduleBtn').data('schedule-id', calendar.event.id);
+            $('#scheduleDetailModal').modal('show'); // 일정 상세 모달로 연결
+            $('#scheduleDetailModal #deleteScheduleBtn').data('schedule-id', calendar.event.id); // 삭제를 위한 id 세팅
+            $('#scheduleDetailModal #updateScheduleBtn').data('schedule-id', calendar.event.id); // 수정을 위한 id 세팅
+            
             $('#startDate').text(moment(calendar.event.start).format('YYYY년 MM월 DD일'));
-            $('#endDate').text(moment(calendar.event.end).format('YYYY년 MM월 DD일'));
+            if (calendar.event.end != null) { // 종료일 있을때
+            	$('#endDate').text(moment(calendar.event.end).format('YYYY년 MM월 DD일'));
+            	$('#endDate').siblings('.betweenDates').css('display', 'block');
+            } else if (calendar.event.end == null) { // 종료일 없을때
+            	$('#endDate').text('');
+            	$('#endDate').siblings('.betweenDates').css('display', 'none');
+            }
             $('#subject').text(calendar.event.title);
             $('#content').text(calendar.event.extendedProps.content);
         },
@@ -111,8 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function() {
 	// 일정 삭제
 	$('#deleteScheduleBtn').on('click', function() {
-		let scheduleId = $(this).data('schedule-id'); // getting
-		alert(scheduleId);
+		let scheduleId = $(this).data('schedule-id');
 		
 		if (confirm('삭제하시겠습니까?')) {
 			$.ajax({
@@ -133,6 +140,14 @@ $(document).ready(function() {
 				}
 			});
 		}
+	});
+	
+	// 일정 수정 페이지 이동
+	$('#updateScheduleBtn').on('click', function(e) {
+		e.preventDefault();
+		
+		let scheduleId = $(this).data('schedule-id');
+		location.href = '/schedule/schedule_update_view?scheduleId=' + scheduleId;
 	});
 });
 </script>

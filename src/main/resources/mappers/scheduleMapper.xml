@@ -32,6 +32,18 @@
 			`id` = #{scheduleId}
 	</delete>
 	
+	<update id="updateSchedule" parameterType="map">
+		UPDATE `schedule`
+		SET
+			`startDate` = #{startDate}
+			, `endDate` = #{endDate}
+			, `subject` = #{subject}
+			, `content` = #{content}
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{scheduleId}
+	</update>
+	
 	<select id="selectScheduleList" resultType="com.temlog.schedule.model.Schedule">
 		SELECT
 			`id`
