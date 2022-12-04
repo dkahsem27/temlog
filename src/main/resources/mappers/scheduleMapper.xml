@@ -45,4 +45,20 @@
 		FROM
 			`schedule`
 	</select>
+	
+	<select id="selectScheduleById" parameterType="int" resultType="com.temlog.schedule.model.Schedule">
+		SELECT
+			`id`
+			, `userId`
+			, `startDate`
+			, `endDate`
+			, `subject`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`schedule`
+		WHERE
+			`id` = #{scheduleId}
+	</select>
 </mapper>

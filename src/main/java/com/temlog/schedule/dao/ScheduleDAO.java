@@ -21,4 +21,6 @@ public interface ScheduleDAO {
 	public void deleteSchedule(int scheduleId);
 	
 	public List<Schedule> selectScheduleList();
+	
+	public Schedule selectScheduleById(int scheduleId);
 }

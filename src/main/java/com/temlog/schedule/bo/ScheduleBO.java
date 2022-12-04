@@ -26,4 +26,8 @@ public class ScheduleBO {
 	public List<Schedule> getScheduleList() {
 		return scheduleDAO.selectScheduleList();
 	}
+	
+	public Schedule getScheduleById(int scheduleId) {
+		return scheduleDAO.selectScheduleById(scheduleId);
+	}
 }

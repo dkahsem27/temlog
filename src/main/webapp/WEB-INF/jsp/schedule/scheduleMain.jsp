@@ -16,7 +16,7 @@
 <!-- 모달버튼 -->
 <!-- <button type="button" data-toggle="modal" data-target="#scheduleDetailModal">모달버튼</button> -->
 <!-- Modal -->
-<div class="modal fade" id="scheduleDetailModal">
+<div class="modal fade" id="scheduleDetailModal" data-schedule-id="${schedule.id}">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<!-- 모달 내용 -->
@@ -25,13 +25,19 @@
 					<button type="button" class="btn-close material-icons" data-dismiss="modal">close</button>
 				</div>
 				<div class="content mb-5">
-					<div class="date mb-1">2022년 11월 1일</div>
-					<div class="subject mb-2">[약속] 약속내용 어쩌고 저쩌고 말줄임 없이</div>
-					<div class="schedule-content">내용입니다 내용은 50자까지 말줄임 없이 뿌린다. 내용입니다 내용은 50자까지 말줄임 없이 뿌린다.</div>
+					<div class="d-flex mb-1">
+						<div class="date"><fmt:formatDate value='${schedule.startDate}' pattern='yyyy년 MM월 dd일' /></div>
+						<c:if test="${not empty schedule.endDate}">
+							&nbsp;~&nbsp;
+							<div class="date"><fmt:formatDate value='${schedule.endDate}' pattern='yyyy년 MM월 dd일' /></div>
+						</c:if>
+					</div>
+					<div class="subject mb-2">${schedule.subject}</div>
+					<div class="schedule-content">${schedule.content}</div>
 				</div>
 				<div class="btn-box d-flex justify-content-center">
 					<a href="/schedule/schedule_update_view" id="updateScheduleBtn" class="btn btn-dark col-6">수정</a>
-					<button type="button" id="deleteScheduleBtn" class="btn btn-secondary col-6 ml-2" data-schedule-id="">삭제</button>
+					<button type="button" id="deleteScheduleBtn" class="btn btn-secondary col-6 ml-2">삭제</button>
 				</div>
 			</div>
 		</div>
@@ -69,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         // 이벤트 클릭 => 일정상세 모달
-        eventClick: function(event) {
+        eventClick: function(info) {
+        	//alert(info.event.title);
             var modal = $("#scheduleDetailModal");
             modal.modal();
         },
@@ -99,8 +106,10 @@ $(document).ready(function() {
 	// 일정 삭제
 	$('#deleteScheduleBtn').on('click', function() {
 		let scheduleId = $(this).data('schedule-id');
+		$('#scheduleDetailModal').data('schedule-id', scheduleId);
+		alert(scheduleId);
 		
-		if (confirm('삭제하시겠습니까?')) {
+		/* if (confirm('삭제하시겠습니까?')) {
 			$.ajax({
 				type: 'delete'
 				, url: '/schedule/delete'
@@ -118,7 +127,7 @@ $(document).ready(function() {
 					alert('일정 삭제 실패');
 				}
 			});
-		}
+		} */
 	});
 });
 </script>
