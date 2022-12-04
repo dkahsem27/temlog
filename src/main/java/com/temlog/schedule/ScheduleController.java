@@ -22,13 +22,6 @@ public class ScheduleController {
 		List<Schedule> scheduleList = scheduleBO.getScheduleList();
 		model.addAttribute("scheduleList", scheduleList);
 		
-		//Schedule schedule = new Schedule();
-		for (var i = 0; i < scheduleList.size(); i++) {
-			Schedule schedule = scheduleBO.getScheduleById(scheduleList.get(i).getId());
-			model.addAttribute("schedule", schedule);
-		}
-		 
-		
 		model.addAttribute("viewName", "schedule/scheduleMain");
 		return "template/layout";
 	}

@@ -16,7 +16,7 @@
 <!-- 모달버튼 -->
 <!-- <button type="button" data-toggle="modal" data-target="#scheduleDetailModal">모달버튼</button> -->
 <!-- Modal -->
-<div class="modal fade" id="scheduleDetailModal" data-schedule-id="${schedule.id}">
+<div class="modal fade" id="scheduleDetailModal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<!-- 모달 내용 -->
@@ -26,14 +26,12 @@
 				</div>
 				<div class="content mb-5">
 					<div class="d-flex mb-1">
-						<div class="date"><fmt:formatDate value='${schedule.startDate}' pattern='yyyy년 MM월 dd일' /></div>
-						<c:if test="${not empty schedule.endDate}">
-							&nbsp;~&nbsp;
-							<div class="date"><fmt:formatDate value='${schedule.endDate}' pattern='yyyy년 MM월 dd일' /></div>
-						</c:if>
+						<div id="startDate" class="date"></div>
+						<span class="betweenDates">&nbsp;~&nbsp;</span>
+						<div id="endDate" class="date"></div>
 					</div>
-					<div class="subject mb-2">${schedule.subject}</div>
-					<div class="schedule-content">${schedule.content}</div>
+					<div id="subject" class="subject mb-2"></div>
+					<div id="content" class="schedule-content"></div>
 				</div>
 				<div class="btn-box d-flex justify-content-center">
 					<a href="/schedule/schedule_update_view" id="updateScheduleBtn" class="btn btn-dark col-6">수정</a>
@@ -48,6 +46,7 @@
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	var calendarEl = document.getElementById('calendar');
@@ -68,34 +67,41 @@ document.addEventListener('DOMContentLoaded', function() {
         selectMirror: true, // 날짜 드래그 선택 가능 여부
         editable: true,
         
-        // 날짜가 있는 칸 클릭 => 일정등록 페이지
-        select: function(date, jsEvent, view) {
-            //$('#scheduleDetailModal').modal('show');
-            location.href="/schedule/schedule_create_view";
-        },
-        
-        // 이벤트 클릭 => 일정상세 모달
-        eventClick: function(info) {
-        	//alert(info.event.title);
-            var modal = $("#scheduleDetailModal");
-            modal.modal();
-        },
         events: [ // 이벤트(일정)
         	<c:forEach items="${scheduleList}" var="schedule">
             { // 한개의 일정 생성 영역
-              	title: '${schedule.subject}', // 제목
+            	id: ${schedule.id},
+              	title: "${schedule.subject}", // 제목
               	start: "<fmt:formatDate value='${schedule.startDate}' pattern='yyyy-MM-dd' />", // 시작일
               	<c:if test="${not empty schedule.endDate}">
-             	end: "<fmt:formatDate value='${schedule.endDate}' pattern='yyyy-MM-dd' />" // 종료일 ** 지정일 하루 전 종료 **
+             	end: "<fmt:formatDate value='${schedule.endDate}' pattern='yyyy-MM-dd' />", // 종료일 ** 지정일 하루 전 종료 **
              	</c:if>
+             	allDay: true, // 종일 (optionable)
+             	extendedProps: {
+             		content: "${schedule.content}"
+             	}
             },
             </c:forEach>
-            /* {
-              	title: '일정 제목입니다',
-              	start: '2022-11-11',
-             	allDay: true, // 종일 (optionable)
-            } */
-       	]
+       	],
+
+        // 이벤트 클릭 => 일정상세 모달
+        eventClick: function(calendar, event, info) {
+        	//alert(info.event.title);
+        	//alert(calendar.event.id);
+        	
+            $('#scheduleDetailModal').modal('show');
+            $('#scheduleDetailModal #deleteScheduleBtn').data('schedule-id', calendar.event.id);
+            $('#startDate').text(moment(calendar.event.start).format('YYYY년 MM월 DD일'));
+            $('#endDate').text(moment(calendar.event.end).format('YYYY년 MM월 DD일'));
+            $('#subject').text(calendar.event.title);
+            $('#content').text(calendar.event.extendedProps.content);
+        },
+        
+        // 날짜가 있는 칸 클릭 => 일정등록 페이지
+        /* select: function(date, jsEvent, view) {
+            //$('#scheduleDetailModal').modal('show');
+            location.href="/schedule/schedule_create_view";
+        }, */
 	});
 	calendar.render();
 });
@@ -105,11 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function() {
 	// 일정 삭제
 	$('#deleteScheduleBtn').on('click', function() {
-		let scheduleId = $(this).data('schedule-id');
-		$('#scheduleDetailModal').data('schedule-id', scheduleId);
+		let scheduleId = $(this).data('schedule-id'); // getting
 		alert(scheduleId);
 		
-		/* if (confirm('삭제하시겠습니까?')) {
+		if (confirm('삭제하시겠습니까?')) {
 			$.ajax({
 				type: 'delete'
 				, url: '/schedule/delete'
@@ -127,7 +132,7 @@ $(document).ready(function() {
 					alert('일정 삭제 실패');
 				}
 			});
-		} */
+		}
 	});
 });
 </script>
