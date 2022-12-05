@@ -64,11 +64,13 @@
 		)
 	</insert>
 	
-	<update id="updateUserPassword" parameterType="string">
+	<update id="updateUserPassword" parameterType="map">
 		update `user`
 		SET
 			`password` = #{password}
 			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{userId}
 	</update>
 	
 	<delete id="deleteUser" parameterType="int">

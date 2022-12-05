@@ -94,7 +94,10 @@ public class UserRestController {
 	@RequestMapping("/account/update")
 	public Map<String, Object> isMatchedPassword(
 			@RequestParam("password") String password,
-			@RequestParam("changedPassword") String changedPassword) {
+			@RequestParam("changedPassword") String changedPassword,
+			HttpSession session) {
+		
+		Integer userId = (Integer)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
 		// 암호화(해싱)
@@ -107,7 +110,7 @@ public class UserRestController {
 			result.put("result", true);
 			
 			// 2차: 일치시 password update
-			userBO.updateUserPassword(changedEncryptPassword);
+			userBO.updateUserPassword(userId, changedEncryptPassword);
 			result.put("code", 100);
 			result.put("errorMessage", "회원정보 수정에 실패했습니다. 관리자에게 문의해주세요.");
 		} else {

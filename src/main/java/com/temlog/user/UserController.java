@@ -46,7 +46,6 @@ public class UserController {
 			Model model) {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
-		String userLoginId = (String)session.getAttribute("userLoginId");
 		
 		User user = userBO.getUserByUserId(userId);
 		model.addAttribute("user", user);

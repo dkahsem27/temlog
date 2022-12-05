@@ -100,14 +100,13 @@ $(document).ready(function() {
 			, error: function(e) {
 				alert('회원정보 수정 에러');
 			}
-		})
-		
+		});
 	})
 	
 	// 회원탈퇴
 	$('#withdrawalBtn').on('click', function() {
 		let userId = $(this).data('user-id');
-		if (confirm('정말로 탈퇴하시겠습니까? 탈퇴되면 기록한 내용은 다시 복구되지 않습니다.')) {
+		if (confirm('탈퇴되면 기록한 내용은 복구되지 않습니다.\n정말로 탈퇴하시겠습니까?')) {
 			$.ajax({
 				type: 'delete'
 				, url: '/account/delete'

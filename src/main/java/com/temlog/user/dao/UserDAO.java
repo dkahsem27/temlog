@@ -22,7 +22,9 @@ public interface UserDAO {
 	
 	public User selectUserByUserId(int userId);
 	
-	public void updateUserPassword(String password);
+	public void updateUserPassword(
+			@Param("userId") int userId, 
+			@Param("password") String password);
 	
 	public int deleteUser(int userId);
 }
