@@ -1,24 +1,20 @@
 package com.temlog.user;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.temlog.post.bo.PostBO;
-import com.temlog.post.model.Post;
+import com.temlog.user.bo.UserBO;
+import com.temlog.user.model.User;
 
 @Controller
 public class UserController {
-	
-	@Autowired
-	private PostBO postBO;
 
+	@Autowired UserBO userBO;
+	
 	@RequestMapping("/user/sign_in_view")
 	public String signInView(Model model) {
 		model.addAttribute("viewName", "user/signIn");
@@ -45,7 +41,16 @@ public class UserController {
 	}
 	
 	@RequestMapping("/account_view")
-	public String accountView(Model model) {
+	public String accountView(
+			HttpSession session,
+			Model model) {
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
+		
+		User user = userBO.getUserByUserId(userId);
+		model.addAttribute("user", user);
+		
 		model.addAttribute("viewName", "user/account");
 		return "template/layout";
 	}
