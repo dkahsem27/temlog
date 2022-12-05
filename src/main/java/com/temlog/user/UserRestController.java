@@ -89,4 +89,30 @@ public class UserRestController {
 		
 		return result;
 	}
+	
+	@RequestMapping("/account/update")
+	public Map<String, Object> isMatchedPassword(
+			@RequestParam("password") String password,
+			@RequestParam("changedPassword") String changedPassword) {
+		
+		Map<String, Object> result = new HashMap<>();
+		// 암호화(해싱)
+		String encryptPassword = EncryptUtils.md5(password);
+		String changedEncryptPassword = EncryptUtils.md5(changedPassword);
+		
+		// 1차: 현재 비밀번호 일치 확인
+		boolean isMatched = userBO.matchedPassword(encryptPassword);
+		if (isMatched) {
+			result.put("result", true);
+			
+			// 2차: 일치시 password update
+			userBO.updateUserPassword(changedEncryptPassword);
+			result.put("code", 100);
+			result.put("errorMessage", "회원정보 수정에 실패했습니다. 관리자에게 문의해주세요.");
+		} else {
+			result.put("result", false);
+		}
+		
+		return result;
+	}
 }

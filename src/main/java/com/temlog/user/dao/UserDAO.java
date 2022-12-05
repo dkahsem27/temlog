@@ -13,10 +13,14 @@ public interface UserDAO {
 			@Param("password") String password);
 	
 	public boolean existLoginId(String loginId);
+	
+	public boolean matchedPassword(String password);
 
 	public int insertUser(
 			@Param("loginId") String loginId, 
 			@Param("password") String password);
 	
 	public User selectUserByUserId(int userId);
+	
+	public void updateUserPassword(String password);
 }

@@ -19,6 +19,10 @@ public class UserBO {
 	public boolean existLoginId(String loginId) {
 		return userDAO.existLoginId(loginId);
 	}
+	
+	public boolean matchedPassword(String password) {
+		return userDAO.matchedPassword(password);
+	}
 
 	public int addUser(String loginId, String password) {
 		return userDAO.insertUser(loginId, password);
@@ -26,5 +30,9 @@ public class UserBO {
 	
 	public User getUserByUserId(int userId) {
 		return userDAO.selectUserByUserId(userId);
+	}
+	
+	public void updateUserPassword(String password) {
+		userDAO.updateUserPassword(password);
 	}
 }

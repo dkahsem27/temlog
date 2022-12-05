@@ -39,19 +39,19 @@
 
 <script>
 $(document).ready(function() {
-	// 내 정보 수정
-	$('#updateBtn').on('click', function() {
-		let password = $('#password').val().trim(); // 현재 비밀번호
+	// 회원정보 수정
+	$('#updateBtn').on('click', function(){
+		let password = $('#password').val().trim();
 		let changedPassword = $('#changedPassword').val().trim();
 		let checkchangedPassword = $('#checkchangedPassword').val().trim();
-
+		
 		// 유효성 검사
 		if (password == '') {
-			alert('비밀번호를 입력해주세요.');
+			alert('현재 비밀번호를 입력해주세요.');
 			$('#password').focus();
 			return;
 		}
-		/* if (changedPassword == '') {
+		if (changedPassword == '') {
 			alert('새 비밀번호를 입력해주세요.');
 			$('#changedPassword').focus();
 			return;
@@ -61,12 +61,51 @@ $(document).ready(function() {
 			$('#checkchangedPassword').focus();
 			return;
 		}
-		if (changedPassword != checkchangedPassword) {
-			alert('새로 입력한 비밀번호가 일치하지 않습니다.');
+		
+		if (password == changedPassword) {
+			alert('현재 비밀번호와 동일한 비밀번호입니다. 다시 입력해주세요.');
+			$('#changedPassword').val('');
+			$('#checkchangedPassword').val('');
+			$('#changedPassword').focus();
 			return;
-		} */
-
-		// 현재 비밀번호가 입력값과 일치하는지 확인
-	});
+		}
+		if (changedPassword != checkchangedPassword) {
+			alert('새 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+			$('#checkchangedPassword').focus();
+			return;
+		}
+		
+		// ajax
+		$.ajax({
+			type: "GET"
+			, url: "/account/update"
+			, data: {"password":password, "changedPassword":changedPassword}
+			, success: function(data){
+				if (data.result == true) {
+					// 현재 비밀번호 일치
+					if (data.code == 100) {
+						// 성공
+						alert('비밀번호가 수정되었습니다.');
+						location.reload();
+					} else {
+						// 에러
+						alert(data.errorMessage);
+					}
+				} else if (data.result == false) {
+					// 현재 비밀번호 불일치
+					alert('현재 비밀번호가 일치하지 않습니다.');
+					$('#password').focus();
+				}
+			}
+			, error: function(e) {
+				alert('회원정보 수정 에러');
+			}
+		})
+		
+	})
+	
+	
+	
+	
 });
 </script>

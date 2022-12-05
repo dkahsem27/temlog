@@ -38,6 +38,15 @@
 			`loginId` = #{loginId}
 	</select>
 	
+	<select id="matchedPassword" parameterType="string" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			`user`
+		WHERE
+			`password` = #{password}
+	</select>
+	
 	<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 		(
@@ -54,4 +63,11 @@
 			, NOW()
 		)
 	</insert>
+	
+	<update id="updateUserPassword" parameterType="string">
+		update `user`
+		SET
+			`password` = #{password}
+			, `updatedAt` = NOW()
+	</update>
 </mapper>
