@@ -43,30 +43,44 @@ public interface PostDAO {
 			@Param("postId") int postId, 
 			@Param("userId") int userId);
 	
-	public List<Post> selectPostList();
+	public List<Post> selectPostList(int userId);
 	
 	public Post selectPost();
 	
-	public List<Post> selectPostListByCategoryId(int categoryId);
+	public List<Post> selectPostListByCategoryId(
+			@Param("userId") int userId, 
+			@Param("categoryId") int categoryId);
 	
-	public List<Post> selectPostListByKeyword(String keyword);
+	public List<Post> selectPostListByKeyword(
+			@Param("userId") int userId, 
+			@Param("keyword") String keyword);
 	
-	public List<Post> selectPostListByRating(String rating);
+	public List<Post> selectPostListByRating(
+			@Param("userId") int userId, 
+			@Param("rating") String rating);
 	
 	public List<Post> selectPostListByCategoryIdAndKeyword(
+			@Param("userId") int userId,
 			@Param("categoryId") int categoryId, 
 			@Param("keyword") String keyword);
 	
 	public List<Post> selectPostListByCategoryIdAndRating(
+			@Param("userId") int userId,
 			@Param("categoryId") int categoryId, 
 			@Param("rating") String rating);
 	
-	public List<Post> selectPostListByCreatedAt();
-	public List<Post> selectPostListByPurchaseDate();
-	public List<Post> selectPostListByPurchaseNumber();
+	public List<Post> selectPostListByCreatedAt(int userId);
+	public List<Post> selectPostListByPurchaseDate(int userId);
+	public List<Post> selectPostListByPurchaseNumber(int userId);
 	
-	public List<Post> selectPostListByCategoryIdAndCreatedAt(int categoryId);
-	public List<Post> selectPostListByCategoryIdAndPurchaseDate(int categoryId);
-	public List<Post> selectPostListByCategoryIdAndPurchaseNumber(int categoryId);
+	public List<Post> selectPostListByCategoryIdAndCreatedAt(
+			@Param("userId") int userId, 
+			@Param("categoryId") int categoryId);
+	public List<Post> selectPostListByCategoryIdAndPurchaseDate(
+			@Param("userId") int userId, 
+			@Param("categoryId") int categoryId);
+	public List<Post> selectPostListByCategoryIdAndPurchaseNumber(
+			@Param("userId") int userId, 
+			@Param("categoryId") int categoryId);
 	
 }

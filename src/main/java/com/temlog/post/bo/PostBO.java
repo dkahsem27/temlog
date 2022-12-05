@@ -143,53 +143,53 @@ public class PostBO {
 		return postDAO.selectPostByPostIdAndUserId(postId, userId);
 	}
 	
-	public List<Post> getPostList() {
-		return postDAO.selectPostList();
+	public List<Post> getPostList(int userId) {
+		return postDAO.selectPostList(userId);
 	}
 	
-	public List<Post> getPostListByCategoryId(int categoryId) {
-		return postDAO.selectPostListByCategoryId(categoryId);
+	public List<Post> getPostListByCategoryId(int userId, int categoryId) {
+		return postDAO.selectPostListByCategoryId(userId, categoryId);
 	}
 	
-	public List<Post> getPostList(String keyword, String rating, String sort) {
+	public List<Post> getPostList(int userId, String keyword, String rating, String sort) {
 		
 		if (keyword != null) {	
-			return postDAO.selectPostListByKeyword(keyword);
+			return postDAO.selectPostListByKeyword(userId, keyword);
 		} else if (rating != null) {
-			return postDAO.selectPostListByRating(rating);
+			return postDAO.selectPostListByRating(userId, rating);
 		}
 		
 		if (sort != null) {
 			if (sort.equals("등록일")) {
-				return postDAO.selectPostListByCreatedAt();
+				return postDAO.selectPostListByCreatedAt(userId);
 			} else if (sort.equals("구매일")) {
-				return postDAO.selectPostListByPurchaseDate();
+				return postDAO.selectPostListByPurchaseDate(userId);
 			} else if (sort.equals("구매횟수")) {
-				return postDAO.selectPostListByPurchaseNumber();
+				return postDAO.selectPostListByPurchaseNumber(userId);
 			} 
 		}
 		
-		return postDAO.selectPostList();
+		return postDAO.selectPostList(userId);
 	}
 	
-	public List<Post> getPostListByCategoryId(int categoryId, String keyword, String rating, String sort) {
+	public List<Post> getPostListByCategoryId(int userId, int categoryId, String keyword, String rating, String sort) {
 		
 		if (keyword != null) {
-			return postDAO.selectPostListByCategoryIdAndKeyword(categoryId, keyword);
+			return postDAO.selectPostListByCategoryIdAndKeyword(userId, categoryId, keyword);
 		} else if (rating != null) {
-			return postDAO.selectPostListByCategoryIdAndRating(categoryId, rating);
+			return postDAO.selectPostListByCategoryIdAndRating(userId, categoryId, rating);
 		}
 		
 		if (sort != null) {
 			if (sort.equals("등록일")) {
-				return postDAO.selectPostListByCategoryIdAndCreatedAt(categoryId);
+				return postDAO.selectPostListByCategoryIdAndCreatedAt(userId, categoryId);
 			} else if (sort.equals("구매일")) {
-				return postDAO.selectPostListByCategoryIdAndPurchaseDate(categoryId);
+				return postDAO.selectPostListByCategoryIdAndPurchaseDate(userId, categoryId);
 			} else if (sort.equals("구매횟수")) {
-				return postDAO.selectPostListByCategoryIdAndPurchaseNumber(categoryId);
+				return postDAO.selectPostListByCategoryIdAndPurchaseNumber(userId, categoryId);
 			}
 		}
 		
-		return postDAO.selectPostListByCategoryId(categoryId);
+		return postDAO.selectPostListByCategoryId(userId, categoryId);
 	}
 }

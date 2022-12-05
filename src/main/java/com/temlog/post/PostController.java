@@ -37,7 +37,9 @@ public class PostController {
 			HttpSession session,
 			Model model) {
 		
-		List<Post> postList = postBO.getPostList(keyword, rating, sort);
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		List<Post> postList = postBO.getPostList(userId, keyword, rating, sort);
 		model.addAttribute("postList", postList);
 		
 		List<Category> categoryList = categoryBO.getCategoryList();
@@ -55,9 +57,12 @@ public class PostController {
 			@RequestParam(value="keyword", required=false) String keyword,
 			@RequestParam(value="rating", required=false) String rating,
 			@RequestParam(value="sort", required=false) String sort,
+			HttpSession session,
 			Model model) {
 
-		List<Post> postListByCategoryId = postBO.getPostListByCategoryId(categoryId, keyword, rating, sort);
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		List<Post> postListByCategoryId = postBO.getPostListByCategoryId(userId, categoryId, keyword, rating, sort);
 		model.addAttribute("postListByCategory", postListByCategoryId);
 
 		List<Category> categoryList = categoryBO.getCategoryList();
