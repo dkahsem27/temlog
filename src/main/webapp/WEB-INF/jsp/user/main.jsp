@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <section class="user-area">
-	<h1 class="logo text-center py-3"><a href="/post/post_list_view"><img src="/static/logo2.png" alt="로고"></a></h1>
+	<h1 class="logo text-center py-4"><a href="/post/post_list_view"><img src="/static/logo.svg" alt="로고"></a></h1>
 	<div class="search-box d-flex align-items-center">
 		<input type="search" id="searchText" class="form-control" placeholder="검색어를 입력해주세요">
 		<button type="button" id="searchBtn" class="btn-search"><span class="material-icons-outlined">search</span></button>
 	</div>
-	<div class="btn-box py-5 d-flex justify-content-around align-items-center">
+	<div class="btn-box main-btn-box py-5 d-flex justify-content-around align-items-center">
 		<a href="/post/post_create_view" class="btn-create post">
 			<div class="btn-create-inner">
 				<div class="btn-create-icon material-icons-outlined">edit_note</div>

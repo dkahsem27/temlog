@@ -22,6 +22,8 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .c-red {color: firebrick;}
 .c-blue {color: steelblue;}
 .c-gray {color: gray;}
+.c-main {color: #6C6070;}
+.c-main-rgba {color: rgba(108, 96, 112, 0.8);}
 
 /* buttons */
 .btn-cancle {font-size: 18px; color: #888;}
@@ -33,10 +35,10 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .btn-clear {font-size: 18px; color: #ccc;}
 .btn-delete-image {font-size: 24px; color: #fff; padding: 5px;}
 
-.btn-create {position: relative; width: 120px; max-height: 80px; border-radius: 5px; text-align: center; background: #eee;}
+.btn-create {position: relative; width: 120px; max-height: 80px; border-radius: 12px; text-align: center; background: #efefef;}
 .btn-create.post {padding: 15px 0;}
 .btn-create.schedule {padding: 18px 0;}
-.btn-create:hover {background: #333; transition: background 300ms;}
+.btn-create:hover {background: #3d3d3d; transition: background 200ms;}
 .btn-create:hover .btn-create-text {color: #fff;}
 .btn-create:hover .btn-create-icon {color: #fff;}
 .btn-create .btn-create-inner {display: grid;}
@@ -107,10 +109,12 @@ body {font-family: 'SUIT Variable', sans-serif;}
 #navigation .nav .nav-item.on .nav-link .nav-text {color: #fff; transition: all 150ms;}
 
 
-
 .logo > a {display: block; font-size: 50px;}
 .logo > a > img {width: 100%;}
 input#datePicker {cursor: default;}
+
+.main-btn-box {position: relative;}
+.main-btn-box:before {position: absolute; content: ''; border-left: 1px solid #efefef; height: 80px;}
 
 .subject-box {padding: 15px 0; border-bottom: 1px solid #bbb;}
 .subject-box .form-title {font-size: 35px;}
@@ -214,19 +218,19 @@ input#datePicker {cursor: default;}
 .category-area .category-list .category:hover {background: #e6e6e6; transition: all 150ms;}
 .category-area .category-list .category:hover .btn-list-category {color: #222; transition: all 150ms;}
 
-.category-area .category-list .category.all {background: lightslategray;}
+.category-area .category-list .category.all {background: rgba(108, 96, 112, 0.8);}
 .category-area .category-list .category.all .btn-list-category {color: #fff;}
-.category-area .category-list .category.all:hover {background: slategray; transition: all 150ms;}
+.category-area .category-list .category.all:hover {background: rgba(108, 96, 112, 1); transition: all 150ms;}
 .category-area .category-list .category.all:hover .btn-list-category {color: #fff; transition: all 150ms;}
 
 /* calendar */
 #calendar {height: calc(100vh - 165px); overflow: hidden;}
 #calendar .fc-toolbar-title {font-size: 1.5em;}
-#calendar .fc-day-today {background-color: rgba(211, 250, 175, 0.4);}
-#calendar .fc-highlight {background-color: rgba(0, 0, 0, .02);}
+#calendar .fc-day-today {background-color: rgba(189, 171, 134, 0.15);}
+#calendar .fc-highlight {background-color: rgba(0, 0, 0, .01);}
 #calendar .fc-day-sun a {color: firebrick;}
 #calendar .fc-day-sat a {color: steelblue;}
-#calendar .fc-h-event {background-color: slateblue; border-color: slateblue;}
+#calendar .fc-h-event {background-color: #6C6070; border-color: #6C6070;}
 #calendar button {outline: none; box-shadow: none;}
 #calendar .fc-button:disabled {opacity: .35; cursor: default;}
 #calendar .fc-today-button {background-color: transparent; border: none; color: #333;}

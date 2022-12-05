@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <section class="user-area">
-	<h1 class="logo text-center py-3"><a href="/main_view"><img src="/static/logo2.png" alt="로고"></a></h1>
+	<h1 class="logo text-center py-4"><a href="/main_view"><img src="/static/logo.svg" alt="로고"></a></h1>
 	<div class="form-outer">
 		<div class="form-box">
 			<div class="form-group d-flex align-items-center">
