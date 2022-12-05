@@ -35,4 +35,8 @@ public class UserBO {
 	public void updateUserPassword(String password) {
 		userDAO.updateUserPassword(password);
 	}
+	
+	public int deleteUser(int userId) {
+		return userDAO.deleteUser(userId);
+	}
 }

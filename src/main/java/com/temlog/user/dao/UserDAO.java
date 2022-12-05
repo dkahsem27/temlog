@@ -23,4 +23,6 @@ public interface UserDAO {
 	public User selectUserByUserId(int userId);
 	
 	public void updateUserPassword(String password);
+	
+	public int deleteUser(int userId);
 }

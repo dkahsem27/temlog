@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -111,6 +112,28 @@ public class UserRestController {
 			result.put("errorMessage", "회원정보 수정에 실패했습니다. 관리자에게 문의해주세요.");
 		} else {
 			result.put("result", false);
+		}
+		
+		return result;
+	}
+	
+	@DeleteMapping("/account/delete")
+	public Map<String, Object> delete(
+			@RequestParam("userId") int userId,
+			HttpSession session) {
+
+		Map<String, Object> result = new HashMap<>();
+		
+		// delete user
+		int row = userBO.deleteUser(userId);
+		if (row > 0) {			
+			session.removeAttribute("userLoginId");
+			session.removeAttribute("userId");
+			
+			result.put("code", 100);
+			result.put("result", "success");
+		} else {			
+			result.put("errorMessage", "유저 삭제에 실패했습니다. 관리자에게 문의해주세요.");
 		}
 		
 		return result;

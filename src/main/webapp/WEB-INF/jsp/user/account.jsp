@@ -32,7 +32,7 @@
 	<div class="btn-box py-0 my-4">
 		<button type="button" id="updateBtn" class="btn btn-block btn-dark">저장</button>
 		<div class="d-flex justify-content-end mt-3">
-			<button type="button" id="withdrawalBtn" class="btn-text withdrawal">회원탈퇴</button>
+			<button type="button" id="withdrawalBtn" class="btn-text withdrawal" data-user-id="${user.id}">회원탈퇴</button>
 		</div>
 	</div>
 </section>
@@ -104,8 +104,28 @@ $(document).ready(function() {
 		
 	})
 	
-	
-	
-	
+	// 회원탈퇴
+	$('#withdrawalBtn').on('click', function() {
+		let userId = $(this).data('user-id');
+		if (confirm('정말로 탈퇴하시겠습니까? 탈퇴되면 기록한 내용은 다시 복구되지 않습니다.')) {
+			$.ajax({
+				type: 'delete'
+				, url: '/account/delete'
+				, data: {'userId':userId}
+			
+				, success: function(data) {
+					if (data.code == 100) {
+						alert('정상적으로 탈퇴되었습니다.');
+						location.href='/user/sign_in_view';
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error: function(e) {
+					alert('회원 탈퇴 실패');
+				}
+			});
+		}
+	});
 });
 </script>
