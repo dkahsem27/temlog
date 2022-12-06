@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             end: 'today prev,next'
         },
         buttonText: { // 버튼명 변경 옵션
-        	today: '오늘'
+        	today: 'Today'
         },
         
 		selectable: true, // 날짜 선택 가능 여부
@@ -74,11 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
               	title: "${schedule.subject}", // 제목
               	start: "<fmt:formatDate value='${schedule.startDate}' pattern='yyyy-MM-dd' />", // 시작일
               	<c:if test="${not empty schedule.endDate}">
-             	end: "<fmt:formatDate value='${schedule.endDate}' pattern='yyyy-MM-dd' />", // 종료일 ** 지정일 하루 전 종료 **
+             	end: "<fmt:formatDate value='${schedule.endDate}' pattern='yyyy-MM-dd' /> 23:59:59", // 기본 00:00:00으로 설정되어 있기 때문에 종료일 하루 전으로 설정되는 현상을 수정하기 위해 시간을 해당일 23:59:59로 설정함.
              	</c:if>
-             	allDay: true, // 종일 (optionable)
              	extendedProps: {
-             		content: "${schedule.content}"
+             		content: "${schedule.content}" // 내용
              	}
             },
             </c:forEach>
