@@ -209,7 +209,7 @@ input#datePicker {cursor: default;}
 	-webkit-box-orient: vertical}
 .post-area .detail-content .purchase-date {font-size: 14px; color: #888;}
 .post-area .detail-content .content {white-space: pre-line; line-height: 1.5; border-top: 1px solid #eee;}
-.post-area .detail-content .date-box {font-size: 14px; color: #888;}
+.post-area .detail-content .date-box {font-size: 14px; color: #888; border-top: 1px solid #eee;}
 
 .category-area .category-list {display: grid; grid-template-columns: repeat(2, 49%); column-gap: 2%; row-gap: 15px;}
 .category-area .category-list .category {background: #eee; border-radius: 4px; text-align: center;}

@@ -54,7 +54,7 @@
 			<div id="map" class="map-box mb-3"></div>
 		</c:if>
 		<!-- 등록일 / 수정일 -->
-		<div class="date-box text-right">
+		<div class="date-box text-right pt-2">
 			<div class="created-date">등록 | <fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd" /></div>
 			<div class="updated-date">마지막 수정 | <fmt:formatDate value="${post.updatedAt}" pattern="yyyy-MM-dd" /></div>
 		</div>
