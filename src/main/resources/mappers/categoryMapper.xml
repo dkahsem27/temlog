@@ -2,25 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.temlog.category.dao.CategoryDAO">
-	<select id="existCategoryName" parameterType="string" resultType="boolean">
+	<select id="existCategoryName" parameterType="map" resultType="boolean">
 		SELECT
 			COUNT(*)
 		FROM
 			`category`
 		WHERE
-			`categoryName` = #{categoryName}
+			`userId` = #{userId}
+			AND `categoryName` = #{categoryName}
 	</select>
 	
-	<insert id="insertCategory" parameterType="string">
+	<insert id="insertCategory" parameterType="map">
 		INSERT INTO `category`
 		(
-			`categoryName`
+			`userId`
+			, `categoryName`
 			, `createdAt`
 			, `updatedAt`
 		)
 		VALUES
 		(
-			#{categoryName}
+			#{userId}
+			, #{categoryName}
 			, NOW()
 			, NOW()
 		)
@@ -42,20 +45,24 @@
 			`id` = #{categoryId}
 	</delete>
 	
-	<select id="selectCategoryList" resultType="com.temlog.category.model.Category">
+	<select id="selectCategoryList" parameterType="int" resultType="com.temlog.category.model.Category">
 		SELECT
 			`id`
+			, `userId`
 			, `categoryName`
 			, `createdAt`
 			, `updatedAt`
 		FROM
 			`category`
+		WHERE
+			`userId` = #{userId}
 		ORDER BY `id` ASC
 	</select>
 	
-	<select id="selectCategoryByCategoryId" parameterType="int" resultType="com.temlog.category.model.Category">
+	<select id="selectCategoryByCategoryId" parameterType="map" resultType="com.temlog.category.model.Category">
 		SELECT
 			`id`
+			, `userId`
 			, `categoryName`
 			, `createdAt`
 			, `updatedAt`
@@ -63,6 +70,7 @@
 			`category`
 		WHERE
 			`id` = #{categoryId}
+		AND `userId` = #{userId}
 	</select>
 	
 	<select id="selectCategory" resultType="com.temlog.category.model.Category">

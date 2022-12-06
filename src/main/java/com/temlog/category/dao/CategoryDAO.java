@@ -10,9 +10,13 @@ import com.temlog.category.model.Category;
 @Repository
 public interface CategoryDAO {
 
-	public boolean existCategoryName(String categoryName);
+	public boolean existCategoryName(
+			@Param("userId") int userId, 
+			@Param("categoryName") String categoryName);
 	
-	public int insertCategory(String categoryName);
+	public int insertCategory(
+			@Param("userId") int userId, 
+			@Param("categoryName") String categoryName);
 	
 	public int updateCategoryByCategoryId(
 			@Param("categoryId") int categoryId, 
@@ -20,9 +24,11 @@ public interface CategoryDAO {
 	
 	public int deleteCategoryByCategoryId(int categoryId);
 	
-	public List<Category> selectCategoryList();
+	public List<Category> selectCategoryList(int userId);
 	
-	public Category selectCategoryByCategoryId(int categoryId);
+	public Category selectCategoryByCategoryId(
+			@Param("categoryId") int categoryId, 
+			@Param("userId") int userId);
 	
 	public Category selectCategory();
 }

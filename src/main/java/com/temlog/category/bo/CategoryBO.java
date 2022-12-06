@@ -14,12 +14,12 @@ public class CategoryBO {
 	@Autowired
 	private CategoryDAO categoryDAO;
 	
-	public boolean existCategoryName(String categoryName) {
-		return categoryDAO.existCategoryName(categoryName);
+	public boolean existCategoryName(int userId, String categoryName) {
+		return categoryDAO.existCategoryName(userId, categoryName);
 	}
 	
-	public int addCategory(String categoryName) {
-		return categoryDAO.insertCategory(categoryName);
+	public int addCategory(int userId, String categoryName) {
+		return categoryDAO.insertCategory(userId, categoryName);
 	}
 	
 	public int updateCategoryByCategoryId(int categoryId, String categoryName) {
@@ -30,12 +30,12 @@ public class CategoryBO {
 		return categoryDAO.deleteCategoryByCategoryId(categoryId);
 	}
 	
-	public List<Category> getCategoryList() {
-		return categoryDAO.selectCategoryList();
+	public List<Category> getCategoryList(int userId) {
+		return categoryDAO.selectCategoryList(userId);
 	}
 	
-	public Category getCategoryByCategoryId(int categoryId) {
-		return categoryDAO.selectCategoryByCategoryId(categoryId);
+	public Category getCategoryByCategoryId(int categoryId, int userId) {
+		return categoryDAO.selectCategoryByCategoryId(categoryId, userId);
 	}
 	
 	public Category getCategory() {

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Category {
 	private int id;
+	private int userId;
 	private String categoryName;
 	private Date createdAt;
 	private Date updatedAt;
@@ -13,6 +14,12 @@ public class Category {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getCategoryName() {
 		return categoryName;

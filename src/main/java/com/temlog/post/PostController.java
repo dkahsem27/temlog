@@ -42,7 +42,7 @@ public class PostController {
 		List<Post> postList = postBO.getPostList(userId, keyword, rating, sort);
 		model.addAttribute("postList", postList);
 		
-		List<Category> categoryList = categoryBO.getCategoryList();
+		List<Category> categoryList = categoryBO.getCategoryList(userId);
 		model.addAttribute("categoryList", categoryList);
 
 		model.addAttribute("keyword", keyword);
@@ -65,10 +65,10 @@ public class PostController {
 		List<Post> postListByCategoryId = postBO.getPostListByCategoryId(userId, categoryId, keyword, rating, sort);
 		model.addAttribute("postListByCategory", postListByCategoryId);
 
-		List<Category> categoryList = categoryBO.getCategoryList();
+		List<Category> categoryList = categoryBO.getCategoryList(userId);
 		model.addAttribute("categoryList", categoryList);
 		
-		Category category = categoryBO.getCategoryByCategoryId(categoryId);
+		Category category = categoryBO.getCategoryByCategoryId(categoryId, userId);
 		model.addAttribute("categoryName", category.getCategoryName());
 		
 		model.addAttribute("keyword", keyword);
@@ -78,9 +78,11 @@ public class PostController {
 	}
 	
 	@RequestMapping("/post/post_create_view")
-	public String postCreateView(Model model) {
+	public String postCreateView(Model model, HttpSession session) {
+
+		Integer userId = (Integer)session.getAttribute("userId");
 		
-		List<Category> categoryList = categoryBO.getCategoryList();
+		List<Category> categoryList = categoryBO.getCategoryList(userId);
 		model.addAttribute("categoryList", categoryList);
 		
 		model.addAttribute("viewName", "post/postCreate");
@@ -90,11 +92,14 @@ public class PostController {
 	@RequestMapping("/post/post_update_view")
 	public String postUpdateView(
 			@RequestParam("postId") int postId,
-			Model model) {
+			Model model,
+			HttpSession session) {
 		
-		Post post = postBO.getPostByPostId(postId);
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		Post post = postBO.getPostByPostId(postId, userId);
 		model.addAttribute("post", post);
-		List<Category> categoryList = categoryBO.getCategoryList();
+		List<Category> categoryList = categoryBO.getCategoryList(userId);
 		model.addAttribute("categoryList", categoryList);
 		List<String> imagePathList = imageBO.getImagePathListByPostId(postId);
 		model.addAttribute("imagePathList", imagePathList);
@@ -114,7 +119,7 @@ public class PostController {
 		
 		Post post = postBO.getPostByPostIdAndUserId(postId, userId);
 		model.addAttribute("post", post);
-		Category category = categoryBO.getCategoryByCategoryId(categoryId);
+		Category category = categoryBO.getCategoryByCategoryId(categoryId, userId);
 		model.addAttribute("category", category);
 		List<String> imagePathList = imageBO.getImagePathListByPostId(postId);
 		model.addAttribute("imagePathList", imagePathList);

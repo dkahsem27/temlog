@@ -37,7 +37,9 @@ public interface PostDAO {
 	
 	public int deletePost(int postId);
 	
-	public Post selectPostByPostId(int postId);
+	public Post selectPostByPostId(
+			@Param("postId") int postId,
+			@Param("userId") int userId);
 	
 	public Post selectPostByPostIdAndUserId(
 			@Param("postId") int postId, 
@@ -45,7 +47,7 @@ public interface PostDAO {
 	
 	public List<Post> selectPostList(int userId);
 	
-	public Post selectPost();
+	public Post selectPost(int userId);
 	
 	public List<Post> selectPostListByCategoryId(
 			@Param("userId") int userId, 

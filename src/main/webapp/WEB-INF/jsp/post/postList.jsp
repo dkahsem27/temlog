@@ -80,9 +80,7 @@
 			</c:forEach>
 		</ul>
 		<c:if test="${empty postList}">
-			<div class="empty text-center">목록이 없습니다.
-				<a href="javascript:history.back();" class="btn-empty-back mt-5">뒤로가기</a>
-			</div>
+			<div class="empty text-center">목록이 없습니다.</div>
 		</c:if>
 	</div>
 	<!-- navi -->

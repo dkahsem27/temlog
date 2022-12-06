@@ -3,6 +3,8 @@ package com.temlog.category;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,11 +23,13 @@ public class CategoryRestController {
 	
 	@RequestMapping("/category/is_duplicated_category")
 	public Map<String, Object> isDuplicatedCategory(
-			@RequestParam("categoryName") String categoryName) {
+			@RequestParam("categoryName") String categoryName,
+			HttpSession session) {
 		
+		Integer userId = (Integer)session.getAttribute("userId");
 		Map<String, Object> result = new HashMap<>();
 		
-		boolean isDuplicated = categoryBO.existCategoryName(categoryName);
+		boolean isDuplicated = categoryBO.existCategoryName(userId, categoryName);
 		if (isDuplicated) {
 			result.put("code", 100);
 			result.put("result", true);
@@ -39,12 +43,14 @@ public class CategoryRestController {
 	
 	@PostMapping("/category/create")
 	public Map<String, Object> create(
-			@RequestParam("categoryName") String categoryName) {
+			@RequestParam("categoryName") String categoryName,
+			HttpSession session) {
 		
+		Integer userId = (Integer)session.getAttribute("userId");
 		// insert
 		Map<String, Object> result = new HashMap<>();
 		
-		int row = categoryBO.addCategory(categoryName);
+		int row = categoryBO.addCategory(userId, categoryName);
 		if (row > 0) {
 			result.put("code", 100);
 			result.put("result", "success");

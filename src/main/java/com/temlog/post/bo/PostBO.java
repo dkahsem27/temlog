@@ -56,7 +56,7 @@ public class PostBO {
 			List<MultipartFile> fileList) {
 
 		// 기존 글과 이미지를 가지고 온다.(post 존재 유무 확인, 이미지가 교체될 때 기존 이미지를 제거하기 위해)
-		Post post = getPostByPostId(postId);
+		Post post = getPostByPostId(postId, userId);
 		if (post == null) { // 수정할 글이 존재하지 않는 경우
 			log.warn("[update post] 수정할 글이 존재하지 않습니다. postId:{} userId:{}", postId, userId);
 			//return 0;
@@ -111,10 +111,10 @@ public class PostBO {
 		 */
 	}
 	
-	public void deletePost(int postId) {
+	public void deletePost(int postId, int userId) {
 		
 		// 기존 글과 이미지 가져오기
-		Post post = getPostByPostId(postId);
+		Post post = getPostByPostId(postId, userId);
 		if (post == null) { // 포스트가 없는 경우
 			log.warn("[delete post] 삭제할 글이 존재하지 않습니다. postId:{}", postId);
 			//return 0;
@@ -132,12 +132,12 @@ public class PostBO {
 		postDAO.deletePost(postId);
 	}
 
-	public Post getPost() {
-		return postDAO.selectPost();
+	public Post getPost(int userId) {
+		return postDAO.selectPost(userId);
 	}
 	
-	public Post getPostByPostId(int postId) {
-		return postDAO.selectPostByPostId(postId);
+	public Post getPostByPostId(int postId, int userId) {
+		return postDAO.selectPostByPostId(postId, userId);
 	}
 	public Post getPostByPostIdAndUserId(int postId, int userId) {
 		return postDAO.selectPostByPostIdAndUserId(postId, userId);

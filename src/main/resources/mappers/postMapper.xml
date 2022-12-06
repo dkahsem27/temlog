@@ -55,7 +55,7 @@
 			`id` = #{postId}
 	</delete>
 	
-	<select id="selectPostByPostId" parameterType="int" resultType="com.temlog.post.model.Post">
+	<select id="selectPostByPostId" parameterType="map" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -95,7 +95,7 @@
 			AND `userId` = #{userId}
 	</select>
 	
-	<select id="selectPostList" resultType="com.temlog.post.model.Post">
+	<select id="selectPostList" parameterType="int" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -115,24 +115,7 @@
 		ORDER BY `id` DESC
 	</select>
 	
-	<select id="selectPost" resultType="com.temlog.post.model.Post">
-		SELECT
-			`id`
-			, `userId`
-			, `categoryId`
-			, `subject`
-			, `content`
-			, `rating`
-			, `purchaseNumber`
-			, `purchaseDate`
-			, `location`
-			, `createdAt`
-			, `updatedAt`
-		FROM
-			`post`
-	</select>
-	
-	<select id="selectPostListByCategoryId" parameterType="int" resultType="com.temlog.post.model.Post">
+	<select id="selectPost" parameterType="int" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -148,12 +131,31 @@
 		FROM
 			`post`
 		WHERE
-			`categoryId` = #{categoryId}
-			AND `userId` = #{userId}
+			`userId` = #{userId}
+	</select>
+	
+	<select id="selectPostListByCategoryId" parameterType="map" resultType="com.temlog.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `categoryId`
+			, `subject`
+			, `content`
+			, `rating`
+			, `purchaseNumber`
+			, `purchaseDate`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`userId` = #{userId}
+			AND `categoryId` = #{categoryId} 
 		ORDER BY `id` DESC
 	</select>
 	
-	<select id="selectPostListByKeyword" parameterType="string" resultType="com.temlog.post.model.Post">
+	<select id="selectPostListByKeyword" parameterType="map" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -241,7 +243,7 @@
 		ORDER BY `id` DESC
 	</select>
 	
-	<select id="selectPostListByCreatedAt" resultType="com.temlog.post.model.Post">
+	<select id="selectPostListByCreatedAt" parameterType="int" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -261,7 +263,7 @@
 		ORDER BY `createdAt` DESC
 	</select>
 	
-	<select id="selectPostListByPurchaseDate" resultType="com.temlog.post.model.Post">
+	<select id="selectPostListByPurchaseDate" parameterType="int" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -281,7 +283,7 @@
 		ORDER BY `purchaseDate` DESC
 	</select>
 	
-	<select id="selectPostListByPurchaseNumber" resultType="com.temlog.post.model.Post">
+	<select id="selectPostListByPurchaseNumber" parameterType="int" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -301,7 +303,7 @@
 		ORDER BY `purchaseNumber` DESC
 	</select>
 	
-	<select id="selectPostListByCategoryIdAndCreatedAt" parameterType="int" resultType="com.temlog.post.model.Post">
+	<select id="selectPostListByCategoryIdAndCreatedAt" parameterType="map" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -322,7 +324,7 @@
 		ORDER BY `createdAt` DESC
 	</select>
 	
-	<select id="selectPostListByCategoryIdAndPurchaseDate" parameterType="int" resultType="com.temlog.post.model.Post">
+	<select id="selectPostListByCategoryIdAndPurchaseDate" parameterType="map" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -343,7 +345,7 @@
 		ORDER BY `purchaseDate` DESC
 	</select>
 	
-	<select id="selectPostListByCategoryIdAndPurchaseNumber" parameterType="int" resultType="com.temlog.post.model.Post">
+	<select id="selectPostListByCategoryIdAndPurchaseNumber" parameterType="map" resultType="com.temlog.post.model.Post">
 		SELECT
 			`id`
 			, `userId`

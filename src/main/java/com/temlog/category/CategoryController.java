@@ -2,6 +2,8 @@ package com.temlog.category;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +19,11 @@ public class CategoryController {
 	private CategoryBO categoryBO;
 	
 	@RequestMapping("/category/category_list_view")
-	public String categoryListView(Model model) {
+	public String categoryListView(Model model, HttpSession session) {
 		
-		List<Category> categoryList = categoryBO.getCategoryList();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		List<Category> categoryList = categoryBO.getCategoryList(userId);
 		model.addAttribute("categoryList", categoryList);
 		
 		model.addAttribute("viewName", "category/categoryList");
@@ -27,9 +31,11 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("/category/category_update_view")
-	public String categoryUpdateView(Model model) {
+	public String categoryUpdateView(Model model, HttpSession session) {
+
+		Integer userId = (Integer)session.getAttribute("userId");
 		
-		List<Category> categoryList = categoryBO.getCategoryList();
+		List<Category> categoryList = categoryBO.getCategoryList(userId);
 		model.addAttribute("categoryList", categoryList);
 		
 		model.addAttribute("viewName", "category/categoryUpdate");
@@ -37,9 +43,11 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("/category/category_delete_view")
-	public String categoryDeleteView(Model model) {
+	public String categoryDeleteView(Model model, HttpSession session) {
 
-		List<Category> categoryList = categoryBO.getCategoryList();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		List<Category> categoryList = categoryBO.getCategoryList(userId);
 		model.addAttribute("categoryList", categoryList);
 		
 		model.addAttribute("viewName", "category/categoryDelete");
