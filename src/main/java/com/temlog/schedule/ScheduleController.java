@@ -2,6 +2,8 @@ package com.temlog.schedule;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +20,11 @@ public class ScheduleController {
 	private ScheduleBO scheduleBO;
 	
 	@RequestMapping("/schedule/schedule_main_view")
-	public String scheduleMainView(Model model) {
+	public String scheduleMainView(Model model, HttpSession session) {
 		
-		List<Schedule> scheduleList = scheduleBO.getScheduleList();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		List<Schedule> scheduleList = scheduleBO.getScheduleList(userId);
 		model.addAttribute("scheduleList", scheduleList);
 		
 		model.addAttribute("viewName", "schedule/scheduleMain");

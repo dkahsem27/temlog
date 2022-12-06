@@ -27,7 +27,7 @@ public interface ScheduleDAO {
 			@Param("subject") String subject, 
 			@Param("content") String content);
 	
-	public List<Schedule> selectScheduleList();
+	public List<Schedule> selectScheduleList(int userId);
 	
 	public Schedule selectScheduleById(int scheduleId);
 }

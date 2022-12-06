@@ -27,8 +27,8 @@ public class ScheduleBO {
 		scheduleDAO.updateSchedule(scheduleId, startDate, endDate, subject, content);
 	}
 	
-	public List<Schedule> getScheduleList() {
-		return scheduleDAO.selectScheduleList();
+	public List<Schedule> getScheduleList(int userId) {
+		return scheduleDAO.selectScheduleList(userId);
 	}
 	
 	public Schedule getScheduleById(int scheduleId) {

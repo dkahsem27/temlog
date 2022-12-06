@@ -44,7 +44,7 @@
 			`id` = #{scheduleId}
 	</update>
 	
-	<select id="selectScheduleList" resultType="com.temlog.schedule.model.Schedule">
+	<select id="selectScheduleList" parameterType="int" resultType="com.temlog.schedule.model.Schedule">
 		SELECT
 			`id`
 			, `userId`
@@ -56,6 +56,8 @@
 			, `updatedAt`
 		FROM
 			`schedule`
+		WHERE
+			`userId` = #{userId}
 	</select>
 	
 	<select id="selectScheduleById" parameterType="int" resultType="com.temlog.schedule.model.Schedule">
