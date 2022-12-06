@@ -14,7 +14,12 @@
 					<span class="noti hover-block ml-1">아이디는 수정할 수 없습니다.</span>
 				</div>
 			</div>
-			<div id="userLoginId" class="user-login-id">${user.loginId}</div>
+			<div class="d-flex justify-content-between">
+				<div id="userLoginId" class="user-login-id">${user.loginId}</div>
+				<div class="util-box">
+					<a href="/user/sign_out" class="btn-text sign-out">로그아웃</a>
+				</div>
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="password" class="mb-2">현재 비밀번호<span class="required">*</span></label>
@@ -32,7 +37,7 @@
 	<div class="btn-box py-0 my-4">
 		<button type="button" id="updateBtn" class="btn btn-block btn-dark">저장</button>
 		<div class="d-flex justify-content-end mt-3">
-			<button type="button" id="withdrawalBtn" class="btn-text withdrawal" data-user-id="${user.id}">회원탈퇴</button>
+			<button type="button" id="withdrawalBtn" class="btn-text withdrawal px-0" data-user-id="${user.id}">회원탈퇴</button>
 		</div>
 	</div>
 </section>
