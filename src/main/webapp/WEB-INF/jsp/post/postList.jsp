@@ -28,7 +28,7 @@
 			    	정렬
 			  	</button>
 			  	<div class="dropdown-menu py-0">
-			  		<a class="sort-dropdown dropdown-item p-2" href="#">등록일</a>
+			  		<a class="sort-dropdown dropdown-item p-2" href="#">등록일(기본)</a>
 				    <a class="sort-dropdown dropdown-item p-2" href="#">구매일</a>
 				    <a class="sort-dropdown dropdown-item p-2" href="#">구매횟수</a>
 			  	</div>
