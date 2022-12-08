@@ -48,6 +48,14 @@
 			`postId` = #{postId}
 	</delete>
 	
+	<delete id="deleteImageByPostIdAndImagePath" parameterType="map">
+		DELETE FROM
+			`image`
+		WHERE
+			`postId` = #{postId}
+			AND `imagePath` = #{deleteImagePath}
+	</delete>
+	
 	<select id="selectImageList" resultType="com.temlog.image.model.Image">
 		SELECT
 			`id`

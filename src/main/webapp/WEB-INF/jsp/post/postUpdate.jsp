@@ -119,7 +119,7 @@
 			<div class="image">
 				<!-- 첨부된 이미지 노출 영역 -->
 				<img src="${imagePath}" alt="첨부이미지">
-				<button type='button' class='btn-delete-image material-icons'>clear</button>
+				<button type='button' class='btn-delete-image material-icons' data-post-id="${post.id}">clear</button>
 			</div>
 		</c:forEach>
 		</div>
@@ -267,14 +267,13 @@ $(document).ready(function() {
 	// 파일 이미지 미리보기
 	var sel_files = [];
 	// 기존 이미지 배열에 담기
-	var test = $('#preview').children().length;
+	/* var test = $('#preview').children().length;
 	if (test != 0) {
-		
 		for (var i = 0; i < test; i++) {
 			sel_files.push($('#preview > .image > img:eq(' + i + ')').attr('src'));
-		} 
-		
-	} 
+		}
+	} */
+	
 	$('#fileInput').on('change', handleImgsFilesSelect);
 	function handleImgsFilesSelect(e) {
 		var files = e.target.files;
@@ -283,7 +282,7 @@ $(document).ready(function() {
 		filesArr.forEach(function(f) {
 			sel_files.push(f);
 			// 파일 2개 초과해서 첨부하려 할 때
-			if (sel_files.length > 5) {
+			if (sel_files.length > 2) {
 				alert('파일은 2개까지만 첨부할 수 있습니다.');
 				return false;
 			}
@@ -294,12 +293,31 @@ $(document).ready(function() {
 				$('#preview').append(img_html);
 			}
 			reader.readAsDataURL(f);
-			console.log(sel_files)
+			
+			console.log(sel_files);
 		});
 	}
 	// 이미지 삭제 버튼
 	$('.btn-delete-image').on('click', function() {
-		$(this).parent().remove('');
+		//$(this).parent().remove('');
+		
+		let deleteImagePath = $(this).siblings().attr('src');
+		let postId = $(this).data('post-id');
+		$.ajax({
+			type: 'delete'
+			, url: '/image/delete'
+			, data: {'postId':postId, 'deleteImagePath':deleteImagePath}
+			, success: function(data) {
+				if (data.code == 100) {
+					location.reload();
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('이미지 삭제 에러');
+			}
+		});
 	});
 	
 	// 글 수정
@@ -338,7 +356,6 @@ $(document).ready(function() {
 			return;
 		}
 		
-		
 		let formData = new FormData();
 		formData.append("postId", postId);
 		formData.append("categoryId", categoryId);
@@ -348,11 +365,10 @@ $(document).ready(function() {
 		formData.append("purchaseNumber", purchaseNumber);
 		formData.append("purchaseDate", purchaseDate);
 		formData.append("location", location);
-		/* for (var i = 0; i < sel_files.length; i++) {
+		for (var i = 0; i < sel_files.length; i++) {
 			formData.append("file", sel_files[i]);
 			console.log(sel_files[i]);
-		} */
-		
+		}
 		
 		// ajax
 		$.ajax({

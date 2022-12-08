@@ -97,20 +97,5 @@ public class PostRestController {
 		
 		return result;
 	}
-	
-//	@GetMapping("/post/search")
-//	public Map<String, Object> search(
-//			@RequestParam("keyword") String keyword) {
-//		Map<String, Object> result = new HashMap<>();
-//		
-//		// search
-//		postBO.getPostListByKeyword(keyword);
-//		
-//		result.put("code", 100);
-//		result.put("result", "success");
-//		result.put("errorMessage", "검색에 실패했습니다. 관리자에게 문의해주세요.");
-//		
-//		return result;
-//	}
-	
+
 }

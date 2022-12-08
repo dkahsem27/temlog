@@ -61,9 +61,7 @@ public class ImageBO {
 			 * 업로드가 실패할 수 있으므로 업로드가 된 후 제거
 			 * fileManagerService.deleteFile(image.getImagePath()); }
 			 */
-			
 		}
-		
 	}
 	
 	public void deleteImage(int imageId, int postId) {
@@ -89,6 +87,10 @@ public class ImageBO {
 			}
 			imageDAO.deleteImageByPostId(postId);
 		}
+	}
+	
+	public void deleteImageByPostIdAndImagePath(int postId, String deleteImagePath) {
+		imageDAO.deleteImageByPostIdAndImagePath(postId, deleteImagePath);
 	}
 	
 	public List<Image> getImageList() {

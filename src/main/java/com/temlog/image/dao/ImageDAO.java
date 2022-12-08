@@ -27,6 +27,10 @@ public interface ImageDAO {
 	
 	public void deleteImageByPostId(int postId);
 	
+	public void deleteImageByPostIdAndImagePath(
+			@Param("postId") int postId, 
+			@Param("deleteImagePath") String deleteImagePath);
+	
 	public List<Image> selectImageList();
 	
 	public List<Image> selectImageListByPostId(int postId);

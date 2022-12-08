@@ -63,11 +63,11 @@ public class PostBO {
 		}
 		
 		// update image -> 이미지 모두 삭제 후 새로 DB에 저장
-		List<Image> imageList = imageBO.getImageListByPostId(postId);
+//		List<Image> imageList = imageBO.getImageListByPostId(postId);
 		// 이미지가 존재할 때 이미지 삭제
-		if (ObjectUtils.isEmpty(imageList) == false) {
-			for (int i = 0; i < imageList.size(); i++) {
-				int imageId = imageList.get(i).getId();
+//		if (ObjectUtils.isEmpty(imageList) == false) {
+//			for (int i = 0; i < imageList.size(); i++) {
+//				int imageId = imageList.get(i).getId();
 					 
 					// 기존 이미지가 1개일 때
 					// 기존 이미지가 1개이고 기존 이미지를 삭제하고 새로 추가할 때 => 
@@ -78,37 +78,15 @@ public class PostBO {
 					
 					// or 프론트단에서 삭제버튼 누르면 전부 삭제된다는 alert 띄우고 삭제 후 새로 추가하는 방법 (imageId 필요 없음)
 					// 문제 -> 이미지 건드리지 않고 저장해도 이미지가 다 삭제되어버림
-					imageBO.deleteImageByPostId(postId);
-			}
-		}
+//					imageBO.deleteImageByPostId(postId);
+//			}
+//		}
+		// input[file]에서 추가된 새로운 이미지 insert
 		imageBO.addImage(postId, userId, userLoginId, fileList);
-		
 		
 		// update post
 		postDAO.updatePost(postId, userId, categoryId, subject, content, rating, purchaseNumber, purchaseDate, location);
 		
-		
-		
-		
-		// update image
-		//Image image = imageBO.getImageByPostId(postId);
-		//int imageId = image.getId();
-		//imageBO.updateImage(imageId, postId, userId, userLoginId, fileList);
-		
-		/*
-		 * List<Image> imageList = imageBO.getImageListByPostId(postId); for (int i = 0;
-		 * i < imageList.size(); i++) { int imageId = imageList.get(i).getId(); if
-		 * (ObjectUtils.isEmpty(imageList) == false) { imageBO.updateImage(imageId,
-		 * postId, userId, userLoginId, fileList); } }
-		 */
-		
-		/*
-		 * if (ObjectUtils.isEmpty(imageList)) { // 기존 이미지가 존재하지 않을 경우 -> insert image
-		 * imageBO.addImage(postId, userId, userLoginId, fileList); } else { // 이미지가 존재할
-		 * 경우 -> update image for (int i = 0; i < imageList.size(); i++) { int imageId =
-		 * imageList.get(i).getId(); if (ObjectUtils.isEmpty(imageList) == false) {
-		 * imageBO.updateImage(imageId, postId, userId, userLoginId, fileList); } } }
-		 */
 	}
 	
 	public void deletePost(int postId, int userId) {

@@ -261,7 +261,7 @@ $(document).ready(function() {
 			// 첨부 이미지 태그 생성
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				var img_html = "<div class='image'><img src=\'" + e.target.result + "\' /><button type='button' class='btn-delete-image material-icons'>clear</button></div>";
+				var img_html = "<div class='image'><img src=\'" + e.target.result + "\' /></div>";
 				$('#preview').append(img_html);
 			}
 			reader.readAsDataURL(f);
