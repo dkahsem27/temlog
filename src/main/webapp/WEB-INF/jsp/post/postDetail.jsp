@@ -91,10 +91,24 @@
 				<div class="d-flex justify-content-center mb-2">
 					<button type="button" class="btn-close material-icons" data-dismiss="modal">close</button>
 				</div>
-				<div class="image-box">
+				<%-- <div class="image-box">
 					<c:forEach items="${imagePathList}" var="imagePath">
 						<img src="${imagePath}" alt="첨부이미지">
 					</c:forEach>
+				</div> --%>
+				<!-- swiper -->
+				<div class="swiper">
+					<!-- wrapper -->
+					<div class="swiper-wrapper">
+					<c:forEach items="${imagePathList}" var="imagePath">
+						<div class="swiper-slide"><img src="${imagePath}" alt="첨부이미지"></div>
+					</c:forEach>
+					</div>
+					<!-- pagination -->
+					<div class="swiper-pagination"></div>
+					<!-- navigation buttons -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
 				</div>
 			</div>
 		</div>
@@ -161,5 +175,22 @@ $(document).ready(function() {
 			});
 		}
 	});
+});
+
+
+//swiper
+const swiper = new Swiper('.swiper', {
+	// Optional parameters
+	direction: 'horizontal', // 슬라이드 방향
+	loop: false,
+	
+	pagination: {
+	 el: '.swiper-pagination',
+	},
+	
+	navigation: {
+	 nextEl: '.swiper-button-next',
+	 prevEl: '.swiper-button-prev',
+	},
 });
 </script>

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,33 +46,6 @@ public class FileManagerService {
 		// 성공 했으면 이미지 url path를 리턴한다. (WebMvcConfig 에서 매핑한 이미지 path)
 		// http://localhost/images/dkahsem27_1620204641/sun.png
 		return "/images/" + directoryName + file.getOriginalFilename();
-	}
-	
-	public void deleteFile(List<String> imagePathList) {
-		// imagePath: /images/dkahsem27_1620204641/sun.png
-		// /images/ => 이 구문을 제거
-		for (int i = 0; i > imagePathList.size(); i++) {
-			String imagePath = imagePathList.get(i);
-			Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
-			if (Files.exists(path)) {
-				try {
-					Files.delete(path); // 이미지를 삭제
-				} catch (IOException e) {
-					log.error("[이미지 삭제] 이미지 삭제 실패  imagePath:{}", imagePath);
-				}
-				
-				// 디렉토리(=폴더) 삭제
-				path = path.getParent();
-				if (Files.exists(path)) {
-					try {
-						Files.delete(path); // 디렉토리를 삭제
-					} catch (IOException e) {
-						log.error("[이미지 삭제] 디렉토리 삭제 실패  imagePath:{}", imagePath);
-					}
-				}
-			}
-			
-		}
 	}
 	
 	public void deleteFile(String imagePath) {
