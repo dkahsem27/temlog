@@ -7,11 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.temlog.image.bo.ImageBO;
-import com.temlog.image.model.Image;
 import com.temlog.post.dao.PostDAO;
 import com.temlog.post.model.Post;
 
@@ -62,25 +60,6 @@ public class PostBO {
 			//return 0;
 		}
 		
-		// update image -> 이미지 모두 삭제 후 새로 DB에 저장
-//		List<Image> imageList = imageBO.getImageListByPostId(postId);
-		// 이미지가 존재할 때 이미지 삭제
-//		if (ObjectUtils.isEmpty(imageList) == false) {
-//			for (int i = 0; i < imageList.size(); i++) {
-//				int imageId = imageList.get(i).getId();
-					 
-					// 기존 이미지가 1개일 때
-					// 기존 이미지가 1개이고 기존 이미지를 삭제하고 새로 추가할 때 => 
-					// 기존 이미지가 2개일 때 =>
-//					if (imageList.size() > 2) { // 3
-//						imageBO.deleteImage(imageId, postId); 
-//					}
-					
-					// or 프론트단에서 삭제버튼 누르면 전부 삭제된다는 alert 띄우고 삭제 후 새로 추가하는 방법 (imageId 필요 없음)
-					// 문제 -> 이미지 건드리지 않고 저장해도 이미지가 다 삭제되어버림
-//					imageBO.deleteImageByPostId(postId);
-//			}
-//		}
 		// input[file]에서 추가된 새로운 이미지 insert
 		imageBO.addImage(postId, userId, userLoginId, fileList);
 		
@@ -99,13 +78,8 @@ public class PostBO {
 		}
 		
 		// delete image
-		List<Image> imageList = imageBO.getImageListByPostId(postId);
-		for (int i = 0; i < imageList.size(); i++) {
-			int imageId = imageList.get(i).getId();
-			if (ObjectUtils.isEmpty(imageList) == false) {			
-				imageBO.deleteImage(imageId, postId);
-			}
-		}
+		imageBO.deleteImageByPostId(postId);
+		
 		// delete post
 		postDAO.deletePost(postId);
 	}

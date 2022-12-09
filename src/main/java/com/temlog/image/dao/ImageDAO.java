@@ -15,16 +15,6 @@ public interface ImageDAO {
 			@Param("userId") int userId, 
 			@Param("imagePath") String imagePath);
 	
-	public void updateImage(
-			@Param("imageId") int imageId, 
-			@Param("postId") int postId, 
-			@Param("userId") int userId, 
-			@Param("imagePath") String imagePath);
-	
-	public void deleteImage(
-			@Param("imageId") int imageId, 
-			@Param("postId") int postId);
-	
 	public void deleteImageByPostId(int postId);
 	
 	public void deleteImageByPostIdAndImagePath(

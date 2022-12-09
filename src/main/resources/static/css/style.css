@@ -33,7 +33,7 @@ body {font-family: 'SUIT Variable', sans-serif;}
 .btn-text.sign-out, .btn-text.withdrawal {font-size: 15px; text-decoration: underline;}
 .btn-close-gray {color: #eee;}
 .btn-clear {font-size: 18px; color: #ccc;}
-.btn-delete-image {font-size: 24px; color: #fff; padding: 5px;}
+.btn-delete-image {font-size: 24px; color: #fff; padding: 5px; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);}
 
 .btn-create {position: relative; width: 120px; max-height: 80px; border-radius: 12px; text-align: center; background: #efefef;}
 .btn-create.post {padding: 15px 0;}
@@ -159,7 +159,8 @@ input#datePicker {cursor: default;}
 .modal-box .image-box img {height: auto;}
 .modal-box .image-box img:not(:first-child) {margin-top: 10px;}
 
-#imageModal .modal-content {background-color: transparent; border: none;}
+#modal .modal-content, 
+#imageModal .modal-content {border: none;}
 
 .input-cancle-box {position: relative; width: 100%;}
 .input-cancle-box input {padding-right: 35px !important;}
