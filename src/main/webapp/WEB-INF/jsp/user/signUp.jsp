@@ -16,6 +16,7 @@
 			</div>
 			<div class="noti-box mb-3">
 				<div id="idCheckLength" class="noti text-danger d-none">아이디는 4자 이상 입력해주세요.</div>
+				<div id="idCheckRegExp" class="noti text-danger d-none">아이디는 영문자 또는 숫자만 가능합니다.</div>
 		      	<div id="idCheckDuplicated" class="noti text-danger d-none">중복된 아이디입니다.</div>
 		     	<div id="idCheckOk" class="noti text-success d-none">사용 가능한 아이디입니다.</div>
 			</div>
@@ -43,7 +44,18 @@ $(document).ready(function() {
 		// 입력한 아이디가 4자 이하일 때
 		if (loginId.length < 4) {
 			$('#idCheckLength').removeClass('d-none'); // 알림문구 노출
-			$('#idCheckDuplicated').addClass('d-none') // 숨김
+			$('#idCheckRegExp').addClass('d-none'); // 숨김
+			$('#idCheckDuplicated').addClass('d-none'); // 숨김
+			$('#idCheckOk').addClass('d-none'); // 숨김
+			return;
+		}
+		
+		// 아이디 정규표현식 : 영문자&숫자만/4~20자
+		let idReg = /^[a-z]+[a-z0-9]{3,19}$/g;
+		if (!idReg.test(loginId)) {
+			$('#idCheckRegExp').removeClass('d-none'); // 알림문구 노출
+			$('#idCheckLength').addClass('d-none'); // 숨김
+			$('#idCheckDuplicated').addClass('d-none'); // 숨김
 			$('#idCheckOk').addClass('d-none'); // 숨김
 			return;
 		}
@@ -57,11 +69,13 @@ $(document).ready(function() {
 				if (data.result) {
 					// 중복일 때
 					$('#idCheckDuplicated').removeClass('d-none'); // 알림문구 노출
+					$('#idCheckRegExp').addClass('d-none');
 					$('#idCheckLength').addClass('d-none') // 숨김
 					$('#idCheckOk').addClass('d-none'); // 숨김
 				} else {
 					// 중복 아닐 때
 					$('#idCheckOk').removeClass('d-none'); // 알림문구 노출
+					$('#idCheckRegExp').addClass('d-none');
 					$('#idCheckLength').addClass('d-none') // 숨김
 					$('#idCheckDuplicated').addClass('d-none'); // 숨김
 				}
@@ -94,6 +108,16 @@ $(document).ready(function() {
 			$('#checkPassword').focus();
 			return;
 		}
+		
+		// 비밀번호 정규표현식 : 숫자&문자&허용된특수문자만/6~20자
+		let pwReg = /^[a-zA-Z\\d`~!@#$%^&*()-_=+]{6,20}$/;
+		if (!pwReg.test(password)) {
+			alert('비밀번호는 6자 이상, 영문 또는 숫자로 구성되어야 합니다.');
+			$('#password').focus();
+			return;
+		}
+		
+		// 비밀번호 일치 여부 확인
 		if (password != checkPassword) {
 			alert('비밀번호가 일치하지 않습니다.');
 			return;

@@ -67,6 +67,14 @@ $(document).ready(function() {
 			return;
 		}
 		
+		// 비밀번호 정규표현식 : 숫자&문자&허용된특수문자만/6~20자
+		let pwReg = /^[a-zA-Z\\d`~!@#$%^&*()-_=+]{6,20}$/;
+		if (!pwReg.test(changedPassword)) {
+			alert('비밀번호는 6자 이상, 영문 또는 숫자로 구성되어야 합니다.');
+			$('#password').focus();
+			return;
+		}
+		
 		if (password == changedPassword) {
 			alert('현재 비밀번호와 동일한 비밀번호입니다. 다시 입력해주세요.');
 			$('#changedPassword').val('');
