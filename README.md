@@ -1,4 +1,12 @@
-# temlog
+<p align="center">
+<a href="http://3.39.227.222:8080/user/sign_in_view" target="_blank"><img src="https://user-images.githubusercontent.com/85773231/208420319-59f82ca4-db45-4bc6-97a2-f320aa15ad72.png" alt="logo"></a>
+</p>
+
+---
+
+<sub>*로고를 클릭하면 프로젝트 웹사이트로 이동합니다.*</sub>
+
+<br>
 
 #### 프로젝트 설명
 item + blog  
