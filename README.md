@@ -1,5 +1,7 @@
 <p align="center">
-<a href="http://3.39.227.222:8080/user/sign_in_view" target="_blank"><img src="https://user-images.githubusercontent.com/85773231/208420319-59f82ca4-db45-4bc6-97a2-f320aa15ad72.png" alt="logo"></a>
+<a href="http://3.39.227.222:8080/user/sign_in_view">
+<img src="https://user-images.githubusercontent.com/85773231/208420319-59f82ca4-db45-4bc6-97a2-f320aa15ad72.png" alt="logo">
+</a>
 </p>
 
 ---
@@ -15,7 +17,7 @@ item + blog
 쇼핑할 때, 또는 어딜 갈 때 내가 이걸 샀었는데(또는 갔었는데) 어땠는지 기억나지 않아 답답한 마음을 해결하기 위해 만들었습니다.  
 물건, 식당, 카페, 미용실, 장소, 거래처, 사람(?) 등.. 일상에서 기록해두고 싶은 것들을 기록하고, 나만의 데이터를 한 곳에 저장해 두고 어디서든 편하게 찾아볼 수 있습니다.  
 
-＋ 달력 기능도 함께 붙어있어 친구와의 약속이나 내게 필요한 일정을 기록할 수 있습니다.
+＋ 캘린더가 있어 친구와의 약속이나 내게 필요한 일정, 주기 등을 기록할 수 있습니다.
 
 
 <br><br>
