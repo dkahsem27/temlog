@@ -49,21 +49,18 @@ Java, SpringBoot, MyBatis, JavaScript, jQuery, HTML, CSS, Bootstrap
 <summary>다중 이미지 저장(등록)</summary>
 https://github.com/dkahsem27/temlog/issues/3
 
-이슈내용
 </details>
 <!-- 2 -->
 <details>
 <summary>다중 이미지 수정/삭제</summary>
 https://github.com/dkahsem27/temlog/issues/7
 
-이슈내용
 </details>
 <!-- 3 -->
 <details>
 <summary>풀캘린더</summary>
 https://github.com/dkahsem27/temlog/issues/11
 
-이슈내용
 </details>
 
 
