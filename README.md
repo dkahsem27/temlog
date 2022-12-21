@@ -38,6 +38,7 @@ Java, SpringBoot, MyBatis, JavaScript, jQuery, HTML, CSS, Bootstrap
 #### 추후 개선사항(ver.2)
 - 목록 화면에서 구매일/구매횟수/등록일 버튼을 눌렀을 때마다 ASC/DESC 로 정렬 (토글)
 - 검색결과 목록에서 정렬
+- 카테고리 목록 페이지 무한스크롤 
 - 지도 검색시 상호명/장소명으로 검색
 - 글쓰기 에디터(Summernote)
 
